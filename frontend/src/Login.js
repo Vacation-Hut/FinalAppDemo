@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import Validation from "./loginvalidate"
 import axios from "axios"
 
+
 function Login() {
     const Navigate = useNavigate();
     const [error, setError] = useState({})
@@ -43,7 +44,8 @@ function Login() {
                     </div>
                     <button type="submit" className="btn btn-danger w-100">Log in</button>
                     <p>You are agree our terms and conditions</p>
-                    <Link to="/signup" className="btn border w-100">Create Account</Link>
+                   <Link to="./Signup" className="btn border w-100">Create Account</Link>
+      
                 </form>
             </div>
         </div>

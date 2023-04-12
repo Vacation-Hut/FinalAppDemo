@@ -1,21 +1,18 @@
-import React from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import './App.css';
+import React, { useState } from "react";
+import styles from "./App.css";
 
+import Modal from "./Modal.js";
 
-function Home() {
-  const Navigate = useNavigate();
-  function login (e){
-    Navigate("/login")
-  }
-    return (
-      <div className="App">
-        <h1>My home page</h1><br></br>
-        <button onClick={login}>Login</button>
-      </div>
- );
-}
-
+const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <main>
+      <button className={styles.primaryBtn} onClick={() => setIsOpen(true)}>
+        Login
+      </button>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
+    </main>
+  );
+};
 
 export default Home;
-  

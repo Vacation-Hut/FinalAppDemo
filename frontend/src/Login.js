@@ -13,11 +13,12 @@ function Login() {
         setError(Validation(email, password));
         try {
             if (error.email === "" && error.password === "")
-                await axios.post("http://localhost:5000/", {
+                await axios.post("http://localhost:5000/login", {
                     email, password
                 })
 
             // history("/admin")
+            Navigate("/")
         }
         catch (error) {
             console.log(error)

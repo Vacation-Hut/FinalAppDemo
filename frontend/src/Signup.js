@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 import Validation from "./signupvalidate"
 import axios from "axios"
 
 function Signup() {
+    const Navigate = useNavigate();
     const [error, setError] = useState({})
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ function Signup() {
                 await axios.post("http://localhost:5000/signup", {
                     name, email, password
                 })
-                Navigate("/")
+                Navigate("/login")
             }
         }
         catch (error) {
@@ -48,7 +49,7 @@ function Signup() {
                     </div>
                     <button type="submit" className="btn btn-danger w-100">Sign Up</button>
                     <p>You are agree our terms and conditions</p>
-                    <Link to="/" className="btn border w-100">Log In</Link>
+                    <Link to="/login" className="btn border w-100">Log In</Link>
                 </form>
             </div>
         </div>

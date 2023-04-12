@@ -48,7 +48,7 @@ const salt=await bcrypt.genSalt(10);
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });

@@ -21,12 +21,12 @@ const User = mongoose.model("User", {
   email: String,
   password: String,
 });
-// const Activity = mongoose.model("Activity", {
-//   activityname: String,
-//   discription: String,
-//   food: String,
-//   accomadation: String
-// });
+const Activity = mongoose.model("Activity", {
+  activityname: String,
+  discription: String,
+  food: String,
+  accomadation: String
+});
 
 app.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
@@ -65,23 +65,45 @@ app.post("/login", async (req, res) => {
     
   }
 });
+app.get('/dash/activity/:id', async (req, res) => {
+  const activityId = req.params.id;
+  console.log(activityId);
+  try {
+    const activity = await Activity.findById(activityId);
+    if (!activity) {
+      return res.status(404).json({ error: 'Activity not found' });
+    }
+    res.json(activity);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve activity' });
+  }
+});
 
-// app.post('/dash/activity', async (req, res) => {
-//   await Activity.create({
-//     activityname,
-//     discription,
-//     food,
-//     accomadation });
-    
-//   })
 
-app.put('/quotes', (req, res) => {
-  quotesCollection.findOneAndUpdate(
-    { name: 'Yoda' },
+app.post('/dash/activity', async (req, res) => {
+  try {
+    const { activityname, discription, food, accomadation } = req.body; // Assuming you have name, location, and description fields in your form
+    const createdActivity = await Activity.create({
+      activityname,
+      discription,
+      food,
+      accomadation
+    });
+    await createdActivity.save();
+    res.status(201).json(createdActivity);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+app.put('/dash/activity/:id', (req, res) => {
+  Activity.findOneAndUpdate(
+    req.params.id,
     {
       $set: {
-        name: req.body.name,
-        quote: req.body.quote
+    activityname:req.body.activityname,
+    discription:req.body.discription,
+    food:req.body.activityname,
+    accomadation:req.body.activityname 
       }
     },
     {
@@ -92,18 +114,16 @@ app.put('/quotes', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.delete('/quotes', (req, res) => {
-  quotesCollection.deleteOne(
-    { name: req.body.name }
-  )
+app.delete('/dash/activity/:id', (req, res) => {
+  Activity.deleteOne({ _id: req.params.id }) // Fix: Pass an object with _id field set to req.params.id
     .then(result => {
       if (result.deletedCount === 0) {
         return res.json('No quote to delete')
       }
-      res.json('Deleted Darth Vadar\'s quote')
+      res.json('Deleted ${_id}')
     })
     .catch(error => console.error(error))
-})
+});
 
 
 app.listen(5000, () => {

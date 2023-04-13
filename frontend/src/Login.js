@@ -44,7 +44,7 @@ function Login() {
                     </div>
                     <button type="submit" className="btn btn-danger w-100">Log in</button>
                     <p>You are agree our terms and conditions</p>
-                   <Link to="./Signup" className="btn border w-100">Create Account</Link>
+                   <Link to="/Signup" className="btn border w-100">Create Account</Link>
       
                 </form>
             </div>

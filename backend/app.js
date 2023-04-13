@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const env = require("dotenv")
 const app = express();
 
 app.use(cors());
@@ -11,7 +11,11 @@ app.use(express.json());
 
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-mongoose.connect("mongodb://localhost/heyyy", {
+// mongoose.connect("mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority" , {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+mongoose.connect("mongodb://localhost/heyyy" , {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -120,7 +124,66 @@ app.delete('/dash/activity/:id', (req, res) => {
       if (result.deletedCount === 0) {
         return res.json('No quote to delete')
       }
-      res.json('Deleted ${_id}')
+      res.json('Deleted id')
+    })
+    .catch(error => console.error(error))
+});
+
+app.get('/dash/user/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'Activity not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve activity' });
+  }
+});
+
+
+app.post('/dash/user', async (req, res) => {
+  try {
+    const { role, name, email, password } = req.body; // Assuming you have name, location, and description fields in your form
+    const user = await User.create({
+        role,
+        name,
+        email,
+        password });
+  
+    await user.save();
+    res.status(201).json(user); }
+   catch (err) {
+    res.status(400).json({ message: err.message });
+  }})
+;
+app.put('/dash/user/:id', (req, res) => {
+  User.findOneAndUpdate(
+    req.params.id,
+    {
+      $set: {
+    role:req.body.role,
+    name:req.body.name,
+    email:req.body.email,
+    password:req.body.password
+      }
+    },
+    {
+      upsert: true
+    }
+  )
+    .then(result => res.json('Success'))
+    .catch(error => console.error(error))
+})
+
+app.delete('/dash/user/:id', (req, res) => {
+  User.deleteOne({ _id: req.params.id }) 
+    .then(result => {
+      if (result.deletedCount === 0) {
+        return res.json('No quote to delete')
+      }
+      res.json('Deleted id')
     })
     .catch(error => console.error(error))
 });

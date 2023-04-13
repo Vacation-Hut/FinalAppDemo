@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
 import pottery from './Appphoto2.png';
 import oil from './Appphoto1.png';
 import hraft from './Appphoto10.jpg';
@@ -37,21 +38,21 @@ function Activity() {
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-primary" type="submit">Search</button>
+        <button  class="btn btn-outline-primary" type="submit">Search</button>
       </form>
     </div>
   </div>
 </nav>
 <div>
     <h1 class="activity">Activities</h1>
-    <button class="buttact">Add activity</button>
+    <Link class="buttact btn w-500 border" to="/dash/activity/new">Add activity</Link>
     <div class="grid-container">
-  <div class="grid-item"><img src={pottery} class="aligns"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>
-  <div class="grid-item"><img src={oil} class="aligns"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>
-  <div class="grid-item"><img src={hraft} class="aligns"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>  
-  <div class="grid-item"><img src={museum} class="aligns margins"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>
-  <div class="grid-item"><img src={beach} class="aligns margins"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>
-  <div class="grid-item"><img src={thinnai} class="aligns margins"></img><div class="butt"><button class="b1">Update</button><button class="b2">Delete</button></div></div>  
+  <div class="grid-item"><img src={pottery} class="aligns"></img><div class="butt"> <Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>
+  <div class="grid-item"><img src={oil} class="aligns"></img><div class="butt"><Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>
+  <div class="grid-item"><img src={hraft} class="aligns"></img><div class="butt"><Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>  
+  <div class="grid-item"><img src={museum} class="aligns margins"></img><div class="butt"><Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>
+  <div class="grid-item"><img src={beach} class="aligns margins"></img><div class="butt"><Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>
+  <div class="grid-item"><img src={thinnai} class="aligns margins"></img><div class="butt"><Link class="b1 btn w-500 border" to="/dash/activity/update">Update</Link><button class="b2">Delete</button></div></div>  
 </div>
 </div>
       </div>

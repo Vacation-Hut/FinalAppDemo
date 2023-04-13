@@ -73,7 +73,7 @@ function Updateactivity() {
         <input name="food" onChange={(e) => { setFood(e.target.value) }}></input><br></br>
         <label className="label4">Accommodation</label><br></br>
         <input name="accommodation" onChange={(e) => { setAccomadation(e.target.value) }}></input><br></br>
-        <button className="btn2" onClick={submit}>Add activity</button><button className="btn3">Cancel</button>
+        <button className="btn2" onClick={submit}>Add activity</button><Link to ="/dash/activity" className="btn3 btn">Cancel</Link>
       </form>
   </div>
   <div className="flex-item-right">

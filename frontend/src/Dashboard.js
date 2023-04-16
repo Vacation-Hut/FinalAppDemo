@@ -20,7 +20,7 @@ function Dashboard() {
           <Link to="/dash/activity" className="nav-link">Activity</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">User</a>
+          <a className="nav-link" href="/dash/users">User</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Payment</a>

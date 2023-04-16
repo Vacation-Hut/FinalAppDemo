@@ -34,7 +34,7 @@ const User = mongoose.model("User", {
 });
 const Activity = mongoose.model("Activity", {
   activityname: String,
-  discription: String,
+  description: String,
   food: String,
   accomadation: String
 });
@@ -106,10 +106,10 @@ app.get('/dash/activity/:id', async (req, res) => {
 
 app.post('/dash/activity', async (req, res) => {
   try {
-    const { activityname, discription, food, accomadation } = req.body; // Assuming you have name, location, and description fields in your form
+    const { activityname, description, food, accomadation } = req.body; // Assuming you have name, location, and description fields in your form
     const createdActivity = await Activity.create({
       activityname,
-      discription,
+      description,
       food,
       accomadation
     });
@@ -125,7 +125,7 @@ app.put('/dash/activity/:id', (req, res) => {
     {
       $set: {
     activityname:req.body.activityname,
-    discription:req.body.discription,
+    description:req.body.description,
     food:req.body.activityname,
     accomadation:req.body.activityname 
       }

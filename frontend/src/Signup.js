@@ -17,7 +17,7 @@ function Signup() {
                 await axios.post("http://localhost:5000/signup", {
                     name, email, password
                 })
-                Navigate("/login")
+                Navigate("/")
             }
         }
         catch (error) {

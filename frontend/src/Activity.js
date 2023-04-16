@@ -1,12 +1,6 @@
 import React ,{useState ,useEffect}from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
-import pottery from './Appphoto2.png';
-import oil from './Appphoto1.png';
-import hraft from './Appphoto10.jpg';
-import museum from './Appphoto11.jpg';
-import beach from './Appphoto5.jpg';
-import thinnai from './Appphoto6.jpg';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 
@@ -56,13 +50,13 @@ function Activity() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link" href="#">Dashboard</a>
+          <a className="nav-link" href="/dash">Dashboard</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Activity</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">User</a>
+          <a className="nav-link" href="/dash/users">User</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Payment</a>
@@ -80,14 +74,14 @@ function Activity() {
 </nav>
 <div>
     <h1 className="activity">Activities</h1>
-    <Link className="buttact btn w-500 border" to="/dash/activity/new">Add activity</Link>
+    <Link className="buttact btn w-500 border adds" to="/dash/activity/new">Add activity</Link>
     <div className="grid-container">
-    <table>
+    <table class="table1">
             <thead>
               <tr>
                 {/* <th>Image</th> */}
                 <th>Activity Name</th>
-                <th>Discripion</th>
+                <th>Description</th>
                 <th>Food</th>
                 <th>Accommodation</th>
                 </tr>
@@ -97,7 +91,7 @@ function Activity() {
               return (
               <tr key={i.id}>
                 <td>{i.activityname}</td>
-                <td>{i.discription}</td>
+                <td>{i.description}</td>
                 <td>{i.food}</td>
                 <td>{i.accomadation}</td>
               </tr>

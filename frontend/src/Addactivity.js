@@ -7,20 +7,21 @@ import axios from 'axios';
 function Addactivity() {
   const Navigate = useNavigate;
   const [activityname,setActivityName] = useState("");
-    const [discription,setDiscription] = useState("");
+    const [description,setDescription] = useState("");
     const [food,setFood] = useState("");
     const [accomadation,setAccomadation] = useState("");
   async function submit(e) {
     e.preventDefault();
     try {
         await axios.post("http://localhost:5000/dash/activity", {
-           activityname,accomadation,discription,food       })
-        Navigate("/dash/activity")
+           activityname,accomadation,description,food       })
+           Navigate("/dash/activity")
     }
     catch (error) {
       console.log(error)
 
   }
+  
 }
     return (
       <div className="App">
@@ -33,7 +34,7 @@ function Addactivity() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link" href="#">Dashboard</a>
+          <a className="nav-link" href="/dash">Dashboard</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Activity</a>
@@ -62,13 +63,13 @@ function Addactivity() {
       <form className="form">
         <label className="label1">Activity name</label><br></br>
         <input name="activityname" onChange={(e) => { setActivityName(e.target.value) }}></input><br></br>
-        <label className="label2">Discription</label><br></br>
-        <input name="discription" onChange={(e) => { setDiscription(e.target.value) }}></input><br></br>
+        <label className="label2">Description</label><br></br>
+        <input name="description" onChange={(e) => { setDescription(e.target.value) }}></input><br></br>
         <label className="label3">Food</label><br></br>
         <input name="food" onChange={(e) => { setFood(e.target.value) }}></input><br></br>
         <label className="label4">Accommodation</label><br></br>
         <input name="accommodation" onChange={(e) => { setAccomadation(e.target.value) }}></input><br></br>
-        <button className="btn2" onClick={submit}>Add activity</button><Link to ="/dash/activity" className="btn3 btn">Cancel</Link>
+        <button className="btn2" onClick={submit}><Link to="/dash/activity" className="buttact btn w-500 border">Add activity</Link></button><button className="btn2" onClick={submit}><Link to="/dash/activity" className="buttact btn w-500 border">Cancel</Link></button>
       </form>
   </div>
   <div className="flex-item-right">

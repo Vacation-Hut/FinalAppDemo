@@ -1,11 +1,12 @@
 import React, { useState } from "react"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Validation from "./loginvalidate"
 import axios from "axios"
 
 
 function Login() {
     const Navigate = useNavigate();
+    const [role , setRole] = useState()
     const [error, setError] = useState({})
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,11 +16,17 @@ function Login() {
         try {
             if (error.email === "" && error.password === "")
                 await axios.post("http://localhost:5000/login", {
-                    email, password
+                    role,email, password
                 })
-
-            // history("/admin")
-            Navigate("/")
+                
+            if (email === "vacationapk@gmail.com" && password === "Apk@192407"){
+                Navigate("/dash")
+             } else {
+                Navigate("/")
+             }
+           
+            
+        
         }
         catch (error) {
             console.log(error)

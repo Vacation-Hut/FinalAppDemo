@@ -22,8 +22,15 @@ mongoose.connect("mongodb://localhost/heyyy" , {
 
 const User = mongoose.model("User", {
   name: String,
+  role : String,
   email: String,
   password: String,
+  phonenumber : Number,
+  fname : String,
+  lname : String,
+  nic : Number,
+  passportno : Number,
+  country : String
 });
 const Activity = mongoose.model("Activity", {
   activityname: String,
@@ -53,12 +60,13 @@ const salt=await bcrypt.genSalt(10);
 });
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { email,password } = req.body;
 
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(401).json({ error: "User Not Found" });
   }
+  
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.sign({ email: user.email }, JWT_SECRET, {
       expiresIn: "15m",
@@ -69,7 +77,18 @@ app.post("/login", async (req, res) => {
     
   }
 });
+
+app.get('/users',async (req,res) => {
+  try{
+    const users = await User.find({});
+
+    res.send({status:"ok",data : users})
+  }catch(error){
+    console.log(error)
+  }
+})
 app.get('/dash/activity/:id', async (req, res) => {
+ 
   const activityId = req.params.id;
   console.log(activityId);
   try {
@@ -81,6 +100,7 @@ app.get('/dash/activity/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve activity' });
   }
+  
 });
 
 
@@ -128,6 +148,16 @@ app.delete('/dash/activity/:id', (req, res) => {
     })
     .catch(error => console.error(error))
 });
+
+app.get('/allactivity',async (req,res) => {
+  try{
+    const allactivity = await Activity.find({});
+
+    res.send({status:"ok",data : allactivity})
+  }catch(error){
+    console.log(error)
+  }
+})
 
 app.get('/dash/user/:id', async (req, res) => {
   const userId = req.params.id;
@@ -187,6 +217,8 @@ app.delete('/dash/user/:id', (req, res) => {
     })
     .catch(error => console.error(error))
 });
+
+
 
 
 app.listen(5000, () => {

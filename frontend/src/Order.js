@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-function Dashboard() {
+function Order() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/orders", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userdata");
+        setData(data.data);
+      });
+  }, []);
   return (
-    <div className="App">
+    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <button
@@ -21,17 +33,17 @@ function Dashboard() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/dash">
                   Dashboard
                 </a>
               </li>
               <li className="nav-item">
-                <Link to="/dash/activity" className="nav-link">
+                <a className="nav-link" href="/dash/activity">
                   Activity
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/dash/users">
+                <a className="nav-link" href="#">
                   User
                 </a>
               </li>
@@ -60,37 +72,41 @@ function Dashboard() {
           </div>
         </div>
       </nav>
-      <div>
-        <h3>Total booking</h3>
-      </div>
-      <div>
-        <h3>Total income</h3>
-      </div>
-      <div>
-        <h3>Recent customers</h3>
-        <table>
-          <thead>
+      <h1 className="activity users">Users</h1>
+      <table>
+        <thead>
+          <tr>
+            {/* <th>Image</th> */}
             <th>Name</th>
-            <th>Booking Date</th>
-            <th>Phone Number </th>
-            <th>Country</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
             <th>Email</th>
-            <th>N.I.C</th>
-            <th>Passport No</th>
-          </thead>
-          <tbody>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-          </tbody>
-        </table>
-      </div>
+            <th>Phone Number</th>
+            <th>N.I.C Number</th>
+            <th>Passport Number</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((i) => {
+            return (
+              <tr key={i.id}>
+                <td>{i.name}</td>
+                <td>{i.fname}</td>
+                <td>{i.lname}</td>
+                <td>{i.role}</td>
+                <td>{i.email}</td>
+                <td>{i.phonenumber}</td>
+                <td>{i.nic}</td>
+                <td>{i.passportno}</td>
+                <td>{i.country}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
-
-export default Dashboard;
+export default Order;

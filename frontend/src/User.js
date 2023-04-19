@@ -19,7 +19,7 @@ function User() {
   }, []);
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbackground">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -34,7 +34,12 @@ function User() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+            <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i>Vacation Hut</i>
+                </a>
+            </li>
+              <li className="nav-item item1">
                 <a className="nav-link" href="/dash">
                   Dashboard
                 </a>
@@ -60,7 +65,7 @@ function User() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -70,13 +75,13 @@ function User() {
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
       <h1 className="activity users">Users</h1>
-      <table>
-        <thead>
+      <table class="table1 table3 table table-bordered th-lg border-dark">
+        <thead class="tablehead">
           <tr>
             {/* <th>Image</th> */}
             <th>Name</th>

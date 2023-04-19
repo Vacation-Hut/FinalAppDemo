@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import image from "./imageload.png";
+// import image from "./imageload.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ function Updateactivity(i) {
   const [activityname, setActivityName] = useState(data.activityname);
   const [description, setDescription] = useState(data.description);
   const [food, setFood] = useState(data.food);
-  const [accommodation, setAccommodation] = useState(data.accommodation);
+  const [accomadation, setAccomadation] = useState(data.accomadation);
 
   useEffect(() => {
     fetch(`http://localhost:5000/dash/activity/${id}`, {
@@ -29,7 +29,7 @@ function Updateactivity(i) {
       activityname,
       description,
       food,
-      accommodation,
+      accomadation
     };
 
     try {
@@ -53,7 +53,7 @@ function Updateactivity(i) {
 
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbackground">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -68,18 +68,23 @@ function Updateactivity(i) {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+            <li className="nav-item">
                 <a className="nav-link" href="#">
+                  <i>Vacation Hut</i>
+                </a>
+            </li>
+              <li className="nav-item item1">
+                <a className="nav-link" href="/dash">
                   Dashboard
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/dash/activity">
                   Activity
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/dash/users">
                   User
                 </a>
               </li>
@@ -94,7 +99,7 @@ function Updateactivity(i) {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -104,7 +109,7 @@ function Updateactivity(i) {
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
@@ -152,13 +157,13 @@ function Updateactivity(i) {
                 {i.food}
               </input>
               <br></br>
-              <label className="label4">Accommodation</label>
+              <label className="label4">Accomadation</label>
               <br></br>
               <input
-                name="accommodation"
-                value={accommodation}
+                name="accomadation"
+                value={accomadation}
                 onChange={(e) => {
-                  setAccommodation(e.target.value);
+                  setAccomadation(e.target.value);
                 }}
               ></input>
               <br></br>
@@ -175,7 +180,7 @@ function Updateactivity(i) {
           </div>
           <div className="flex-item-right">
             <h3>Activity Image</h3>
-            <img src={image} className="addimg"></img>
+            <img src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png" alt="Image" className="addimg" /><br></br>
             <br></br>
             <button className="btn1">Select image</button>
           </div>

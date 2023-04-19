@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const env = require("dotenv");
 const app = express();
+const cloudinary = require('cloudinary').v2;
+
 
 app.use(cors());
 app.use(express.json());
@@ -140,8 +142,8 @@ app.put("/dash/activity/:id", (req, res) => {
       $set: {
         activityname: req.body.activityname,
         description: req.body.description,
-        food: req.body.activityname,
-        accomadation: req.body.activityname,
+        food: req.body.food,
+        accomadation: req.body.accomadation,
       },
     },
     {
@@ -262,6 +264,19 @@ app.post("/dash/orders", async (req, res) => {
   }
 });
 
+// cloudinary.config({
+//   cloud_name: 'dtbqcm3e2',
+//   api_key: '539715763699155',
+//   api_secret: 'c0iQixhsSFDVlVvTokVucW8VSuY'
+// });
+
+// cloudinary.uploader.upload('https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png', function(error, result) {
+//   console.log(result, error);
+// });
+
+
+
 app.listen(5000, () => {
   console.log("Server connected on port 5000");
 });
+  

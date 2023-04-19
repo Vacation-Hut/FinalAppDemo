@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import axios from "axios";
 
@@ -27,9 +27,17 @@ function Activity() {
     }
   }
 
+  // async function Update(id) {
+  //   try{
+  //   Navigate(`dash/activity/${id}/update`)
+  // } catch (err) {
+  //   console.error(err);
+  // }
+  // }
+
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbackground">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -44,7 +52,12 @@ function Activity() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+            <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i>Vacation Hut</i>
+                </a>
+            </li>
+              <li className="nav-item item1">
                 <a className="nav-link" href="/dash">
                   Dashboard
                 </a>
@@ -70,7 +83,7 @@ function Activity() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -80,25 +93,25 @@ function Activity() {
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
       <div>
         <h1 className="activity">Activities</h1>
-        <Link className="buttact btn w-500 border adds" to="/dash/activity/new">
+        <Link className="btn border btn4" to="/dash/activity/new">
           Add activity
         </Link>
         <div className="grid-container">
-          <table class="table1">
-            <thead>
+          <table class="table1 table4 table table-bordered th-lg border-dark">
+            <thead class="tablehead">
               <tr>
                 {/* <th>Image</th> */}
                 <th>Activity Name</th>
                 <th>Description</th>
                 <th>Food</th>
-                <th>Accommodation</th>
-                <th>Delete</th>
+                <th>Accomadation</th>
+                <th>Update/Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -106,14 +119,15 @@ function Activity() {
                 return (
                   <tr key={i.id}>
                     <td>
-                      <Link to={`/dash/activity/${i._id}/update`}>
+                      
                         {i.activityname}
-                      </Link>
+                      
                     </td>
                     <td>{i.description}</td>
                     <td>{i.food}</td>
                     <td>{i.accomadation}</td>
-                    <Link onClick={() => Delete(i._id)}>Delete</Link>
+                    <button class="btn btn5" onClick={() => {window.location.href=`/dash/activity/${i._id}/update`}}>Update</button>
+                    <button class="btn6 btn" onClick={() => Delete(i._id)}>Delete</button>
                   </tr>
                 );
               })}

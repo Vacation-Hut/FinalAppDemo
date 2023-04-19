@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Dashboard() {
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbackground">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -20,7 +20,12 @@ function Dashboard() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+            <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i>Vacation Hut</i>
+                </a>
+            </li>
+              <li className="nav-item item1">
                 <a className="nav-link" href="#">
                   Dashboard
                 </a>
@@ -46,7 +51,7 @@ function Dashboard() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -56,20 +61,21 @@ function Dashboard() {
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
-      <div>
-        <h3>Total booking</h3>
+      <div class="dashdiv">
+        <button class="dashbtn dashbtn2">Total booking</button>
+        <button class="dashbtn dashbtn1">Total income</button>
       </div>
-      <div>
-        <h3>Total income</h3>
+      <div class="graph">
+
       </div>
-      <div>
-        <h3>Recent customers</h3>
-        <table>
-          <thead>
+      <div class="recent">
+        <h3 class="customer">Recent customers</h3>
+        <table class="table1 table2 table table-bordered th-lg border-dark">
+          <thead class="tablehead">
             <th>Name</th>
             <th>Booking Date</th>
             <th>Phone Number </th>

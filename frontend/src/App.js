@@ -9,6 +9,7 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import User from "./User";
 import Order from "./Order";
+import Update1 from "./update1";
 
 function App() {
   return (

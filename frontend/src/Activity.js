@@ -52,11 +52,11 @@ function Activity() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+              <li className="nav-item">
                 <a className="nav-link" href="#">
                   <i>Vacation Hut</i>
                 </a>
-            </li>
+              </li>
               <li className="nav-item item1">
                 <a className="nav-link" href="/dash">
                   Dashboard
@@ -106,7 +106,7 @@ function Activity() {
           <table class="table1 table4 table table-bordered th-lg border-dark">
             <thead class="tablehead">
               <tr>
-                {/* <th>Image</th> */}
+                <th>Image</th>
                 <th>Activity Name</th>
                 <th>Description</th>
                 <th>Food</th>
@@ -119,15 +119,28 @@ function Activity() {
                 return (
                   <tr key={i.id}>
                     <td>
-                      
-                        {i.activityname}
-                      
+                      <img
+                        src={i.images.url}
+                        alt={i.activityname}
+                        height="200"
+                        width="200"
+                      />
                     </td>
+                    <td>{i.activityname}</td>
                     <td>{i.description}</td>
                     <td>{i.food}</td>
                     <td>{i.accomadation}</td>
-                    <button class="btn btn5" onClick={() => {window.location.href=`/dash/activity/${i._id}/update`}}>Update</button>
-                    <button class="btn6 btn" onClick={() => Delete(i._id)}>Delete</button>
+                    <button
+                      class="btn btn5"
+                      onClick={() => {
+                        window.location.href = `/dash/activity/${i._id}/update`;
+                      }}
+                    >
+                      Update
+                    </button>
+                    <button class="btn6 btn" onClick={() => Delete(i._id)}>
+                      Delete
+                    </button>
                   </tr>
                 );
               })}

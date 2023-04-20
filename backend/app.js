@@ -5,11 +5,16 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const env = require("dotenv");
 const app = express();
-const cloudinary = require('cloudinary').v2;
-
-
+const cloudinary = require("cloudinary").v2;
+const fileupload = require("express-fileupload");
+const fs = require("fs");
 app.use(cors());
 app.use(express.json());
+app.use(
+  fileupload({
+    useTempFiles: true,
+  })
+);
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
@@ -40,12 +45,18 @@ const Activity = mongoose.model("Activity", {
   description: String,
   food: String,
   accomadation: String,
+  images: Object,
 });
 const Order = mongoose.model("Order", {
   activityname: String,
   guider: String,
   food: String,
   accomadation: String,
+});
+cloudinary.config({
+  cloud_name: "dpxmtbyzi",
+  api_key: 581845737163629,
+  api_secret: "eK--TbMwrtfaJzGEK2I9gtXY1CQ",
 });
 
 app.post("/signup", async (req, res) => {
@@ -122,12 +133,13 @@ app.get("/dash/activity/:id", async (req, res) => {
 
 app.post("/dash/activity", async (req, res) => {
   try {
-    const { activityname, description, food, accomadation } = req.body; // Assuming you have name, location, and description fields in your form
+    const { activityname, description, food, accomadation, images } = req.body; // Assuming you have name, location, and description fields in your form
     const createdActivity = await Activity.create({
       activityname,
       description,
       food,
       accomadation,
+      images,
     });
     await createdActivity.save();
     res.status(201).json(createdActivity);
@@ -144,6 +156,7 @@ app.put("/dash/activity/:id", (req, res) => {
         description: req.body.description,
         food: req.body.food,
         accomadation: req.body.accomadation,
+        images: req.body.images,
       },
     },
     {
@@ -264,19 +277,57 @@ app.post("/dash/orders", async (req, res) => {
   }
 });
 
-// cloudinary.config({
-//   cloud_name: 'dtbqcm3e2',
-//   api_key: '539715763699155',
-//   api_secret: 'c0iQixhsSFDVlVvTokVucW8VSuY'
-// });
+app.post("/upload", (req, res) => {
+  try {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send("No files were uploaded.");
+    }
 
-// cloudinary.uploader.upload('https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png', function(error, result) {
-//   console.log(result, error);
-// });
+    const file = req.files.file;
 
+    cloudinary.uploader
+      .upload(file.tempFilePath, { folder: "images" })
+      .then((result) => {
+        removeTmp(file.tempFilePath);
+        res.json({ public_id: result.public_id, url: result.secure_url });
+      })
+      .catch((err) => {
+        console.error(err);
+        res
+          .status(500)
+          .json({
+            error:
+              "Failed to upload image to Cloudinary. Please try again later.",
+          });
+      });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        error: "Failed to upload image to Cloudinary. Please try again later.",
+      });
+  }
+});
 
+app.post("/destroy", (req, res) => {
+  try {
+    const { public_id } = req.body;
+    if (!public_id) return res.status(400).json({ msg: "no Image selected" });
+    cloudinary.uploader.destroy(public_id, async (err, result) => {
+      if (err) throw err;
+      res.json({ msg: "deleted image" });
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
+};
 
 app.listen(5000, () => {
   console.log("Server connected on port 5000");
 });
-  

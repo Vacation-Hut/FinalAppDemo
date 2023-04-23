@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard";
 import User from "./User";
 import Order from "./Order";
 import Activity1 from "./Activity11";
+import Payment from "./Payment";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         ></Route>
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
+        <Route path="/payment" element={<Payment/>}></Route>
       </Routes>
     </BrowserRouter>
   );

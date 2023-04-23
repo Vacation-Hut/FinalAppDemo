@@ -9,7 +9,7 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import User from "./User";
 import Order from "./Order";
-import Update1 from "./update1";
+import Activity1 from "./Activity11";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/dash/activity" element={<Activity />}></Route>
+        <Route path="activity" element={<Activity1 />}></Route>
         <Route path="/dash/users" element={<User />}></Route>
         <Route path="/dash/activity/new" element={<Addactivity />}></Route>
         <Route

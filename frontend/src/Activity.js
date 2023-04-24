@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import axios from "axios";
 
 function Activity() {
-  const [activity, setActivity] = useState([]);
+  const [images, setImages] = useState([]);
   const [activityname,setActivityName]=useState()
   const [description,setDiscription]=useState()
   const [food,setFood]=useState()
@@ -42,6 +42,7 @@ function Activity() {
   async function submit(e) {
     e.preventDefault();
     const updatedProduct = {
+      images,
       activityname,
       description,
       food,
@@ -159,10 +160,11 @@ function Activity() {
                   <tr key={i.id}>
                     <td>
                       <img
-                        src={i.images.url}
+                        src={i.images}
                         alt={i.activityname}
                         height="200"
                         width="200"
+                        
                       />
                     </td>
                     <td>{i.activityname}</td>

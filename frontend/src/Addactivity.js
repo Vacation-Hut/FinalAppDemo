@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-// import image from './imageload.png';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Addactivity() {
   const Navigate = useNavigate;
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState(null); // set initial value to null
   const [activityname, setActivityName] = useState("");
   const [description, setDescription] = useState("");
   const [food, setFood] = useState("");
@@ -15,22 +14,33 @@ function Addactivity() {
   async function submit(e) {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/dash/activity", {
-        activityname,
-        accomadation,
-        description,
-        food,
-        images,
+      const formData = new FormData(); // create a new FormData object
+      formData.append("activityname", activityname);
+      formData.append("accomadation", accomadation);
+      formData.append("description", description);
+      formData.append("food", food);
+      formData.append("images", images); // append the selected image to the form data
+
+      await axios.post("http://localhost:5000/dash/activity", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // set the content type header
+        },
       });
       Navigate("/dash/activity");
     } catch (error) {
       console.log(error);
     }
   }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0]; // get the first selected file
+    setImages(file); // set the selected file as the value of images state
+  }
+
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbackground">
-        <div className="container-fluid">
+       <nav className="navbar navbar-expand-lg navbackground">
+         <div className="container-fluid">
           <button
             className="navbar-toggler"
             type="button"
@@ -82,87 +92,102 @@ function Addactivity() {
         <h1 className="activity">Add new activity</h1>
         <div className="flex-container">
           <div className="flex-item-left">
-            <h3 class="headfont">
+            <h3 className="headfont">
               <i>
                 <u>Activity details</u>
               </i>
             </h3>
-            <form className="form">
-              <label className="label1">Activity name</label>
-              <br></br>
-              <input
-                name="activityname"
-                onChange={(e) => {
-                  setActivityName(e.target.value);
-                }}
-              ></input>
-              <br></br>
-              <label className="label2">Description</label>
-              <br></br>
-              <input
-                name="description"
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-              ></input>
-              <br></br>
-              <label className="label3">Food</label>
-              <br></br>
-              <input
-                name="food"
-                onChange={(e) => {
-                  setFood(e.target.value);
-                }}
-              ></input>
-              <br></br>
-              <label className="label4">Accomadation</label>
-              <br></br>
-              <input
-                name="accomadation"
-                onChange={(e) => {
+             <form className="form">
+               <label className="label1">Activity name</label>
+               <br></br>
+               <input
+                 name="activityname"
+                 onChange={(e) => {
+                   setActivityName(e.target.value);
+                 }}
+               ></input>
+               <br></br>
+               <label className="label2">Description</label>
+               <br></br>
+               <input
+                 name="description"
+                 onChange={(e) => {
+                   setDescription(e.target.value);
+                 }}
+               ></input>
+               <br></br>
+               <label className="label3">Food</label>
+               <br></br>
+               <input
+                 name="food"
+                 onChange={(e) => {
+                   setFood(e.target.value);
+                 }}
+               ></input>
+               <br></br>
+               <label className="label4">Accomadation</label>
+               <br></br>
+               <input
+                 name="accomadation"
+                 onChange={(e) => {
                   setAccomadation(e.target.value);
-                }}
-              ></input>
-              <br></br>
-              <button className="btn2" onClick={submit}>
-                <Link to="/dash/activity" className="btn">
-                  Add activity
-                </Link>
+                 }}
+               ></input>
+                {/* <br></br>
+               <button className="btn2" onClick={submit}>
+                 <Link to="/dash/activity" className="btn">
+                   Add activity
+                 </Link>
               </button>
-              <button className="btn2" onClick={submit}>
+               <button className="btn2" onClick={submit}>
                 <Link to="/dash/activity" className="btn">
                   Cancel
-                </Link>
-              </button>
-            </form>
+                 </Link>
+               </button>  */}
+           </form> 
           </div>
           <div className="flex-item-right">
-            <h3 class="headfont">
+            <h3 className="headfont">
               <i>
                 <u>Activity Image</u>
               </i>
             </h3>
-            <img
-              src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png"
-              alt="Image"
-              className="addimg"
-            />
-            <br></br>
+            {images ? (
+              <img
+                src={URL.createObjectURL(images)}
+                alt="Selected Image"
+                className="addimg"
+              />
+            ) : (
+              <img
+                src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png"
+                alt="Default Image"
+                className="addimg"
+              />
+            )}
+            <br />
 
-            {/* <img src={image} className="addimg"></img><br></br>  */}
-            <button
-              className="btn2"
-              onChange={(e) => {
-                setImages(e.target.value);
-              }}
-            >
-              Select image
-            </button>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange} // call the handleImageChange function on change event
+            />
           </div>
         </div>
+        <button className="btn2" onClick={submit}>
+          <Link to="/dash/activity" className="btn">
+          Add activity
+          </Link>
+        </button>
+        <button className="btn2" onClick={submit}>
+          <Link to="/dash/activity" className="btn">
+          Cancel
+          </Link>
+        </button>
       </div>
     </div>
   );
 }
 
 export default Addactivity;
+

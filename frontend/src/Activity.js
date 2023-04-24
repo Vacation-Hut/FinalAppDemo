@@ -23,17 +23,44 @@ function Activity() {
         setData(data.data);
       });
   }, []);
-  async function Selectuser(id) {
-    setActivityName(data[0].activityname)
-    setDiscription(data[0].description)
-    setFood(data[0].food)
-    setAccomadation(data[0].accomadation)}
-
+ 
+  // async function Selectuser(id) {
+  //  setActivityName(data[0].activityname)
+  //  setDiscription(data[0].description)
+  //  setFood(data[0].food)
+  //  setAccomadation(data[0].accomadation)}
   async function Delete(id) {
     try {
       const res = await fetch(`http://localhost:5000/dash/activity/${id}`, {
         method: "DELETE",
       });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function submit(e) {
+    e.preventDefault();
+    const updatedProduct = {
+      activityname,
+      description,
+      food,
+      accomadation
+    };
+
+    try {
+      const res = await fetch(`http://localhost:5000/dash/activity/:id`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to update product");
+      }
+      Navigate("/dash/activity");
     } catch (err) {
       console.error(err);
     }
@@ -142,17 +169,10 @@ function Activity() {
                     <td>{i.description}</td>
                     <td>{i.food}</td>
                     <td>{i.accomadation}</td>
-                    <button
-                      class="btn btn5"
-                      onClick={() => 
-                        Selectuser(i._id)
-                      }
-                    >
-                      Update
-                    </button>
+                   <td><button  class= "btn btn6" onClick={() => window.location.href = `/dash/activity/${i._id}/update`}>Update</button> 
                     <button class="btn6 btn" onClick={() => Delete(i._id)}>
                       Delete
-                    </button>
+                    </button></td> 
                   </tr>
                 );
               })}

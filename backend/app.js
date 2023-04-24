@@ -48,10 +48,20 @@ const Activity = mongoose.model("Activity", {
   images: Object,
 });
 const Order = mongoose.model("Order", {
-  activityname: String,
-  guider: String,
-  food: String,
-  accomadation: String,
+ User :{ type  : mongoose.Schema.Types.ObjectId,ref:"User"},
+ items :[
+  {
+    Activity:{type : mongoose.Schema.Types.ObjectId,ref:"Activity"},
+    checkboxData: {
+      type: [String], // an array of strings
+      required: true
+    },
+    Transport : String,
+    Food : String,
+    Accomadation : String,
+    Price : Number,
+  }
+ ]
 });
 cloudinary.config({
   cloud_name: "dpxmtbyzi",
@@ -248,32 +258,38 @@ app.get("/allorders", async (req, res) => {
   }
 });
 
-app.get("/dash/orders/:id", async (req, res) => {
-  const activityId = req.params.id;
+app.get('/dash/orders/:id', async (req, res) => {
   try {
-    const order = await Order.findById(activityId);
+    
+    const order = await Order.findById(req.params.id)
+      .populate('User', 'password') 
+            .populate('items.Activity')
+
     if (!order) {
-      return res.status(404).json({ error: "order not found" });
+      return res.status(404).json({ error: 'Order not found' });
     }
-    res.json(order);
+
+    res.json(order); 
   } catch (err) {
-    res.status(500).json({ error: "Failed to retrieve order" });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
-app.post("/dash/orders", async (req, res) => {
+app.post('/dash/orders', async (req, res) => {
   try {
-    const { activityname, guider, food, accomadation } = req.body; // Assuming you have name, location, and description fields in your form
-    const order = await Order.create({
-      activityname,
-      guider,
-      food,
-      accomadation,
-    });
+    Order.findOne({user: req.body._id})
+    const order = new Order({
+      user: req.body._id,
+      items: req.body.items
+    }); 
+
     await order.save();
-    res.status(201).json(order);
+
+    res.status(201).json(order); 
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

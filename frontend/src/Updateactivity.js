@@ -2,55 +2,74 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 // import image from "./imageload.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-
 
 function Updateactivity(i) {
-  const Navigate = useNavigate();
-  const [data, setData] = useState({});
-  const { id } = useParams();
-  const [activityname, setActivityName] = useState(data.activityname);
-  const [description, setDescription] = useState(data.description);
-  const [food, setFood] = useState(data.food);
-  const [accomadation, setAccomadation] = useState(data.accomadation);
+  const [activity, setActivity] = useState([]);
+  const [activityname,setActivityName]=useState()
+  const [description,setDiscription]=useState()
+  const [food,setFood]=useState()
+  const [accomadation,setAccomadation]=useState()
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/dash/activity/${id}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.data);
-      });
-  }, []);
 
-  async function submit(e) {
-    e.preventDefault();
-    const updatedProduct = {
-      activityname,
-      description,
-      food,
-      accomadation
-    };
+  const [data, setData] = useState([]);
+  const Navigate = useNavigate()
 
-    try {
-      const res = await fetch(`http://localhost:5000/dash/activity/:id`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedProduct),
-      });
+  
+    
+ ;
+ 
+ useEffect(() => {
+  fetch("http://localhost:5000/allactivity", {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setData(data.data);
+      
+      console.log(data.data[0].activityname)
+        setActivityName(data.data[0].activityname)
+        setDiscription(data.data[0].description)
+        setFood(data.data[0].food)
+        setAccomadation(data.data[0].accomadation)
+        
+    });
+}, []);
 
-      if (!res.ok) {
-        throw new Error("Failed to update product");
-      }
 
-      Navigate("/dash/activity");
-    } catch (err) {
-      console.error(err);
+
+
+
+
+async function submit(e) {
+  e.preventDefault();
+  const updatedProduct = {
+    activityname,
+    description,
+    food,
+    accomadation
+  };
+
+  try {
+    const res = await fetch(`http://localhost:5000/dash/activity/:id`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+   
+    if (res.ok) {
+      Navigate("/dash/activity")
+     
     }
+    else{
+      throw new Error("Failed to update product");
+    }
+    
+  } catch (err) {
+    console.error(err);
   }
+}
 
   return (
     <div className="App">
@@ -125,23 +144,18 @@ function Updateactivity(i) {
               
               return ( */}
 
-              <label className="label1">Activity name</label>
-              <br />
-              <input
-                name="activityname"
-                value={activityname}
-                onChange={(e) => {
+              
+              <label>Activity Name</label><br></br>
+          <input value={activityname} onChange={(e) => {
                   setActivityName(e.target.value);
-                }}
-              ></input>
-              <br />
+                }}></input><br></br>
               <label className="label2">Description</label>
               <br />
               <input
                 name="description"
                 value={description}
                 onChange={(e) => {
-                  setDescription(e.target.value);
+                  setDiscription(e.target.value);
                 }}
               />
               <br />

@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Addactivity() {
   const Navigate = useNavigate;
-  const [images, setImages] = useState(null); // set initial value to null
+  const [images, setImages] = useState(null); 
   const [activityname, setActivityName] = useState("");
   const [description, setDescription] = useState("");
   const [food, setFood] = useState("");
@@ -14,16 +14,19 @@ function Addactivity() {
   async function submit(e) {
     e.preventDefault();
     try {
-      const formData = new FormData(); // create a new FormData object
+      const formData = new FormData(); 
       formData.append("activityname", activityname);
       formData.append("accomadation", accomadation);
       formData.append("description", description);
       formData.append("food", food);
-      formData.append("images", images); // append the selected image to the form data
 
+      const { public_id, url } = await uploadImage(images); 
+
+      formData.append("public_id", public_id); 
+      formData.append("url", url); 
       await axios.post("http://localhost:5000/dash/activity", formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // set the content type header
+          "Content-Type": "multipart/form-data", 
         },
       });
       Navigate("/dash/activity");
@@ -32,15 +35,30 @@ function Addactivity() {
     }
   }
 
+  async function uploadImage(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(
+      "http://localhost:5000/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  }
+
   function handleImageChange(e) {
-    const file = e.target.files[0]; // get the first selected file
-    setImages(file); // set the selected file as the value of images state
+    const file = e.target.files[0]; 
+    setImages(file); 
   }
 
   return (
     <div className="App">
-       <nav className="navbar navbar-expand-lg navbackground">
-         <div className="container-fluid">
+      <nav className="navbar navbar-expand-lg navbackground">
+        <div className="container-fluid">
           <button
             className="navbar-toggler"
             type="button"
@@ -97,54 +115,43 @@ function Addactivity() {
                 <u>Activity details</u>
               </i>
             </h3>
-             <form className="form">
-               <label className="label1">Activity name</label>
-               <br></br>
-               <input
-                 name="activityname"
-                 onChange={(e) => {
-                   setActivityName(e.target.value);
-                 }}
-               ></input>
-               <br></br>
-               <label className="label2">Description</label>
-               <br></br>
-               <input
-                 name="description"
-                 onChange={(e) => {
-                   setDescription(e.target.value);
-                 }}
-               ></input>
-               <br></br>
-               <label className="label3">Food</label>
-               <br></br>
-               <input
-                 name="food"
-                 onChange={(e) => {
-                   setFood(e.target.value);
-                 }}
-               ></input>
-               <br></br>
-               <label className="label4">Accomadation</label>
-               <br></br>
-               <input
-                 name="accomadation"
-                 onChange={(e) => {
+            <form className="form">
+              <label className="label1">Activity name</label>
+              <br></br>
+              <input
+                name="activityname"
+                onChange={(e) => {
+                  setActivityName(e.target.value);
+                }}
+              ></input>
+              <br></br>
+              <label className="label2">Description</label>
+              <br></br>
+              <input
+                name="description"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              ></input>
+              <br></br>
+              <label className="label3">Food</label>
+              <br></br>
+              <input
+                name="food"
+                onChange={(e) => {
+                  setFood(e.target.value);
+                }}
+              ></input>
+              <br></br>
+              <label className="label4">Accomadation</label>
+              <br></br>
+              <input
+                name="accomadation"
+                onChange={(e) => {
                   setAccomadation(e.target.value);
-                 }}
-               ></input>
-                {/* <br></br>
-               <button className="btn2" onClick={submit}>
-                 <Link to="/dash/activity" className="btn">
-                   Add activity
-                 </Link>
-              </button>
-               <button className="btn2" onClick={submit}>
-                <Link to="/dash/activity" className="btn">
-                  Cancel
-                 </Link>
-               </button>  */}
-           </form> 
+                }}
+              ></input>
+            </form>
           </div>
           <div className="flex-item-right">
             <h3 className="headfont">
@@ -176,12 +183,12 @@ function Addactivity() {
         </div>
         <button className="btn2" onClick={submit}>
           <Link to="/dash/activity" className="btn">
-          Add activity
+            Add activity
           </Link>
         </button>
         <button className="btn2" onClick={submit}>
           <Link to="/dash/activity" className="btn">
-          Cancel
+            Cancel
           </Link>
         </button>
       </div>
@@ -190,4 +197,3 @@ function Addactivity() {
 }
 
 export default Addactivity;
-

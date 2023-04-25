@@ -2,74 +2,79 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 // import image from "./imageload.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-function Updateactivity(i) {
-  const [activity, setActivity] = useState([]);
-  const [activityname,setActivityName]=useState()
-  const [description,setDiscription]=useState()
-  const [food,setFood]=useState()
-  const [accomadation,setAccomadation]=useState()
-
+function Updateactivity() {
+  const { id } = useParams();
+  const [images, setImages] = useState(null);
+  const [activity, setActivity] = useState({});
+  const [activityname, setActivityName] = useState();
+  const [description, setDescription] = useState();
+  const [food, setFood] = useState();
+  const [accomadation, setAccomadation] = useState();
 
   const [data, setData] = useState([]);
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/dash/activity/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.data);
+
+ 
+        // setImages(data.data[0].images.url)
+        setActivityName(data.data.activityname);
+        setDescription(data.data.description);
+        setFood(data.data.food);
+        setAccomadation(data.data.accomadation);
+      });
+  }, []);
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("activityname", activityname);
+      formData.append("accomadation", accomadation);
+      formData.append("description", description);
+      formData.append("food", food);
   
     
- ;
- 
- useEffect(() => {
-  fetch("http://localhost:5000/allactivity", {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setData(data.data);
-      
-      console.log(data.data[0].activityname)
-        setActivityName(data.data[0].activityname)
-        setDiscription(data.data[0].description)
-        setFood(data.data[0].food)
-        setAccomadation(data.data[0].accomadation)
-        
-    });
-}, []);
-
-
-
-
-
-
-async function submit(e) {
-  e.preventDefault();
-  const updatedProduct = {
-    activityname,
-    description,
-    food,
-    accomadation
-  };
-
-  try {
-    const res = await fetch(`http://localhost:5000/dash/activity/:id`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedProduct),
-    });
-   
-    if (res.ok) {
-      Navigate("/dash/activity")
-     
-    }
-    else{
-      throw new Error("Failed to update product");
-    }
+        const { public_id, url } = await uploadImage(images);
+        formData.append("public_id", public_id);
+        formData.append("url", url);
     
-  } catch (err) {
-    console.error(err);
+      await axios.put(`http://localhost:5000/dash/activity/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      Navigate("/dash/activity");
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
+  
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    setImages(file);
+  }
+  async function uploadImage(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(
+      "http://localhost:5000/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  }
 
   return (
     <div className="App">
@@ -88,11 +93,11 @@ async function submit(e) {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+              <li className="nav-item">
                 <a className="nav-link" href="#">
                   <i>Vacation Hut</i>
                 </a>
-            </li>
+              </li>
               <li className="nav-item item1">
                 <a className="nav-link" href="/dash">
                   Dashboard
@@ -119,17 +124,6 @@ async function submit(e) {
                 </a>
               </li>
             </ul>
-            {/* <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-primary" type="submit">
-                Search
-              </button>
-            </form> */}
           </div>
         </div>
       </nav>
@@ -144,18 +138,22 @@ async function submit(e) {
               
               return ( */}
 
-              
-              <label>Activity Name</label><br></br>
-          <input value={activityname} onChange={(e) => {
+              <label>Activity Name</label>
+              <br></br>
+              <input
+                value={activityname}
+                onChange={(e) => {
                   setActivityName(e.target.value);
-                }}></input><br></br>
+                }}
+              ></input>
+              <br></br>
               <label className="label2">Description</label>
               <br />
               <input
                 name="description"
                 value={description}
                 onChange={(e) => {
-                  setDiscription(e.target.value);
+                  setDescription(e.target.value);
                 }}
               />
               <br />
@@ -169,7 +167,6 @@ async function submit(e) {
                   setFood(e.target.value);
                 }}
               >
-                {i.food}
               </input>
               <br></br>
               <label className="label4">Accomadation</label>
@@ -182,24 +179,48 @@ async function submit(e) {
                 }}
               ></input>
               <br></br>
-
-              <button className="btn2" onClick={submit}>
-                Update activity
-              </button>
-              <Link to="/dash/activity" className="btn3 btn">
-                Cancel
-              </Link>
-
-              {/* )})} */}
             </form>
           </div>
           <div className="flex-item-right">
-            <h3>Activity Image</h3>
-            <img src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png" alt="Image" className="addimg" /><br></br>
-            <br></br>
-            <button className="btn1">Select image</button>
+            <h3 className="headfont">
+              <i>
+                <u>Activity Image</u>
+              </i>
+            </h3>
+            {images ? (
+              <img
+                src={URL.createObjectURL(images)}
+                alt="Selected Image"
+                className="addimg"
+              />
+            ) : (
+              <img
+                src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1681897067/Activities/imageload_lubost.png"
+                alt="Default Image"
+                className="addimg"
+              />
+            )}
+            <br />
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setImages(e.target.files[0]);
+              }} // call the handleImageChange function on change event
+            />
           </div>
         </div>
+        <button className="btn2" onClick={submit}>
+          <Link to="/dash/activity" className="btn">
+            Update activity
+          </Link>
+        </button>
+        <button className="btn2" onClick={submit}>
+          <Link to="/dash/activity" className="btn">
+            Cancel
+          </Link>
+        </button>
       </div>
     </div>
   );

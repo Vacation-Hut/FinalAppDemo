@@ -48,20 +48,20 @@ const Activity = mongoose.model("Activity", {
   images: Object,
 });
 const Order = mongoose.model("Order", {
- User :{ type  : mongoose.Schema.Types.ObjectId,ref:"User"},
- items :[
-  {
-    Activity:{type : mongoose.Schema.Types.ObjectId,ref:"Activity"},
-    checkboxData: {
-      type: [String], // an array of strings
-      required: true
+  User: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  items: [
+    {
+      Activity: { type: mongoose.Schema.Types.ObjectId, ref: "Activity" },
+      checkboxData: {
+        type: [String], // an array of strings
+        required: true,
+      },
+      Transport: String,
+      Food: String,
+      Accomadation: String,
+      Price: Number,
     },
-    Transport : String,
-    Food : String,
-    Accomadation : String,
-    Price : Number,
-  }
- ]
+  ],
 });
 cloudinary.config({
   cloud_name: "dpxmtbyzi",
@@ -143,13 +143,14 @@ app.get("/dash/activity/:id", async (req, res) => {
 
 app.post("/dash/activity", async (req, res) => {
   try {
-    const { activityname, description, food, accomadation, images } = req.body; // Assuming you have name, location, and description fields in your form
+    const { activityname, description, food, accomadation, public_id, url } =
+      req.body; // Assuming you have name, location, and description fields in your form
     const createdActivity = await Activity.create({
       activityname,
       description,
       food,
       accomadation,
-      images,
+      images: { public_id, url },
     });
     await createdActivity.save();
     res.status(201).json(createdActivity);
@@ -157,24 +158,41 @@ app.post("/dash/activity", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-app.put("/dash/activity/:id", (req, res) => {
-  Activity.findOneAndUpdate(
-    req.params.id,
-    {
-      $set: {
-        activityname: req.body.activityname,
-        description: req.body.description,
-        food: req.body.food,
-        accomadation: req.body.accomadation,
-        images: req.body.images,
+app.put("/dash/activity/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const { activityname, accomadation, description, food, public_id, url } =
+      req.body;
+
+    const updatedActivity = await Activity.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          activityname: activityname,
+          accomadation: accomadation,
+          description: description,
+          food: food,
+          "images.public_id": public_id,
+          "images.url": url,
+        },
       },
-    },
-    {
-      upsert: true,
+      {
+        new: true,
+        upsert: true,
+        useFindAndModify: false,
+      }
+    );
+
+    if (!updatedActivity) {
+      return res.status(404).send("Activity not found");
     }
-  )
-    .then((result) => res.json("Success"))
-    .catch((error) => console.error(error));
+
+    res.status(200).json("Activity updated successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Failed to update activity");
+  }
 });
 
 app.delete("/dash/activity/:id", (req, res) => {
@@ -258,38 +276,37 @@ app.get("/allorders", async (req, res) => {
   }
 });
 
-app.get('/dash/orders/:id', async (req, res) => {
+app.get("/dash/orders/:id", async (req, res) => {
   try {
-    
     const order = await Order.findById(req.params.id)
-      .populate('User', 'password') 
-            .populate('items.Activity')
+      .populate("User", "password")
+      .populate("items.Activity");
 
     if (!order) {
-      return res.status(404).json({ error: 'Order not found' });
+      return res.status(404).json({ error: "Order not found" });
     }
 
-    res.json(order); 
+    res.json(order);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-app.post('/dash/orders', async (req, res) => {
+app.post("/dash/orders", async (req, res) => {
   try {
-    Order.findOne({user: req.body._id})
+    Order.findOne({ user: req.body._id });
     const order = new Order({
       user: req.body._id,
-      items: req.body.items
-    }); 
+      items: req.body.items,
+    });
 
     await order.save();
 
-    res.status(201).json(order); 
+    res.status(201).json(order);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -305,27 +322,25 @@ app.post("/upload", (req, res) => {
       .upload(file.tempFilePath, { folder: "images" })
       .then((result) => {
         removeTmp(file.tempFilePath);
-        res.json({ public_id: result.public_id, url: result.secure_url });
+        res.json({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
       })
       .catch((err) => {
         console.error(err);
-        res
-          .status(500)
-          .json({
-            error:
-              "Failed to upload image to Cloudinary. Please try again later.",
-          });
+        res.status(500).json({
+          error:
+            "Failed to upload image to Cloudinary. Please try again later.",
+        });
       });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: "Failed to upload image to Cloudinary. Please try again later.",
-      });
+    res.status(500).json({
+      error: "Failed to upload image to Cloudinary. Please try again later.",
+    });
   }
 });
-
 app.post("/destroy", (req, res) => {
   try {
     const { public_id } = req.body;

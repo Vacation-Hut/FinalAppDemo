@@ -160,7 +160,7 @@ function Activity() {
                   <tr key={i.id}>
                     <td>
                       <img
-                        src={i.images}
+                        src={i.images.url}
                         alt={i.activityname}
                         height="200"
                         width="200"

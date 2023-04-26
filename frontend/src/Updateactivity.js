@@ -23,9 +23,6 @@ function Updateactivity() {
       .then((res) => res.json())
       .then((data) => {
         setData(data.data);
-
- 
-        // setImages(data.data[0].images.url)
         setActivityName(data.data.activityname);
         setDescription(data.data.description);
         setFood(data.data.food);

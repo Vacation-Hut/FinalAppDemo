@@ -11,6 +11,7 @@ import User from "./User";
 import Order from "./Order";
 
 import Payment from "./Payment";
+import Pottery from "./Pottery";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           path="/dash/activity/:id/update"
           element={<Updateactivity />}
         ></Route>
+        <Route path="/pottery/:id" element={<Pottery/>}></Route>
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
         <Route path="/payment" element={<Payment />}></Route>

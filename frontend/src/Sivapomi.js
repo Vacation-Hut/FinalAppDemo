@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
-function Sivapomi() {
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+
+
+function Pottery() {
+  const { id } = useParams();
+  const [images, setImages] = useState({});
+  const [activity, setActivity] = useState({});
+  const [activityname, setActivityName] = useState();
+  const [description, setDescription] = useState();
+  const [food, setFood] = useState();
+  const [accomadation, setAccomadation] = useState();
+
+  const [data, setData] = useState([]);
+  const Navigate = useNavigate();
+
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/dash/activity/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.data);
+
+        setImages(data.data.images)
+        setActivityName(data.data.activityname);
+        setDescription(data.data.description);  
+        setFood(data.data.food);
+        setAccomadation(data.data.accomadation);
+      });
+  });
+
+  
     return (
       <div className="App">
         <nav className="navbar navbar-expand-lg navbackground">
@@ -51,6 +84,18 @@ function Sivapomi() {
             </div>
           </div>
         </nav> 
+      
+        <div>
+          <p>{activityname}</p>
+          <img
+           src={images.url}
+          alt={activityname}
+          height="200"
+          width="200"
+                        
+          />
+          <p>{description}</p>
+        </div>
         <div>
             <button>Back to home</button>
             <button> Add to cart</button>
@@ -60,4 +105,4 @@ function Sivapomi() {
   );
 }
 
-export default Sivapomi;
+export default Pottery;

@@ -19,14 +19,14 @@ app.use(
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-// mongoose.connect("mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority" , {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-mongoose.connect("mongodb://localhost/heyyy", {
+mongoose.connect("mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority" , {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+// mongoose.connect("mongodb://localhost/heyyy", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 const User = mongoose.model("User", {
   name: String,

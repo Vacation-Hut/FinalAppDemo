@@ -220,7 +220,7 @@ table, th, td {
   width: 100rem !important;
 }
 .navbackground{
-  background: rgba(83, 29, 29, 0.948);
+  background: #7a4231;
 }
 
 .nav-link {
@@ -228,7 +228,7 @@ table, th, td {
   }
 
 .btn{
-  background:rgb(219, 187, 184) !important;
+  background: #f5c9b8 !important;
   height: 30px;
 }
 
@@ -342,4 +342,60 @@ table, th, td {
   height: 40px;
 }
 
+.font{
+  font-size: larger !important;
+}
 
+.curosel{
+  height: 800px;
+  width:1600px;
+  margin-left: 120px;
+  margin-top: 40px;
+}
+
+.whychoose{
+  margin-top: 50px;
+  color: #7a4231;
+}
+
+.flex-item-leftside {
+ margin-left: 120px;
+ margin-right: 1000px;
+ font-size: large !important;
+}
+
+.flex-item-rightside {
+  margin-left: 900px;
+  margin-right: 100px;
+  margin-top: -140px !important;
+  font-size: large !important;
+  
+}
+
+.row{
+  margin-top: 50px !important;
+  margin-left: 110px !important;
+  margin-right: 100px !important;
+}
+
+.imagegallery{
+  width: 400px !important;
+  height: 400px !important;
+  
+}
+
+.searchbar{
+  margin-top: 15px;
+}
+
+.font1{
+  margin-left: 200px;
+}
+
+.font2{
+  margin-left: 1100px;
+}
+
+.item5{
+  margin-top: 40px;
+}

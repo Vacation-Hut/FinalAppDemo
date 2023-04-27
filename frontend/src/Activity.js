@@ -6,11 +6,9 @@ import axios from "axios";
 
 function Activity() {
   const [images, setImages] = useState([]);
-  const [activityname,setActivityName]=useState()
-  const [description,setDiscription]=useState()
-  const [food,setFood]=useState()
-  const [accomadation,setAccomadation]=useState()
-
+  const [activityname, setActivityName] = useState();
+  const [description, setDiscription] = useState();
+  const [price, setPrice] = useState();
 
   const [data, setData] = useState([]);
 
@@ -23,12 +21,7 @@ function Activity() {
         setData(data.data);
       });
   }, []);
- 
-  // async function Selectuser(id) {
-  //  setActivityName(data[0].activityname)
-  //  setDiscription(data[0].description)
-  //  setFood(data[0].food)
-  //  setAccomadation(data[0].accomadation)}
+
   async function Delete(id) {
     try {
       const res = await fetch(`http://localhost:5000/dash/activity/${id}`, {
@@ -45,8 +38,7 @@ function Activity() {
       images,
       activityname,
       description,
-      food,
-      accomadation
+      price
     };
 
     try {
@@ -149,8 +141,7 @@ function Activity() {
                 <th>Image</th>
                 <th>Activity Name</th>
                 <th>Description</th>
-                <th>Food</th>
-                <th>Accomadation</th>
+                <th>Price</th>
                 <th>Update/Delete</th>
               </tr>
             </thead>
@@ -164,17 +155,24 @@ function Activity() {
                         alt={i.activityname}
                         height="200"
                         width="200"
-                        
                       />
                     </td>
                     <td>{i.activityname}</td>
                     <td>{i.description}</td>
-                    <td>{i.food}</td>
-                    <td>{i.accomadation}</td>
-                   <td><button  class= "btn btn6" onClick={() => window.location.href = `/dash/activity/${i._id}/update`}>Update</button> 
-                    <button class="btn6 btn" onClick={() => Delete(i._id)}>
-                      Delete
-                    </button></td> 
+                    <td>{i.price}</td>
+                    <td>
+                      <button
+                        class="btn btn6"
+                        onClick={() =>
+                          (window.location.href = `/dash/activity/${i._id}/update`)
+                        }
+                      >
+                        Update
+                      </button>
+                      <button class="btn6 btn" onClick={() => Delete(i._id)}>
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 );
               })}

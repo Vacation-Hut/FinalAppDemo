@@ -8,17 +8,16 @@ function Addactivity() {
   const [images, setImages] = useState(null); 
   const [activityname, setActivityName] = useState("");
   const [description, setDescription] = useState("");
-  const [food, setFood] = useState("");
-  const [accomadation, setAccomadation] = useState("");
+  const [price, setPrice] = useState("");
+
 
   async function submit(e) {
     e.preventDefault();
     try {
       const formData = new FormData(); 
       formData.append("activityname", activityname);
-      formData.append("accomadation", accomadation);
       formData.append("description", description);
-      formData.append("food", food);
+      formData.append("price", price);
 
       const { public_id, url } = await uploadImage(images); 
 
@@ -134,23 +133,16 @@ function Addactivity() {
                 }}
               ></input>
               <br></br>
-              <label className="label3">Food</label>
+              <label className="label3">Price</label>
               <br></br>
               <input
-                name="food"
+                name="price"
                 onChange={(e) => {
-                  setFood(e.target.value);
+                  setPrice(e.target.value);
                 }}
               ></input>
               <br></br>
-              <label className="label4">Accomadation</label>
-              <br></br>
-              <input
-                name="accomadation"
-                onChange={(e) => {
-                  setAccomadation(e.target.value);
-                }}
-              ></input>
+              
             </form>
           </div>
           <div className="flex-item-right">

@@ -19,10 +19,13 @@ app.use(
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-mongoose.connect("mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority" , {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 // mongoose.connect("mongodb://localhost/heyyy", {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
@@ -43,8 +46,7 @@ const User = mongoose.model("User", {
 const Activity = mongoose.model("Activity", {
   activityname: String,
   description: String,
-  food: String,
-  accomadation: String,
+  price: String,
   images: Object,
 });
 const Order = mongoose.model("Order", {
@@ -143,13 +145,12 @@ app.get("/dash/activity/:id", async (req, res) => {
 
 app.post("/dash/activity", async (req, res) => {
   try {
-    const { activityname, description, food, accomadation, public_id, url } =
+    const { activityname, description, price, public_id, url } =
       req.body; // Assuming you have name, location, and description fields in your form
     const createdActivity = await Activity.create({
       activityname,
       description,
-      food,
-      accomadation,
+      price,
       images: { public_id, url },
     });
     await createdActivity.save();
@@ -162,7 +163,7 @@ app.put("/dash/activity/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const { activityname, accomadation, description, food, public_id, url } =
+    const { activityname,description,price, public_id, url } =
       req.body;
 
     const updatedActivity = await Activity.findOneAndUpdate(
@@ -170,9 +171,8 @@ app.put("/dash/activity/:id", async (req, res) => {
       {
         $set: {
           activityname: activityname,
-          accomadation: accomadation,
           description: description,
-          food: food,
+          price: price,
           "images.public_id": public_id,
           "images.url": url,
         },

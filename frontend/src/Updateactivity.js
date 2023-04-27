@@ -7,12 +7,11 @@ import axios from "axios";
 function Updateactivity() {
   const { id } = useParams();
   const [images, setImages] = useState(null);
-  const [activity, setActivity] = useState({});
+  // const [activity, setActivity] = useState({});
   const [activityname, setActivityName] = useState();
   const [description, setDescription] = useState();
-  const [food, setFood] = useState();
-  const [accomadation, setAccomadation] = useState();
-
+  const [price, setPrice] = useState();
+  
   const [data, setData] = useState([]);
   const Navigate = useNavigate();
 
@@ -25,8 +24,8 @@ function Updateactivity() {
         setData(data.data);
         setActivityName(data.data.activityname);
         setDescription(data.data.description);
-        setFood(data.data.food);
-        setAccomadation(data.data.accomadation);
+        setPrice(data.data.price);
+        
       });
   }, []);
   async function submit(e) {
@@ -34,14 +33,14 @@ function Updateactivity() {
     try {
       const formData = new FormData();
       formData.append("activityname", activityname);
-      formData.append("accomadation", accomadation);
       formData.append("description", description);
-      formData.append("food", food);
-  
-    
+      formData.append("price", price);
+      if (images) {
         const { public_id, url } = await uploadImage(images);
         formData.append("public_id", public_id);
         formData.append("url", url);
+      }
+    
     
       await axios.put(`http://localhost:5000/dash/activity/${id}`, formData, {
         headers: {
@@ -154,28 +153,20 @@ function Updateactivity() {
                 }}
               />
               <br />
-              <label className="label3">Food</label>
+              <label className="label3">Price</label>
               <br></br>
 
               <input
-                name="food"
-                value={food}
+                name="price"
+                value={price}
                 onChange={(e) => {
-                  setFood(e.target.value);
+                  setPrice(e.target.value);
                 }}
               >
               </input>
               <br></br>
-              <label className="label4">Accomadation</label>
-              <br></br>
-              <input
-                name="accomadation"
-                value={accomadation}
-                onChange={(e) => {
-                  setAccomadation(e.target.value);
-                }}
-              ></input>
-              <br></br>
+            
+             
             </form>
           </div>
           <div className="flex-item-right">

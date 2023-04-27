@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const [images, setImages] = useState([{}]);
+  const [images, setImages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -20,9 +20,8 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setData(data.data);
-        setImages(data.data.images);
-        console.log(data.data);
-        console.log(data.data.map);
+        const allImages = data.data.map((activity) => activity.images.url);
+        setImages(allImages);
       });
   }, []);
 
@@ -233,48 +232,23 @@ const Home = () => {
 <h1 class="whychoose">Where will you get Authentic Experience</h1>
 
 {/* image gallery  */}
+
 <div class="row">
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-    <img
-      src={images.url}
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Boat on Calm Water"
-    />
+{images.map((image, index) => (
+  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0"  key={index}>
 
-    {/* <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+
+    <img
+      src={image} 
+      alt={`Image ${index}`}
       class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Wintry Mountain Landscape"
-    /> */}
+    
+    /> 
+
+     
   </div>
+))}
 
-  {/* <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Mountains in the Clouds"
-    />
-
-    <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Boat on Calm Water"
-    />
-  </div>
-
-  <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Waves at Sea"
-    />
-
-    <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-      alt="Yosemite National Park"
-    />
-  </div> */}
   
 </div>
 <nav className="navbar navbar-expand-lg navbackground item5">

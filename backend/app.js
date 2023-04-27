@@ -19,17 +19,17 @@ app.use(
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-mongoose.connect(
-  "mongodb+srv://ravipirathap:pirathap33@introtomdb.srqatwu.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
-// mongoose.connect("mongodb://localhost/heyyy", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+// mongoose.connect(
+//   "mongodb+srv://abikiruba:abi090227@cluster0.orqo6fs.mongodb.net/?retryWrites=true&w=majority",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }
+// );
+mongoose.connect("mongodb://localhost/heyyy", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const User = mongoose.model("User", {
   name: String,
@@ -66,9 +66,9 @@ const Order = mongoose.model("Order", {
   ],
 });
 cloudinary.config({
-  cloud_name: "dpxmtbyzi",
-  api_key: 581845737163629,
-  api_secret: "eK--TbMwrtfaJzGEK2I9gtXY1CQ",
+  cloud_name: "dolq5ge5g",
+  api_key: 577799122689975,
+  api_secret: "u6uc3xFRS2BuvOaoI8twMLunOvM",
 });
 
 app.post("/signup", async (req, res) => {

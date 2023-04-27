@@ -6,6 +6,7 @@ import Modal from "./Modal.js";
 
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -237,13 +238,15 @@ const Home = () => {
 {images.map((image, index) => (
   <div class="col-lg-4 col-md-12 mb-4 mb-lg-0"  key={index}>
 
-
+   <Link to="/dash/activity/${activity_id}">
     <img
       src={image} 
       alt={`Image ${index}`}
       class="w-100 shadow-1-strong rounded mb-4 imagegallery"
     
     /> 
+    </Link>
+   
 
      
   </div>

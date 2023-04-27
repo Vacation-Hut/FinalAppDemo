@@ -381,7 +381,7 @@ table, th, td {
 .imagegallery{
   width: 400px !important;
   height: 400px !important;
-  
+  border-radius: 50px !important;
 }
 
 .searchbar{
@@ -398,4 +398,189 @@ table, th, td {
 
 .item5{
   margin-top: 40px;
+}
+
+.small{
+  background: #ac715b;
+  margin-top: -25px;
+  border-radius: 50px;
+  color: white;
+  font-size: medium;
+}
+
+.pay{
+  margin-top: -15px !important;
+}
+
+.des{
+  margin-top: 50px;
+  margin-left: 130px;
+  margin-right: 130px;
+  text-align: justify;
+  font-size: large;
+  color: black;
+}
+
+.acthead{
+  margin-top: 30px;
+  color: #7a4231;
+}
+
+.actimg{
+  margin-top: 20px;
+}
+
+.subtext{
+  margin-top: 40px;
+  text-align: left;
+  font-size: large;
+  color: black;
+  margin-left: 450px;
+}
+
+.time1{
+  margin-left: 150px;
+}
+
+.time2{
+  margin-left: 200px;
+}
+
+.time3{
+  margin-left: 290px;
+}
+
+.time4{
+  margin-left: 360px;
+}
+
+.time5{
+  margin-left: 290px;
+}
+
+.time6{
+  margin-left: 350px;
+}
+
+.time7{
+  margin-left: 320px;
+}
+
+.time8{
+  margin-left: 370px;
+}
+
+.time9{
+  margin-left: 380px;
+}
+
+.time10{
+  margin-left: 370px;
+}
+
+.payment1{
+  margin-left: 300px;
+}
+
+.payment2{
+  margin-left: 285px;
+}
+
+.payment3{
+  margin-left: 550px;
+}
+
+.payment4{
+  margin-left: 280px;
+}
+
+.payment5{
+  margin-left: 270px;
+}
+
+.payment6{
+  margin-left: 275px;
+}
+
+.payment7{
+  margin-left: 250px;
+}
+
+.payment8{
+  margin-left: 250px;
+}
+
+.payment9{
+  margin-left: 270px;
+}
+
+.payment10{
+  margin-left: 270px;
+}
+
+.payment11{
+  margin-left: 270px;
+}
+
+.box1{
+  margin-left: 100px;
+}
+
+.box2{
+  margin-left: 95px;
+}
+
+.box3{
+  margin-left: 105px;
+}
+
+.box5{
+  margin-left: 95px;
+}
+
+.box6{
+  margin-left: 100px;
+}
+
+.box7{
+  margin-left: 100px;
+}
+
+.box8{
+  margin-left: 97px;
+}
+
+.box9{
+  margin-left: 95px;
+}
+
+.box10{
+  margin-left: 95px;
+}
+
+.box11{
+  margin-left: 95px;
+}
+
+.box12{
+  margin-left: 93px;
+}
+
+.actbtn{
+  margin-top: 50px;
+}
+
+.actbtn1{
+  margin-right: 100px;
+  background: #dca998;
+}
+
+.actbtn2{
+  margin-left: 1000px;
+  background: #dca998;
+}
+
+.actbtn3{
+  margin-left: 50px;
+  background: #dca998;
 }

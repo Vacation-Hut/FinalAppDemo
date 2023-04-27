@@ -12,6 +12,7 @@ import Order from "./Order";
 
 import Payment from "./Payment";
 import Pottery from "./Pottery";
+import ProductPage from "./book";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
+        <Route path="/book/:id" element={<ProductPage />}></Route>
+
       </Routes>
     </BrowserRouter>
   );

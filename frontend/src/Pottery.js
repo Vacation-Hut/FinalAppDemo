@@ -86,71 +86,73 @@ function Pottery() {
         </nav> 
       
         <div>
-          <p>{activityname}</p>
+          <h1 className="acthead">{activityname}</h1>
           <img
            src={images.url}
           alt={activityname}
-          height="200"
-          width="200"
+          className="actimg"
+          height="500"
+          width="800"
                         
           />
-          <p>{description}</p>
+          <p className="des">{description}</p>
         </div>
-        <div>
+        <div className="subtext">
         <form>
           <label>
-            Only visiting the pottery center   1 hrs    US$6.00
-          <input type="checkbox" name="option1" value="Option 1"/>
-          </label><br/>
+            Only visiting the pottery center <span className="time1">  1 hrs </span> <span className="payment1">   US$6.00 </span>
+          <input type="checkbox" name="option1" value="Option 1" className="box1"/>
+          </label><br/><br/>
           <label>
-            Get your own  experience  2.5 hrs   US$12.00
-            <input type="checkbox" name="option2" value="Option 2"/>
-          </label><br/>
+            Get your own  experience <span className="time2"> 2.5 hrs </span> <span className="payment2"> US$12.00 </span>
+            <input type="checkbox" name="option2" value="Option 2" className="box2"/>
+          </label><br/><br/>
           <label>
-            Buy a memorable things  US$7.00
-            <input type="checkbox" name="option3" value="Option 3"/>
-          </label><br/>
+            Buy a memorable things <span className="payment3"> US$7.00 </span>
+            <input type="checkbox" name="option3" value="Option 3" className="box3"/>
+          </label><br/><br/>
           <label>
-            Guider facility  per day  US$16.00
-            <input type="checkbox" name="option4" value="Option 4"/>
-          </label><br/>
+            Guider facility   <span className="time3">per day </span> <span className="payment4"> US$16.00 </span>
+            <input type="checkbox" name="option4" value="Option 4" className="box5"/>
+          </label><br/><br/>
+          <label>
+            Food <span className="time4"> per meal</span> <span className="payment5">US$10.00</span>
+            <input type="checkbox" name="option5" value="Option 5" className="box6"/>
+          </label><br/> <br/>
+          <label>
+            Accomadation <span className="time5">per day</span> <span className="payment6">US$40.00</span>
+            <input type="checkbox" name="option5" value="Option 5" className="box7"/>
+          </label><br/>  <br/>   
           <h3>Mode of transport</h3>
           <label>
-            Bicycle
-            <input type="checkbox" name="option5" value="Option 5"/>
-          </label><br/>    
+            Bicycle <span className="time6">per person</span> <span className="payment7">US$10.00</span>
+            <input type="checkbox" name="option5" value="Option 5" className="box8"/>
+          </label><br/> <br/>   
           <label>
-            Motor bike
-          <input type="checkbox" name="option1" value="Option 1"/>
-          </label><br/>
+            Motor bike <span className="time7">per person</span> <span className="payment8">US$16.00</span>
+          <input type="checkbox" name="option1" value="Option 1" className="box9"/>
+          </label><br/><br/>
           <label>
-            Auto
-            <input type="checkbox" name="option2" value="Option 2"/>
-          </label><br/>
+            Auto <span className="time8">3 person</span> <span className="payment9">US$20.00</span>
+            <input type="checkbox" name="option2" value="Option 2" className="box10"/>
+          </label><br/><br/>
           <label>
-            Car
-            <input type="checkbox" name="option3" value="Option 3"/>
-          </label><br/>
+            Car <span className="time9">4 person</span> <span className="payment10">US$25.00</span>
+            <input type="checkbox" name="option3" value="Option 3" className="box11"/>
+          </label><br/><br/>
           <label>
-            Van
-            <input type="checkbox" name="option4" value="Option 4"/>
-          </label><br/>
-          <label>
-            Food
-            <input type="checkbox" name="option5" value="Option 5"/>
-          </label><br/> 
-          <label>
-            Accomadation
-            <input type="checkbox" name="option5" value="Option 5"/>
-          </label><br/>      
+            Van <span className="time10">10 person</span> <span className="payment11">US$28.00</span>
+            <input type="checkbox" name="option4" value="Option 4" className="box12"/>
+          </label><br/><br/>
+           
           
           </form>
           </div>
       
-        <div>
-            <button>Back to home</button>
-            <button> Add to cart</button>
-            <button>Booking now</button>
+        <div className="actbtn">
+        <Link to="/"> <button className="actbtn1">Back to home</button></Link>
+            <button className="actbtn2"> Add to book</button>
+            <button className="actbtn3">Booking now</button>
         </div>
       </div>
   );

@@ -69,7 +69,7 @@ const Home = () => {
               </form>
               <li className="nav-item item4">
                   <a className="nav-link font" href="#">
-                    Add to cart
+                    Add to book
                   </a>
                 </li>
                 </ul>
@@ -235,22 +235,32 @@ const Home = () => {
 {/* image gallery  */}
 
 <div class="row">
-{images.map((image, index) => (
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0"  key={index}>
-
-   <Link to="/dash/activity/${activity_id}">
-    <img
-      src={image} 
-      alt={`Image ${index}`}
-      class="w-100 shadow-1-strong rounded mb-4 imagegallery"
-    
-    /> 
-    </Link>
+{images.map((image, index) => {
+  const activity = data[index];
+  return (
+    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0" key={index}>
+      <Link to={`/dash/activity/${activity._id}`}>
+        <img
+          src={image}
+          alt={`Image ${index}`}
+          class="w-100 shadow-1-strong mb-4 imagegallery"
+        />
+      </Link>
+      <div className="small">
+        <p>{activity.activityname}</p>
+        <p className="pay">{activity.price}</p>
+        <button>Booking now</button>
+        <button>Add to book</button>
+      </div>
+      
+    </div>
+  );
+})}
    
 
      
-  </div>
-))}
+  
+
 
   
 </div>

@@ -213,14 +213,18 @@ table, th, td {
 }
 
 .tablehead{
-  background:rgb(219, 187, 184) !important;
+  background:white !important;
+}
+
+.tablehead1{
+  background: #c18a75;
 }
 
 .th-lg{
   width: 100rem !important;
 }
 .navbackground{
-  background: #7a4231;
+  background: #c18a75;
 }
 
 .nav-link {
@@ -228,7 +232,7 @@ table, th, td {
   }
 
 .btn{
-  background: #f5c9b8 !important;
+  background: #daac99 !important;
   height: 30px;
 }
 
@@ -245,7 +249,7 @@ table, th, td {
 }
 
 .item1{
-  margin-left: 1300px;
+  margin-left: 1250px;
 }
 
 .dashdiv{
@@ -257,7 +261,7 @@ table, th, td {
   height: 90px;
   border-radius: 30px;
   font-size:x-large;
-  background:rgb(219, 187, 184) !important;
+  background:white !important;
   
 }
 
@@ -292,11 +296,20 @@ table, th, td {
 }
 
 .item3{
-  margin-left: 1100px;
+  margin-left: 960px;
+  margin-top: -10px;
+}
+
+.bookicon{
+  margin-left: 10px;
 }
 
 .item4{
   margin-left: 30px;
+}
+
+.item44{
+  margin-left: 1300px;
 }
 
 .headingpayment{
@@ -344,44 +357,51 @@ table, th, td {
 
 .font{
   font-size: larger !important;
+  color: black !important;
 }
 
 .curosel{
-  height: 800px;
-  width:1600px;
-  margin-left: 120px;
+  height: 600px;
+  width:1200px;
+  margin-left: 320px;
   margin-top: 40px;
 }
 
 .whychoose{
   margin-top: 50px;
   color: #7a4231;
+  font-family: 'League Spartan', sans-serif !important;
+  font-size: 40px !important;
 }
 
 .flex-item-leftside {
- margin-left: 120px;
+ margin-left: 300px;
  margin-right: 1000px;
  font-size: large !important;
 }
 
 .flex-item-rightside {
   margin-left: 900px;
-  margin-right: 100px;
-  margin-top: -140px !important;
+  margin-right: 300px;
+  margin-top: -540px !important;
   font-size: large !important;
   
 }
 
+.promo{
+  margin-left: 15px;
+}
+
 .row{
   margin-top: 50px !important;
-  margin-left: 110px !important;
-  margin-right: 100px !important;
+  margin-left: 250px !important;
+  margin-right: 250px !important;
 }
 
 .imagegallery{
   width: 400px !important;
-  height: 400px !important;
-  border-radius: 50px !important;
+  height: 300px !important;
+  border-radius: 30px !important;
 }
 
 .searchbar{
@@ -390,10 +410,12 @@ table, th, td {
 
 .font1{
   margin-left: 200px;
+  color: black !important;
 }
 
 .font2{
   margin-left: 1100px;
+  color: black !important;
 }
 
 .item5{
@@ -401,15 +423,27 @@ table, th, td {
 }
 
 .small{
-  background: #ac715b;
+  /* background: #ac715b; */
   margin-top: -25px;
   border-radius: 50px;
-  color: white;
-  font-size: medium;
+  color: black;
+  font-size: large !important;
 }
 
+.booksbtn{
+  margin-top: -10px !important;
+  border-radius: 15px;
+  background: #ceac9f;                                 ;
+}
+
+.booksbtn1{
+  margin-left: 30px;
+}
+
+
+
 .pay{
-  margin-top: -15px !important;
+ margin-left: 50px;
 }
 
 .des{
@@ -583,4 +617,74 @@ table, th, td {
 .actbtn3{
   margin-left: 50px;
   background: #dca998;
+}
+
+body{
+  background: #e8d3ca !important;
+}
+
+.loginmodel{
+  margin-top: -100px !important;
+}
+
+.loginnav{
+  margin-top: -65px !important;
+}
+
+.loginbtn{
+  background: #ceac9f !important;
+}
+
+.loginimg{
+  height: 345px !important;
+  width: 350px !important;
+}
+
+.signupmodel{
+  margin-top: -100px;
+}
+
+.signupimg{
+  height: 420px !important;
+  width: 400px !important;
+}
+
+.dashnav{
+  margin-top: 394px;
+}
+
+.usernav{
+  margin-top: 428px;
+}
+
+.addactivitynav{
+  margin-top: 30px;
+}
+
+.instagram{
+  margin-left: -5px;
+}
+
+.facebook{
+  margin-left: 10px;
+}
+
+.whatsapp{
+  margin-left: 10px;
+}
+
+.gmail{
+  margin-left: 10px;
+}
+
+/* .flexrighttext{
+  margin-top: -100px !important;
+} */
+
+.copyright{
+  font-size: 12px !important;
+}
+
+.copy{
+  text-align: center !important;
 }

@@ -3,6 +3,13 @@ import "./App.css";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { faInstagram, faFacebookF, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCopyright } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function Pottery() {
@@ -18,12 +25,12 @@ function Pottery() {
   const Navigate = useNavigate();
 
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/dash/activity/${id}`, {
+  const fetchData = async() => {
+    try{
+    const res = await fetch(`http://localhost:5000/dash/activity/${id}`, {
       method: "GET",
     })
-      .then((res) => res.json())
-      .then((data) => {
+      const data = await res.json();
         setData(data.data);
 
         setImages(data.data.images)
@@ -31,8 +38,17 @@ function Pottery() {
         setDescription(data.data.description);  
         setFood(data.data.food);
         setAccomadation(data.data.accomadation);
-      });
-  });
+      }
+      catch (error) {
+        throw error
+      }
+      
+  };
+
+  React.useEffect(()=>{
+    fetchData()
+  },
+  [])
 
   
     return (
@@ -53,37 +69,32 @@ function Pottery() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link font" href="#">
                     <i>Vacation Hut</i>
                   </a>
               </li>
                 <li className="nav-item item2">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link font" href="/">
                     Home
                   </a>
                 </li>
-               
-            
-              <form className="d-flex item3">
-                <input
-                  className="form-control me-2 btn"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn" type="submit">
-                  Search
-                </button>
-              </form>
-              <li className="nav-item item4">
-                  <a className="nav-link" href="#">
-                    Add to cart
+                <li className="nav-item item44">
+                  <a className="nav-link font" href="#">
+                    Add to book
+                    <FontAwesomeIcon icon={faBook} className="bookicon"/>
                   </a>
                 </li>
+                <li className="nav-item item4">
+                 
+                 {/* <a className="nav-link font" onClick={() => setIsOpen(true)}> */}
+                 <a className="nav-link font" href="/Login">
+                 Login
+                 </a>
+             </li>
                 </ul>
             </div>
           </div>
-        </nav> 
+        </nav>
       
         <div>
           <h1 className="acthead">{activityname}</h1>
@@ -154,6 +165,60 @@ function Pottery() {
             <button className="actbtn2"> Add to book</button>
             <button className="actbtn3">Booking now</button>
         </div>
+        <nav className="navbar navbar-expand-lg navbackground item5">
+          <div className="container-fluid">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                  <a className="nav-link font1" href="#">
+                    <i>Vacation Hut</i>
+                  </a>
+              </li>
+                {/* <li className="nav-item item2">
+                  <a className="nav-link font" href="#">
+                    Home
+                  </a>
+                </li> */}
+               
+            
+              {/* <form className="d-flex item3">
+                <input
+                  className="form-control me-2 btn searchbar"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="btn font searchbar" type="submit">
+                <FontAwesomeIcon icon="fas fa-search" />
+                </button>
+              </form> */}
+              <li className="nav-item item4">
+                  <a className="nav-link font2" href="#">
+                    Home<br></br>
+                    Activities<br></br>
+                    Bookings<br></br>
+                    <FontAwesomeIcon icon={faInstagram} style={{ color: '#C13584' }} className="instagram" />
+                    <FontAwesomeIcon icon={faFacebookF} style={{color:'#3b5998'}} className="facebook" />
+                    <FontAwesomeIcon icon={faWhatsapp} style={{color: "#25D366"}} className="whatsapp" />
+                    <FontAwesomeIcon icon={faEnvelope} style={{ color: "#D44638"}} className="gmail" />
+                  </a>
+                </li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+        <p className="copyright">Copyright <span><FontAwesomeIcon icon={faCopyright}/></span> 2023 Vacation Hut, All rights reserved.</p>
       </div>
   );
 }

@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css"
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-PV7g4zBZuVY9XiaS2Jrq7v+8L/qWsktpJprKwRwJzLox8Q+Zq3hmpMijjKSL6Mk8+UWgLUz7sSeTUwvbdV7JWg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

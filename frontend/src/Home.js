@@ -7,6 +7,18 @@ import Modal from "./Modal.js";
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
+import { faInstagram, faFacebookF, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBed } from '@fortawesome/free-solid-svg-icons';
+import { faBus } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCopyright } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 const Home = () => {
@@ -25,9 +37,11 @@ const Home = () => {
         setImages(allImages);
       });
   }, []);
-
+ 
   return (
+    
     <div className="App">
+       
         <nav className="navbar navbar-expand-lg navbackground">
           <div className="container-fluid">
             <button
@@ -49,12 +63,11 @@ const Home = () => {
                   </a>
               </li>
                 <li className="nav-item item2">
-                  <a className="nav-link font" href="#">
+                  <a className="nav-link font" href="/">
                     Home
                   </a>
                 </li>
-               
-            
+                
               <form className="d-flex item3">
                 <input
                   className="form-control me-2 btn searchbar"
@@ -62,91 +75,106 @@ const Home = () => {
                   placeholder="Search"
                   aria-label="Search"
                 />
-                <button className="btn font searchbar" type="submit">
+                <button className="btn font searchbar searchicon" type="submit">
                 {/* <FontAwesomeIcon icon="fas fa-search" /> */}
-                Search
+                <FontAwesomeIcon icon={faSearch} />
                 </button>
               </form>
+              
               <li className="nav-item item4">
                   <a className="nav-link font" href="#">
                     Add to book
+                    <FontAwesomeIcon icon={faBook} className="bookicon"/>
                   </a>
                 </li>
+                <li className="nav-item item4">
+                 
+                  {/* <a className="nav-link font" onClick={() => setIsOpen(true)}> */}
+                  <a className="nav-link font" href="/Login">
+                  Login
+                  </a>
+              </li>
                 </ul>
             </div>
           </div>
         </nav>
+        {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
         <Carousel>
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682485477/image_thinnai_1_gscr9g.png"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682835313/Thinnai1_ky38de.jpg"
           alt="First slide"
         />
         <Carousel.Caption>
           <h3>Thinnai Organic Farm</h3>
         </Carousel.Caption>
       </Carousel.Item>
+      
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682485535/image_beach_1_lh6zpq.png"
-          alt="Second slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Beach side visiting</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682485598/image_crafttary_1_gogc44.png"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760041/Pottery2_qb6q2n.jpg"
           alt="Third slide"
         />
 
         <Carousel.Caption>
-          <h3>Crafttary shop</h3>
+          <h3>Pottery Center</h3>
         </Carousel.Caption>
       </Carousel.Item>
+      
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486097/image_museum_1_cismdj.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Museum1_aiokpw.jpg"
+          alt="Fifth slide"
         />
 
         <Carousel.Caption>
           <h3>Sivapoomi Museum</h3>
         </Carousel.Caption>
       </Carousel.Item>
+      
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486183/image_oil_making_center_1_l1gc0u.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760041/oil_making_center2_gvgm6b.jpg"
+          alt="Seventh slide"
         />
 
         <Carousel.Caption>
-          <h3>Oil making center</h3>
+          <h3>Oil Making Center</h3>
+        </Carousel.Caption>
+      </Carousel.Item>
+      
+      <Carousel.Item>
+        <img
+          className="d-block curosel"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Beach2_uvkmwo.jpg"
+          alt="Nineth slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Beach Side</h3>
+        </Carousel.Caption>
+      </Carousel.Item>
+      
+      <Carousel.Item>
+        <img
+          className="d-block curosel"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Crafttary1_yjxv1q.jpg"
+          alt="Eleventh slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Crafttary Shop</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486250/image_pottery_1_i9fi3n.png"
-          alt="Third slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Pottery making center</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486356/image_thinnai_2_x76by9.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Thinnai2_m4zpj0.jpg"
+          alt="Second slide"
         />
 
         <Carousel.Caption>
@@ -156,30 +184,19 @@ const Home = () => {
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486449/image_beach_2_gi4wnc.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Pottery1_dseqya.jpg"
+          alt="Fourth slide"
         />
 
         <Carousel.Caption>
-          <h3>Beach side visiting</h3>
+          <h3>Pottery Center</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486499/image_crafttary_2_bsmf7a.png"
-          alt="Third slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Kopay Crafttary Shop</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486557/image_museum_2_hgg0n5.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Museum2_dczixq.jpg"
+          alt="Sixth slide"
         />
 
         <Carousel.Caption>
@@ -189,45 +206,51 @@ const Home = () => {
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682486621/image_oil_making_center_2_cjpolf.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760041/oil_making_center1_e0oqxq.png"
+          alt="Eighth slide"
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Oil Making Center</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682489947/image_pottery_2_y7extt.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760039/Beach1_ujhudh.jpg"
+          alt="Tenth slide"
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Beach Side</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block curosel"
-          src="https://res.cloudinary.com/dtbqcm3e2/image/upload/v1682489986/image_thinnai_3_pbjvfb.png"
-          alt="Third slide"
+          src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Crafttary2_vtpjsn.jpg"
+          alt="Twelvth slide"
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          <h3>Crafttary Shop</h3>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
     <h1 class="whychoose">Why Choose Vacation Hut</h1>
     <div class="flex-container">
   <div class="flex-item-leftside">
-    <p>We can provide valuable insights and recommendations for travelers looking to explore the area beyond the typical tourist hotspots.</p>
-    <p>This website can help travelers connect more deeply with the local culture, have a more unique and memorable travel experience, and support sustainable tourism practices.</p>
+    <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1683047660/promo_ny2mz2.png" alt="Vacation Hut Promotion"></img>
   </div>
   <div class="flex-item-rightside">
-    <p>websites for tours often provide opportunities for cultural immersion, such as home-stays, cooking classes, or other hands-on experiences. This can lead to a deeper understanding and appreciation of the local culture.</p>
+  <p>We can provide valuable insights and recommendations for travelers looking to explore the area beyond the typical tourist hotspots.</p>
+    <p>This website can help travelers connect more deeply with the local culture, have a more unique and memorable travel experience, and support sustainable tourism practices.</p>
+    <p>This websites for tours often provide opportunities for cultural immersion, such as home-stays, cooking classes, or other hands-on experiences. This can lead to a deeper understanding and appreciation of the local culture.</p>
+    <p>We can provide this facilities</p>
+    <p><FontAwesomeIcon icon={faMapMarkerAlt} /><span className="promo">Show the authentic experience places</span></p>
+    <p><FontAwesomeIcon icon={faUser} /><span className="promo">Guider facility</span></p>
+    <p><FontAwesomeIcon icon={faBed} /><span className="promo">Accommodation facility</span></p>
+    <p><FontAwesomeIcon icon={faBus} /><span className="promo">Transport facility</span></p>
   </div>
 </div>
 <h1 class="whychoose">Where will you get Authentic Experience</h1>
@@ -243,26 +266,20 @@ const Home = () => {
         <img
           src={image}
           alt={`Image ${index}`}
-          class="w-100 shadow-1-strong mb-4 imagegallery"
+          class="shadow-1-strong mb-4 imagegallery"
         />
       </Link>
       <div className="small">
-        <p>{activity.activityname}</p>
-        <p className="pay">{activity.price}</p>
-        <button>Booking now</button>
-        <button>Add to book</button>
+        <span>{activity.activityname}</span>
+        <span className="pay">{activity.price}</span><br></br><br></br>
+        <button className="booksbtn">Booking now</button>
+        <button className="booksbtn booksbtn1">Add to book</button><br></br><br></br>
+        
       </div>
       
     </div>
   );
-})}
-   
-
-     
-  
-
-
-  
+})} 
 </div>
 <nav className="navbar navbar-expand-lg navbackground item5">
           <div className="container-fluid">
@@ -306,14 +323,18 @@ const Home = () => {
                   <a className="nav-link font2" href="#">
                     Home<br></br>
                     Activities<br></br>
-                    Bookings
+                    Bookings<br></br>
+                    <FontAwesomeIcon icon={faInstagram} style={{ color: '#C13584' }} className="instagram" />
+                    <FontAwesomeIcon icon={faFacebookF} style={{color:'#3b5998'}} className="facebook" />
+                    <FontAwesomeIcon icon={faWhatsapp} style={{color: "#25D366"}} className="whatsapp" />
+                    <FontAwesomeIcon icon={faEnvelope} style={{ color: "#D44638"}} className="gmail" />
                   </a>
                 </li>
                 </ul>
             </div>
           </div>
         </nav>
-
+        <p className="copyright">Copyright <span><FontAwesomeIcon icon={faCopyright}/></span> 2023 Vacation Hut, All rights reserved.</p>
 
         </div>
     // <main>

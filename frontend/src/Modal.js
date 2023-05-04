@@ -1,16 +1,19 @@
-import React from "react";
-import styles from "./App.css";
-import Login from "./Login"
-// import { RiCloseLine } from "react-icons/ri";
+// import React from "react";
+// import styles from "./App.css";
+// import Login from "./Login"
+// // import { RiCloseLine } from "react-icons/ri";
 
-const Modal = ({ setIsOpen }) => {
-  return (
-    <>
-        <div>
-          <Login></Login>
-        </div>
-    </>
-  );
-};
+// const Modal = ({ setIsOpen }) => {
+  
 
-export default Modal;
+//   return (
+//     <>
+//       <div>
+//         <Login></Login>
+//       </div>
+      
+//     </>
+//   );
+// };
+
+// export default Modal;

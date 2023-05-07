@@ -15,6 +15,8 @@ app.use(
     useTempFiles: true,
   })
 );
+const stripe = require('stripe')
+stripe.api_key = 'sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB'
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
@@ -97,18 +99,27 @@ app.post("/login", async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(401).json({ error: "User Not Found" });
+    return res.status(401).json({ error: "User doesn't exist. Please sign up." });
   }
 
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.sign({ email: user.email }, JWT_SECRET, {
       expiresIn: "15m",
     });
-    res.status(200).json({ status: "ok", data: token });
+    let redirectTo;
+    if (user.role === "admin") {
+      redirectTo = "http://localhost:3000/dash";
+    } else {
+      redirectTo = "http://localhost:3000";
+    }
+    res.status(200).json({ status: "ok", data: token, redirectTo });
   } else {
-    res.status(401).json({ error: "Invalid Password" });
+    res.status(401).json({ error: "Password didn't match." });
   }
 });
+
+
+
 
 app.get("/users", async (req, res) => {
   try {
@@ -222,12 +233,18 @@ app.get("/dash/user/:id", async (req, res) => {
 
 app.post("/dash/user", async (req, res) => {
   try {
-    const { role, name, email, password } = req.body; // Assuming you have name, location, and description fields in your form
+    const { role, name, email, password } = req.body;
+    const saltRounds = 10;
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Create a new user object with the hashed password
     const user = await User.create({
       role,
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     await user.save();
@@ -236,24 +253,29 @@ app.post("/dash/user", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-app.put("/dash/user/:id", (req, res) => {
-  User.findOneAndUpdate(
-    req.params.id,
-    {
-      $set: {
-        role: req.body.role,
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-      },
-    },
-    {
-      upsert: true,
+app.put("/dash/user/:id", async (req, res) => {
+  try {
+    const { role, name, email, password } = req.body;
+    const updateFields = {};
+    if (role) updateFields.role = role;
+    if (name) updateFields.name = name;
+    if (email) updateFields.email = email;
+    if (password) {
+      const saltRounds = 10;
+      updateFields.password = await bcrypt.hash(password, saltRounds);
     }
-  )
-    .then((res) => res.json("Success"))
-    .catch((error) => console.error(error));
+    const result = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateFields },
+      { new: true }
+    );
+    res.json({ message: "Success", user: result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong." });
+  }
 });
+
 
 app.delete("/dash/user/:id", (req, res) => {
   User.deleteOne({ _id: req.params.id })

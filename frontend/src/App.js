@@ -1,18 +1,18 @@
 import "./App.css";
-import Login from "./Login";
+import Login from "./Pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./Signup";
-import Activity from "./Activity";
-import Addactivity from "./Addactivity";
-import Updateactivity from "./Updateactivity";
-import Home from "./Home";
-import Dashboard from "./Dashboard";
-import User from "./User";
-import Order from "./Order";
+import Signup from "./Pages/Signup";
+import Activity from "./Pages/Activity";
+import Addactivity from "./Pages/Addactivity";
+import Updateactivity from "./Pages/Updateactivity";
+import Home from "./Pages/Home";
+import Dashboard from "./Pages/Dashboard";
+import User from "./Pages/User";
+import Order from "./Pages/Order";
 
-import Payment from "./Payment";
-import Pottery from "./Pottery";
-import ProductPage from "./book";
+import Checkout from "./Pages/Payment";
+import Pottery from "./Pages/Pottery";
+import Cart from "./Pages/Cart"
 
 function App() {
   return (
@@ -32,8 +32,8 @@ function App() {
         <Route path="/dash/activity/:id" element={<Pottery/>}></Route>
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
-        <Route path="/book/:id" element={<ProductPage />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
 
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -22,7 +23,12 @@ const pages = [  ['Home', '/'],
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [data, setData] = useState([]);
+  const [images, setImages] = useState([]);
+  const [cartCount, setCartCount] = useState(0); // Initialize cart count to zero
+  const Navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const userId = localStorage.getItem("userId");
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -37,7 +43,88 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    // const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      fetch(`http://localhost:5000/user/${userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setUserName(data.user.name);
+          
+        
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [userId]);
 
+  useEffect(() => {
+    fetch("http://localhost:5000/allpackage")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setData(data.data);
+        const allImages = data.data.map((packages) => packages.images[0].url);
+        setImages(allImages);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const handleAddToCart = (id, packageName, discription, price) => {
+
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+
+    const duplicates = cart.filter((cartItem) => cartItem._id === id);
+ 
+    if (duplicates.length === 0) {
+      const activityToAdd = {
+        _id: id,
+        packageName: packageName,
+        discription: discription,
+        price: price,
+        count: 1,
+      };
+    
+      cart.push(activityToAdd);
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      setCartCount((prevCount) => prevCount + 1); // Increment the cart count by 1
+    }
+  };
+  
+
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") != null);
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
+
+  function handleLogin() {
+    navigate("/login");
+  }
   return (
 <AppBar position="static" sx={{ background: 'linear-gradient(to left, #2c3e50, #bdc3c7)' }}>
       <Container maxWidth="xl">

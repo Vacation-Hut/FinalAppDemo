@@ -17,9 +17,8 @@ app.use(
   })
 );
 
-const stripe = require("stripe");
-stripe.api_key =
-  "sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB";
+const stripe = require("stripe")("sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB");
+
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
@@ -69,21 +68,34 @@ const Package = mongoose.model("Package", {
   images: [{ url: String, caption: String }],
 });
 
-const Order = mongoose.model("Order", {
-  User: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+const Order = mongoose.model("Order",{
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    // required: true
+  },
   items: [
     {
-      Activity: { type: mongoose.Schema.Types.ObjectId, ref: "Activity" },
-      checkboxData: {
-        type: [String], // an array of strings
-        required: true,
+      package: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Package',
+        // required: true
       },
-      Transport: String,
-      Food: String,
-      Accomadation: String,
-      Price: Number,
-    },
+      quantity: {
+        type: Number,
+        // required: true
+      }
+    }
   ],
+  status: {
+    type: String,
+    enum: ['pending', 'completed', 'cancelled'],
+    default: 'pending'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 app.post("/signup", async (req, res) => {
@@ -422,8 +434,8 @@ app.get("/allorders", async (req, res) => {
 app.get("/dash/orders/:id", async (req, res) => {
   try {
     const order = await Order.findById(req.params.id)
-      .populate("User", "password")
-      .populate("items.Activity");
+      // .populate("User", "password")
+      .populate("items.package");
 
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
@@ -435,42 +447,15 @@ app.get("/dash/orders/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-app.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: '{{PRICE_ID}}',
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    
-  });
 
-  res.redirect(303, );
-});
-app.post("/create-payment-intent", async (req, res) => {
-  const { items } = req.body;
-
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    // amount: calculateOrderAmount(items),
-    currency: "usd",
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
-});
-app.post("/dash/orders",  async (req, res) => {
+app.post("/dash/orders", async (req, res) => {
   try {
-    // const user = req.user; // user is authenticated by the token
+    // if (!req.user) {
+    //   return res.status(401).json({ error: "Unauthorized" });
+    // }
+
     const order = new Order({
-      // user: user._id, // use user._id to associate the order with the user
+      // user: req.user._id,
       items: req.body.items,
     });
 
@@ -480,9 +465,13 @@ app.post("/dash/orders",  async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
-  }
+  } 
 });
-
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
+};
 app.post("/upload", async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -494,7 +483,7 @@ app.post("/upload", async (req, res) => {
     const result = await cloudinary.uploader.upload(file.tempFilePath, {
       folder: "images",
     });
-
+    removeTmp(file.tempFilePath);
     res.json({
       public_id: result.public_id,
       url: result.secure_url,
@@ -518,11 +507,7 @@ app.post("/destroy", (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-const removeTmp = (path) => {
-  fs.unlink(path, (err) => {
-    if (err) throw err;
-  });
-};
+
 
 
 app.listen(5000, () => {

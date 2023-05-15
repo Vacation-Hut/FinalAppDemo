@@ -73,9 +73,9 @@ const Packagedetails = () => {
             onClick={() =>
             handleAddToCart(
               activity._id,
-              activity.activityname,
+              activity.package,
               activity.description,
-              activity.price
+              activity.totalprice
             )
             }
             >

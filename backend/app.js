@@ -8,6 +8,7 @@ const app = express();
 const cloudinary = require("cloudinary").v2;
 const fileupload = require("express-fileupload");
 const fs = require("fs");
+const authenticateToken = require("./Middleware/auth")
 app.use(cors());
 app.use(express.json());
 app.use(
@@ -15,11 +16,19 @@ app.use(
     useTempFiles: true,
   })
 );
-const stripe = require('stripe')
-stripe.api_key = 'sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB'
+
+const stripe = require("stripe");
+stripe.api_key =
+  "sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB";
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
+
+cloudinary.config({
+  cloud_name: "dolq5ge5g",
+  api_key: 577799122689975,
+  api_secret: "u6uc3xFRS2BuvOaoI8twMLunOvM",
+});
 
 // mongoose.connect(
 //   "mongodb+srv://abikiruba:abi090227@cluster0.orqo6fs.mongodb.net/?retryWrites=true&w=majority",
@@ -51,6 +60,15 @@ const Activity = mongoose.model("Activity", {
   price: String,
   images: Object,
 });
+
+const Package = mongoose.model("Package", {
+  package: String,
+  description: String,
+  details: [{ activity: String, cost: String }],
+  totalprice: String,
+  images: [{ url: String, caption: String }],
+});
+
 const Order = mongoose.model("Order", {
   User: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   items: [
@@ -66,11 +84,6 @@ const Order = mongoose.model("Order", {
       Price: Number,
     },
   ],
-});
-cloudinary.config({
-  cloud_name: "dolq5ge5g",
-  api_key: 577799122689975,
-  api_secret: "u6uc3xFRS2BuvOaoI8twMLunOvM",
 });
 
 app.post("/signup", async (req, res) => {
@@ -94,25 +107,32 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+
+
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(401).json({ error: "User doesn't exist. Please sign up." });
+    return res
+      .status(401)
+      .json({ error: "User doesn't exist. Please sign up." });
   }
 
   if (await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({ email: user.email }, JWT_SECRET, {
-      expiresIn: "15m",
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: '1h',
     });
+
     let redirectTo;
     if (user.role === "admin") {
       redirectTo = "http://localhost:3000/dash";
+
     } else {
       redirectTo = "http://localhost:3000";
     }
-    res.status(200).json({ status: "ok", data: token, redirectTo });
+    res.status(200).json({ status: "ok", data: token, redirectTo, userId: user._id });
   } else {
     res.status(401).json({ error: "Password didn't match." });
   }
@@ -121,6 +141,16 @@ app.post("/login", async (req, res) => {
 
 
 
+app.post("/logout", async (req, res) => {
+  try {
+    // Remove the token from local storage
+    localStorage.removeItem("token");
+    res.status(200).json({ status: "ok" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/users", async (req, res) => {
   try {
     const users = await User.find({});
@@ -128,6 +158,81 @@ app.get("/users", async (req, res) => {
     res.send({ status: "ok", data: users });
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.get("/allpackage", async (req, res) => {
+  try {
+    const allpackage = await Package.find({});
+
+    res.send({ status: "ok", data: allpackage });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/packages", async (req, res) => {
+  const { id } = req.body;
+  const { package: package, description, details,totalprice, images } = req.body;
+  const packageDetails = details.map(({ activity, cost}) => ({
+    activity,
+    cost,
+  }));
+  try {
+    const user = await User.findById(id);
+
+    // if (user.role !== "admin") {
+    //   return res.status(401).json({ error: "Unauthorized" });
+    // }
+
+    const newPackage = new Package({
+      package: package,
+      description: description,
+      details: packageDetails,
+      totalprice: totalprice,
+      images: images.map(({ url, public_id }) => ({ url, public_id })),
+    });
+
+    await newPackage.save();
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/package/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const packageData = await Package.findById(id);
+    res.send(packageData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// PUT method to update a package by ID
+app.put("/package/:id", async (req, res) => {
+  const { id } = req.params;
+  const { package: packageName, description, details, images, totalprice } = req.body;
+  const packageDetails = details.map((activity) => ({
+    activity: activity.activity,
+    cost: activity.cost,
+  }));
+
+  try {
+    const packageData = await Package.findByIdAndUpdate(id, {
+      package: packageName,
+      description: description,
+      details: packageDetails,
+      totalprice: totalprice,
+      images: images.map(({ url, public_id }) => ({ url, public_id })),
+    });
+    res.send(packageData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -156,8 +261,7 @@ app.get("/dash/activity/:id", async (req, res) => {
 
 app.post("/dash/activity", async (req, res) => {
   try {
-    const { activityname, description, price, public_id, url } =
-      req.body; // Assuming you have name, location, and description fields in your form
+    const { activityname, description, price, public_id, url } = req.body; // Assuming you have name, location, and description fields in your form
     const createdActivity = await Activity.create({
       activityname,
       description,
@@ -174,8 +278,7 @@ app.put("/dash/activity/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const { activityname,description,price, public_id, url } =
-      req.body;
+    const { activityname, description, price, public_id, url } = req.body;
 
     const updatedActivity = await Activity.findOneAndUpdate(
       { _id: id },
@@ -218,18 +321,37 @@ app.delete("/dash/activity/:id", (req, res) => {
     .catch((error) => console.error(error));
 });
 
-app.get("/dash/user/:id", async (req, res) => {
-  const userId = req.params.id;
+app.get("/user/:id", async (req, res) => {
   try {
+    // Get the user ID from the request parameter
+    const userId = req.params.id;
+
+    // Check if the user is authenticated with a valid token
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ error: "No authorization header provided" });
+    }
+    const token = authHeader.split(" ")[1];
+    const decodedToken = jwt.verify(token, JWT_SECRET);
+
+    // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: "Activity not found" });
+      return res.status(404).json({ error: "User not found" });
     }
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to retrieve activity" });
+    // Check if the user ID matches the ID in the token
+    if (decodedToken.userId !== user._id.toString()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Return the user object
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 app.post("/dash/user", async (req, res) => {
   try {
@@ -276,7 +398,6 @@ app.put("/dash/user/:id", async (req, res) => {
   }
 });
 
-
 app.delete("/dash/user/:id", (req, res) => {
   User.deleteOne({ _id: req.params.id })
     .then((result) => {
@@ -314,25 +435,55 @@ app.get("/dash/orders/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: '{{PRICE_ID}}',
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    
+  });
 
-app.post("/dash/orders", async (req, res) => {
+  res.redirect(303, );
+});
+app.post("/create-payment-intent", async (req, res) => {
+  const { items } = req.body;
+
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    // amount: calculateOrderAmount(items),
+    currency: "usd",
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
+app.post("/dash/orders",  async (req, res) => {
   try {
-    Order.findOne({ user: req.body._id });
+    // const user = req.user; // user is authenticated by the token
     const order = new Order({
-      user: req.body._id,
+      // user: user._id, // use user._id to associate the order with the user
       items: req.body.items,
     });
 
     await order.save();
 
-    res.status(201).json(order);
+    res.status(201).json({ success: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-app.post("/upload", (req, res) => {
+app.post("/upload", async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).send("No files were uploaded.");
@@ -340,22 +491,14 @@ app.post("/upload", (req, res) => {
 
     const file = req.files.file;
 
-    cloudinary.uploader
-      .upload(file.tempFilePath, { folder: "images" })
-      .then((result) => {
-        removeTmp(file.tempFilePath);
-        res.json({
-          public_id: result.public_id,
-          url: result.secure_url,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).json({
-          error:
-            "Failed to upload image to Cloudinary. Please try again later.",
-        });
-      });
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+      folder: "images",
+    });
+
+    res.json({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -380,6 +523,7 @@ const removeTmp = (path) => {
     if (err) throw err;
   });
 };
+
 
 app.listen(5000, () => {
   console.log("Server connected on port 5000");

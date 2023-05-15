@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { response } from "express";
 import { useParams } from "react-router-dom";
+import ResponsiveAppBar from "./Navbar";
+import Footer from "./Footer";
+
+
 function ProductPage(props) {
   const [product, setProduct] = useState(null);
   const {id} = useParams();
@@ -33,6 +37,8 @@ function ProductPage(props) {
   };
   return (
     <div>
+      <ResponsiveAppBar/>
+    <div>
       {/* <h1>{product.activityname}</h1> */}
       {/* <p>{product.description}</p> */}
       {/* <p>{product.price}</p> */}
@@ -51,6 +57,8 @@ function ProductPage(props) {
           <button onClick={handleCheckout}>Checkout</button>
           </div>
       )}
+    </div>
+    <Footer/>
     </div>
   );
 }

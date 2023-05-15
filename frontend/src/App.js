@@ -1,18 +1,21 @@
 import "./App.css";
-import Login from "./Pages/Login";
+import Login from "./Pages/User/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./Pages/Signup";
-import Activity from "./Pages/Activity";
-import Addactivity from "./Pages/Addactivity";
-import Updateactivity from "./Pages/Updateactivity";
-import Home from "./Pages/Home";
-import Dashboard from "./Pages/Dashboard";
-import User from "./Pages/User";
-import Order from "./Pages/Order";
+import Signup from "./Pages/User/Signup";
+import Activity from "./Pages/Admin/Activity";
+import Addactivity from "./Pages/Admin/Addactivity";
+import Updateactivity from "./Pages/Admin/Updateactivity";
+import Home from "./Pages/User/Home";
+import Dashboard from "./Pages/Admin/Dashboard";
+import User from "./Pages/Admin/User";
+import Order from "./Pages/Admin/Order";
+import Addpackage from "./Pages/Admin/Addpackage";
 
-import Checkout from "./Pages/Payment";
-import Pottery from "./Pages/Pottery";
-import Cart from "./Pages/Cart"
+import Pottery from "./Pages/User/Activity";
+import Cart from "./Pages/User/Cart"
+import Updatepackage from "./Pages/Admin/Updatepackage";
+import Package from "./Pages/User/Package";
+
 
 function App() {
   return (
@@ -22,19 +25,18 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/dash/activity" element={<Activity />}></Route>
-
         <Route path="/dash/users" element={<User />}></Route>
         <Route path="/dash/activity/new" element={<Addactivity />}></Route>
-        <Route
-          path="/dash/activity/:id/update"
-          element={<Updateactivity />}
-        ></Route>
+        <Route path="/dash/activity/:id/update" element={<Updateactivity />}></Route>
         <Route path="/dash/activity/:id" element={<Pottery/>}></Route>
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
+      
         <Route path="/cart" element={<Cart />}></Route>
-
+        <Route path="/dash/package/add" element = {<Addpackage/>}></Route>
+        <Route path="/dash/package/update/:id" element = {<Updatepackage/>}></Route>
+        <Route path="/package/:id" element = {<Package/>}></Route>
+        
       </Routes>
     </BrowserRouter>
   );

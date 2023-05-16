@@ -8,7 +8,7 @@ function Order() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/orders", {
+    fetch("http://localhost:5000/allorders", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -17,6 +17,7 @@ function Order() {
         setData(data.data);
       });
   }, []);
+  console.log(data)
   return (
     <div>
             <ResponsiveDashBar/>
@@ -28,7 +29,7 @@ function Order() {
             <th>Name</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Role</th>
+            <th>status</th>
             <th>Email</th>
             <th>Phone Number</th>
             <th>N.I.C Number</th>
@@ -43,7 +44,7 @@ function Order() {
                 <td>{i.name}</td>
                 <td>{i.fname}</td>
                 <td>{i.lname}</td>
-                <td>{i.role}</td>
+                <td>{i.status}</td>
                 <td>{i.email}</td>
                 <td>{i.phonenumber}</td>
                 <td>{i.nic}</td>

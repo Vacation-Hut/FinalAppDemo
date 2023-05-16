@@ -14,7 +14,8 @@ import Addpackage from "./Pages/Admin/Addpackage";
 import Pottery from "./Pages/User/Activity";
 import Cart from "./Pages/User/Cart"
 import Updatepackage from "./Pages/Admin/Updatepackage";
-import Package from "./Pages/User/Package";
+import UserPackage from "./Pages/User/Package";
+import AdminPackage from "./Pages/Admin/Package";
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/dash/package/add" element = {<Addpackage/>}></Route>
         <Route path="/dash/package/update/:id" element = {<Updatepackage/>}></Route>
-        <Route path="/package/:id" element = {<Package/>}></Route>
+        <Route path="/package/:id" element = {<UserPackage/>}></Route>
+        <Route path="/dash/package" element = {<AdminPackage/>}></Route>
         
       </Routes>
     </BrowserRouter>

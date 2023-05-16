@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = [  ['Dashboard', '/dash'],
-  ['Package', '/dash/activity'],
+  ['Package', '/dash/package'],
   ['User', '/dash/users'],
   ['Payment', '#'],
   ['Booking', '#'],

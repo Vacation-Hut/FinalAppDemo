@@ -68,7 +68,7 @@ try {
     },
   });
   alert(" saved package!");
-  window.location.href = "/dash/activity";
+  window.location.href = "/dash/package";
 } catch (err) {
   console.error(err);
   alert("Error saving package!");
@@ -94,6 +94,7 @@ try {
     <div className="App">
       <ResponsiveDashBar/>
       <div>
+        
         <h1 className="activity">Add new activity</h1>
         <form>
           <label>Package:</label>
@@ -103,7 +104,7 @@ try {
           <input type="text" name="description" />
           <br />
           <label>Total Price:</label>
-          <input type="text" name="total" />
+          <input type="Number" name="total" />
           <br />
           <fieldset>
             <legend>Details:</legend>

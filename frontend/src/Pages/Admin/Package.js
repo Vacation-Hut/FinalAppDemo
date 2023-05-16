@@ -21,18 +21,20 @@ function Package() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allactivity", {
+    fetch("http://localhost:5000/allpackage", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         setData(data.data);
+        const allImages = data.data.map((packages) => packages.images[0].url);
+        setImages(allImages);
       });
-  }, []);
+  }, [])
 
   async function Delete(id) {
     try {
-      const res = await fetch(`http://localhost:5000/dash/activity/${id}`, {
+      const res = await fetch(`http://localhost:5000/dash/package/${id}`, {
         method: "DELETE",
       });
     } catch (err) {
@@ -50,7 +52,7 @@ function Package() {
     };
 
     try {
-      const res = await fetch(`http://localhost:5000/dash/activity/:id`, {
+      const res = await fetch(`http://localhost:5000/dash/package/:id`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +63,7 @@ function Package() {
       if (!res.ok) {
         throw new Error("Failed to update product");
       }
-      Navigate("/dash/activity");
+      Navigate("/dash/packages");
     } catch (err) {
       console.error(err);
     }
@@ -79,46 +81,49 @@ function Package() {
     <div className="App">
       <ResponsiveDashBar/>
       <div>
-        <h1 className="activity">Activities</h1>
-        <Link className="btn border btn4" to="/dash/activity/new">
-          Add activity
+        <h1 className="activity">Packages</h1>
+        <Link className="btn border btn4" to="/dash/package/add">
+          Add Package
         </Link>
         <div className="grid-container">
           <table class="table1 table4 table table-bordered th-lg border-dark">
             <thead class="tablehead1">
               <tr>
                 <th>Image</th>
-                <th>Activity Name</th>
+                <th>Package Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Update/Delete</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((i) => {
-                return (
-                  <tr key={i.id}>
+            {images.map((image, index) => {
+        const activity = data[index];
+        return (
+                  <tr key={index}>
                     <td>
-                      <img
-                        src={i.images.url}
-                        alt={i.activityname}
-                        height="200"
-                        width="200"
-                      />
+                 
+            <img
+              src={image}
+              alt={activity.package}
+              class="shadow-1-strong mb-4 imagegallery"
+            />
+              
+       
                     </td>
-                    <td>{i.activityname}</td>
-                    <td>{i.description}</td>
-                    <td>{i.price}</td>
+                    <td>{activity.package}</td>
+                    <td>{activity.description}</td>
+                    <td>{activity.totalprice}</td>
                     <td>
                       <button
                         class="btn btn6"
                         onClick={() =>
-                          (window.location.href = `/dash/activity/${i._id}/update`)
+                          (window.location.href = `/dash/package/update/${activity._id}`)
                         }
                       >
                         Update
                       </button>
-                      <button class="btn6 btn" onClick={() => Delete(i._id)}>
+                      <button class="btn6 btn" onClick={() => Delete(activity._id)}>
                         Delete
                       </button>
                     </td>

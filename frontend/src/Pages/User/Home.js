@@ -52,7 +52,7 @@ const Home = () => {
         setImages(allImages);
       });
   }, []);
-
+    console.log(images)
   const handleAddToCart = (id, activityname, description, price) => {
 
     const cart = localStorage.getItem("cart")

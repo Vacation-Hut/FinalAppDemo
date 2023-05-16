@@ -80,8 +80,10 @@ function Package() {
               alt={packageData.package}
               class="shadow-1-strong mb-4 imagegallery"
             />
-        )})} 
-        {/* <p className="des">{description}</p> */}
+              
+        )})}
+                <p className="des">{packageData.description}</p>
+ 
       </div>
     
       <fieldset> 
@@ -106,7 +108,7 @@ function Package() {
         </button> */}
         <button className="actbtn3">Booking now</button>
       </div>
-      {/* <MyCalendar/> */}
+      <MyCalendar/>
       <Footer/>
     </div>
   );

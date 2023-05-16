@@ -64,8 +64,9 @@ const Package = mongoose.model("Package", {
   package: String,
   description: String,
   details: [{ activity: String, cost: String }],
-  totalprice: String,
+  totalprice: Number,
   images: [{ url: String, caption: String }],
+  calendar: Date,
 });
 
 const Order = mongoose.model("Order",{
@@ -185,7 +186,7 @@ app.get("/allpackage", async (req, res) => {
 
 app.post("/packages", async (req, res) => {
   const { id } = req.body;
-  const { package: package, description, details,totalprice, images } = req.body;
+  const { package: package, description, details,totalprice, images, calendar } = req.body;
   const packageDetails = details.map(({ activity, cost}) => ({
     activity,
     cost,
@@ -203,6 +204,7 @@ app.post("/packages", async (req, res) => {
       details: packageDetails,
       totalprice: totalprice,
       images: images.map(({ url, public_id }) => ({ url, public_id })),
+      calendar: calendar,
     });
 
     await newPackage.save();
@@ -227,7 +229,7 @@ app.get("/package/:id", async (req, res) => {
 // PUT method to update a package by ID
 app.put("/package/:id", async (req, res) => {
   const { id } = req.params;
-  const { package: packageName, description, details, images, totalprice } = req.body;
+  const { package: packageName,note, description, details, images, totalprice} = req.body;
   const packageDetails = details.map((activity) => ({
     activity: activity.activity,
     cost: activity.cost,
@@ -238,6 +240,7 @@ app.put("/package/:id", async (req, res) => {
       package: packageName,
       description: description,
       details: packageDetails,
+      note :note,
       totalprice: totalprice,
       images: images.map(({ url, public_id }) => ({ url, public_id })),
     });
@@ -246,6 +249,18 @@ app.put("/package/:id", async (req, res) => {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
+});
+
+app.delete("/dash/package/:id", (req, res) => {
+  Package.deleteOne({ _id: req.params.id }) // Fix: Pass an object with _id field set to req.params.id
+
+    .then((result) => {
+      if (result.deletedCount === 0) {
+        return res.json("No data to delete");
+      }
+      res.json("Deleted id");
+    })
+    .catch((error) => console.error(error));
 });
 
 app.get("/allactivity", async (req, res) => {
@@ -506,6 +521,17 @@ app.post("/destroy", (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+// Assuming you have set up your Express.js server and MongoDB connection
+
+// Example route for saving check-in and check-out dates
+app.post('/dash/package', (req, res) => {
+  const { checkInDate, checkOutDate } = req.body;
+
+  // Perform database operations to save check-in and check-out dates
+  // ...
+  res.status(200).json({ message: 'Dates saved successfully' });
 });
 
 

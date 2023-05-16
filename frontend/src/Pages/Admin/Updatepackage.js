@@ -64,6 +64,7 @@ function UpdatePackage() {
       package: formData.get("package"),
       description: formData.get("description"),
       totalprice: formData.get("totalprice"),
+      note : formData.get("note"),
       details,
       images: packageData.images.concat(
         imageUrls.map((url, i) => ({
@@ -148,7 +149,7 @@ function UpdatePackage() {
             <div className="form-group">
               <label htmlFor="package">Total price</label>
               <input
-                type="text"
+                type="Number"
                 className="form-control"
                
                 name="totalprice"
@@ -162,6 +163,14 @@ function UpdatePackage() {
                 className="form-control"
                 name="description"
                 defaultValue={packageData.description}
+              ></textarea>
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Consider</label>
+              <textarea
+                className="form-control"
+                name="note"
+                defaultValue={packageData.note}
               ></textarea>
             </div>
             <div className="form-group">

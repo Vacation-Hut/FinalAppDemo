@@ -65,7 +65,7 @@ const Packagedetails = () => {
           <Grid item xs={12} md={2}>
             <div className="activity-details">
             <h4>{activity.package}</h4>
-             <span>{activity.totalprice}</span>
+             <span>${activity.totalprice}</span>
             <div>
             <button className="booksbtn">Booking now</button>
             <button

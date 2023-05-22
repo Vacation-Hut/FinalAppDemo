@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import imagesLoaded from 'imagesloaded';
+import "./TrendingCarousel.css"
 
 const Carousel = () => {
   useEffect(() => {
@@ -271,19 +272,19 @@ const Carousel = () => {
           <div className="cards__wrapper">
             <div className="card current--card">
               <div className="card__image">
-                <img src="Beach1.jpg" alt="" />
+                <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760039/Beach1_ujhudh.jpg" alt="Beach photo" />
               </div>
             </div>
 
             <div className="card next--card">
               <div className="card__image">
-                <img src="Thinnai2.jpg" alt="" />
+                <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Thinnai2_m4zpj0.jpg" alt="Thinnai organic farm" />
               </div>
             </div>
 
             <div className="card previous--card">
               <div className="card__image">
-                <img src="Museum1.jpg" alt="" />
+                <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Museum1_aiokpw.jpg" alt="Museum photo" />
               </div>
             </div>
           </div>
@@ -318,17 +319,17 @@ const Carousel = () => {
         </button>
       </div>
 
-      <div className="app__bg">
+      {/* <div className="app__bg">
         <div className="app__bg__image current--image">
-          <img src="https://source.unsplash.com/Z8dtTatMVMw" alt="" />
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760039/Beach1_ujhudh.jpg" alt="Beach photo" />
         </div>
         <div className="app__bg__image next--image">
-          <img src="https://source.unsplash.com/9dmycbFE7mQ" alt="" />
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Thinnai2_m4zpj0.jpg" alt="Thinnai organic farm" />
         </div>
         <div className="app__bg__image previous--image">
-          <img src="https://source.unsplash.com/m7K4KzL5aQ8" alt="" />
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682760040/Museum1_aiokpw.jpg" alt="Museum photo" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

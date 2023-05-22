@@ -8,6 +8,7 @@ import Packagedetails from "./Packagedetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import LandingPage from "./Landingpage";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -97,14 +98,17 @@ const Home = () => {
 
   return (
     <div className="App">
-      <ResponsiveAppBar/>
-      {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
-     <AppCarousel/>
+      {/* <ResponsiveAppBar/> */}
+
+      <LandingPage/>
+     {/* <AppCarousel/>
       <h1 class="whychoose">Why Choose Vacation Hut</h1>
-      <Whychoose/>
-      <h1 class="whychoose">Where will you get Authentic Experience</h1>
+      <Whychoose/> */}
+      {/* <div className="background">
+      <h1 className="whychoose packagealign">Where will you get Authentic Experience</h1>
       <Packagedetails/>
-      <Footer/>
+      </div> */}
+      {/* <Footer/> */}
     </div>
     // <main>
     //   <button className={styles.primaryBtn} onClick={() => setIsOpen(true)}>

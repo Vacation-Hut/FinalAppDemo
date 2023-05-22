@@ -53,31 +53,7 @@ const Home = () => {
         setImages(allImages);
       });
   }, []);
-    console.log(images)
-  const handleAddToCart = (id, activityname, description, price) => {
 
-    const cart = localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
-      : [];
-
-    const duplicates = cart.filter((cartItem) => cartItem._id === id);
- 
-    if (duplicates.length === 0) {
-      const activityToAdd = {
-        _id: id,
-        name: activityname,
-        description: description,
-        price: price,
-        count: 1,
-      };
-    
-      cart.push(activityToAdd);
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      setCartCount((prevCount) => prevCount + 1); // Increment the cart count by 1
-    }
-  };
   
 
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") != null);

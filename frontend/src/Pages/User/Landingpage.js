@@ -24,16 +24,13 @@ const LandingPage = () => {
       </div>
       <ul className="nav--links">
         <li className="link-item">
-          <a href="#">Home</a>
+          <a href="/">Home</a>
         </li>
         <li className="link-item">
-          <a href="#">Packages</a>
+          <a href="/login">Login</a>
         </li>
         <li className="link-item">
-          <a href="#">Login</a>
-        </li>
-        <li className="link-item">
-          <a href="#">Booking</a>
+          <a href="/cart">Booking</a>
         </li>
       </ul>
     </nav>

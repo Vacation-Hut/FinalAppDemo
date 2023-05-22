@@ -1,336 +1,206 @@
-import React, { useEffect } from 'react';
-import { gsap } from 'gsap';
-import imagesLoaded from 'imagesloaded';
-
-const Carousel = () => {
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+const pages = [  ['Home', '/'],
+  ['Login', '/login'],
+  ['Booking', '/cart'],
+];
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [data, setData] = useState([]);
+  const [images, setImages] = useState([]);
+  const [cartCount, setCartCount] = useState(0); // Initialize cart count to zero
+  const Navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const userId = localStorage.getItem("userId");
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   useEffect(() => {
-    const buttons = {
-      prev: document.querySelector('.btn--left'),
-      next: document.querySelector('.btn--right'),
-    };
-    const cardsContainerEl = document.querySelector('.cards__wrapper');
-    const appBgContainerEl = document.querySelector('.app__bg');
-    const cardInfosContainerEl = document.querySelector('.info__wrapper');
-
-    buttons.next.addEventListener('click', () => swapCards('right'));
-
-    buttons.prev.addEventListener('click', () => swapCards('left'));
-
-    function swapCards(direction) {
-        const currentCardEl = cardsContainerEl.querySelector(".current--card");
-        const previousCardEl = cardsContainerEl.querySelector(".previous--card");
-        const nextCardEl = cardsContainerEl.querySelector(".next--card");
-    
-        const currentBgImageEl = appBgContainerEl.querySelector(".current--image");
-        const previousBgImageEl = appBgContainerEl.querySelector(".previous--image");
-        const nextBgImageEl = appBgContainerEl.querySelector(".next--image");
-    
-        changeInfo(direction);
-        swapCardsClass();
-    
-        removeCardEvents(currentCardEl);
-    
-        function swapCardsClass() {
-            currentCardEl.classList.remove("current--card");
-            previousCardEl.classList.remove("previous--card");
-            nextCardEl.classList.remove("next--card");
-    
-            currentBgImageEl.classList.remove("current--image");
-            previousBgImageEl.classList.remove("previous--image");
-            nextBgImageEl.classList.remove("next--image");
-    
-            currentCardEl.style.zIndex = "50";
-            currentBgImageEl.style.zIndex = "-2";
-    
-            if (direction === "right") {
-                previousCardEl.style.zIndex = "20";
-                nextCardEl.style.zIndex = "30";
-    
-                nextBgImageEl.style.zIndex = "-1";
-    
-                currentCardEl.classList.add("previous--card");
-                previousCardEl.classList.add("next--card");
-                nextCardEl.classList.add("current--card");
-    
-                currentBgImageEl.classList.add("previous--image");
-                previousBgImageEl.classList.add("next--image");
-                nextBgImageEl.classList.add("current--image");
-            } else if (direction === "left") {
-                previousCardEl.style.zIndex = "30";
-                nextCardEl.style.zIndex = "20";
-    
-                previousBgImageEl.style.zIndex = "-1";
-    
-                currentCardEl.classList.add("next--card");
-                previousCardEl.classList.add("current--card");
-                nextCardEl.classList.add("previous--card");
-    
-                currentBgImageEl.classList.add("next--image");
-                previousBgImageEl.classList.add("current--image");
-                nextBgImageEl.classList.add("previous--image");
-            }
+    const token = localStorage.getItem("token");
+    // const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      fetch(`http://localhost:5000/user/${userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setUserName(data.user.name);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [userId]);
+  useEffect(() => {
+    fetch("http://localhost:5000/allpackage")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
         }
-    }
-
-    function changeInfo(direction) {
-        let currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        let previousInfoEl = cardInfosContainerEl.querySelector(".previous--info");
-        let nextInfoEl = cardInfosContainerEl.querySelector(".next--info");
-    
-        gsap.timeline()
-            .to([buttons.prev, buttons.next], {
-            duration: 0.2,
-            opacity: 0.5,
-            pointerEvents: "none",
-        })
-            .to(
-            currentInfoEl.querySelectorAll(".text"),
-            {
-                duration: 0.4,
-                stagger: 0.1,
-                translateY: "-120px",
-                opacity: 0,
-            },
-            "-="
-        )
-            .call(() => {
-            swapInfosClass(direction);
-        })
-            .call(() => initCardEvents())
-            .fromTo(
-            direction === "right"
-            ? nextInfoEl.querySelectorAll(".text")
-            : previousInfoEl.querySelectorAll(".text"),
-            {
-                opacity: 0,
-                translateY: "40px",
-            },
-            {
-                duration: 0.4,
-                stagger: 0.1,
-                translateY: "0px",
-                opacity: 1,
-            }
-        )
-            .to([buttons.prev, buttons.next], {
-            duration: 0.2,
-            opacity: 1,
-            pointerEvents: "all",
-        });
-    
-        function swapInfosClass() {
-            currentInfoEl.classList.remove("current--info");
-            previousInfoEl.classList.remove("previous--info");
-            nextInfoEl.classList.remove("next--info");
-    
-            if (direction === "right") {
-                currentInfoEl.classList.add("previous--info");
-                nextInfoEl.classList.add("current--info");
-                previousInfoEl.classList.add("next--info");
-            } else if (direction === "left") {
-                currentInfoEl.classList.add("next--info");
-                nextInfoEl.classList.add("previous--info");
-                previousInfoEl.classList.add("current--info");
-            }
-        }
-    }
-
-    function updateCard(e) {
-        const card = e.currentTarget;
-        const box = card.getBoundingClientRect();
-        const centerPosition = {
-            x: box.left + box.width / 2,
-            y: box.top + box.height / 2,
-        };
-        let angle = Math.atan2(e.pageX - centerPosition.x, 0) * (35 / Math.PI);
-        gsap.set(card, {
-            "--current-card-rotation-offset": `${angle}deg`,
-        });
-        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        gsap.set(currentInfoEl, {
-            rotateY: `${angle}deg`,
-        });
-    }
-
-    function resetCardTransforms(e) {
-        const card = e.currentTarget;
-        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        gsap.set(card, {
-            "--current-card-rotation-offset": 0,
-        });
-        gsap.set(currentInfoEl, {
-            rotateY: 0,
-        });
-    }
-
-    function initCardEvents() {
-        const currentCardEl = cardsContainerEl.querySelector(".current--card");
-        currentCardEl.addEventListener("pointermove", updateCard);
-        currentCardEl.addEventListener("pointerout", (e) => {
-            resetCardTransforms(e);
-        });
-    }
-
-    initCardEvents();
-
-
-    function removeCardEvents(card) {
-        card.removeEventListener("pointermove", updateCard);
-    }
-
-    function init() {
-
-        let tl = gsap.timeline();
-    
-        tl.to(cardsContainerEl.children, {
-            delay: 0.15,
-            duration: 0.5,
-            stagger: {
-                ease: "power4.inOut",
-                from: "right",
-                amount: 0.1,
-            },
-            "--card-translateY-offset": "0%",
-        })
-            .to(cardInfosContainerEl.querySelector(".current--info").querySelectorAll(".text"), {
-            delay: 0.5,
-            duration: 0.4,
-            stagger: 0.1,
-            opacity: 1,
-            translateY: 0,
-        })
-            .to(
-            [buttons.prev, buttons.next],
-            {
-                duration: 0.4,
-                opacity: 1,
-                pointerEvents: "all",
-            },
-            "-=0.4"
-        );
-    }
-
-    const waitForImages = () => {
-        const images = [...document.querySelectorAll("img")];
-        const totalImages = images.length;
-        let loadedImages = 0;
-        const loaderEl = document.querySelector(".loader span");
-    
-        gsap.set(cardsContainerEl.children, {
-            "--card-translateY-offset": "100vh",
-        });
-        gsap.set(cardInfosContainerEl.querySelector(".current--info").querySelectorAll(".text"), {
-            translateY: "40px",
-            opacity: 0,
-        });
-        gsap.set([buttons.prev, buttons.next], {
-            pointerEvents: "none",
-            opacity: "0",
-        });
-    
-        images.forEach((image) => {
-            imagesLoaded(image, (instance) => {
-                if (instance.isComplete) {
-                    loadedImages++;
-                    let loadProgress = loadedImages / totalImages;
-    
-                    gsap.to(loaderEl, {
-                        duration: 1,
-                        scaleX: loadProgress,
-                        backgroundColor: `hsl(${loadProgress * 120}, 100%, 50%`,
-                    });
-    
-                    if (totalImages == loadedImages) {
-                        gsap.timeline()
-                            .to(".loading__wrapper", {
-                            duration: 0.8,
-                            opacity: 0,
-                            pointerEvents: "none",
-                        })
-                            .call(() => init());
-                    }
-                }
-            });
-        });
-    };
-
-    waitForImages();
+        return res.json();
+      })
+      .then((data) => {
+        setData(data.data);
+        const allImages = data.data.map((packages) => packages.images[0].url);
+        setImages(allImages);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
-
+  const handleAddToCart = (id, packageName, discription, price) => {
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    const duplicates = cart.filter((cartItem) => cartItem._id === id);
+    if (duplicates.length === 0) {
+      const activityToAdd = {
+        _id: id,
+        packageName: packageName,
+        discription: discription,
+        price: price,
+        count: 1,
+      };
+      cart.push(activityToAdd);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setCartCount((prevCount) => prevCount + 1); // Increment the cart count by 1
+    }
+  };
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") != null);
+  const navigate = useNavigate();
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
+  function handleLogin() {
+    navigate("/login");
+  }
   return (
-    <div className="app">
-      <div className="cardList">
-        <button className="cardList__btn btn btn--left">
-          <div className="icon">
-            <svg>
-              <use xlinkHref="#arrow-left"></use>
-            </svg>
-          </div>
-        </button>
-        <div>
-          <div className="cards__wrapper">
-            <div className="card current--card">
-              <div className="card__image">
-                <img src="Beach1.jpg" alt="" />
-              </div>
-            </div>
-
-            <div className="card next--card">
-              <div className="card__image">
-                <img src="Thinnai2.jpg" alt="" />
-              </div>
-            </div>
-
-            <div className="card previous--card">
-              <div className="card__image">
-                <img src="Museum1.jpg" alt="" />
-              </div>
-            </div>
-          </div>
-
-          <div className="info__wrapper infoList">
-            <div className="info current--info">
-              <h1 className="text name">Highlands</h1>
-              <h4 className="text location">Scotland</h4>
-              <p className="text description">The mountains are calling</p>
-            </div>
-
-            <div className="info next--info">
-              <h1 className="text name">Machu Pichu</h1>
-              <h4 className="text location">Peru</h4>
-              <p className="text description">Adventure is never far away</p>
-            </div>
-
-            <div className="info previous--info">
-              <h1 className="text name">Chamonix</h1>
-              <h4 className="text location">France</h4>
-              <p className="text description">Let your dreams come true</p>
-            </div>
-          </div>
-        </div>
-
-        <button className="cardList__btn btn btn--right">
-          <div className="icon">
-            <svg>
-              <use xlinkHref="#arrow-right"></use>
-            </svg>
-          </div>
-        </button>
-      </div>
-
-      <div className="app__bg">
-        <div className="app__bg__image current--image">
-          <img src="https://source.unsplash.com/Z8dtTatMVMw" alt="" />
-        </div>
-        <div className="app__bg__image next--image">
-          <img src="https://source.unsplash.com/9dmycbFE7mQ" alt="" />
-        </div>
-        <div className="app__bg__image previous--image">
-          <img src="https://source.unsplash.com/m7K4KzL5aQ8" alt="" />
-        </div>
-      </div>
-    </div>
+<AppBar position="static" sx={{ background: 'linear-gradient(to left, #2C3E50, #BDC3C7)' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 5,
+              display: { xs: 'none', md: 'flex' },
+              flexGrow: 120,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'white',
+              textDecoration: 'none',
+            }}
+          >
+         <img src='https://res.cloudinary.com/dolq5ge5g/image/upload/v1683827717/Dark_logo-removebg-preview_ube8bh.png' alt='Vacation Hut Logo' style={{ height: '50px', width: 'auto' }}></img>
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="white"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" color="black">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'white',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {pages.map((page) => (
+  <Button
+    key={page[0]}
+    component={Link}
+    to={page[1]}
+    onClick={handleCloseNavMenu}
+    sx={{ my: 2, color: 'white', display: 'block' }}
+  >
+    {page[0]}
+  </Button>
+))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
-
-export default Carousel;
+}
+export default ResponsiveAppBar;

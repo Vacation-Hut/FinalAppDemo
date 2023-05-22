@@ -11,24 +11,25 @@ const fs = require("fs");
 const authenticateToken = require("./Middleware/auth")
 app.use(cors());
 app.use(express.json());
+const nodemailer = require('nodemailer');
 app.use(
   fileupload({
     useTempFiles: true,
   })
 );
-
+//Define stipe and key
 const stripe = require("stripe")("sk_test_51N3lwjH8XjLC6H8P7TMsDHdLwNwTSPFrizXL9KVYnGw8m3ARv4BqcqFaOKVuE6wuto3v9SXADWtQhq3Y1ufq9Jjc00cZb7e8SB");
 
-
+//Define jwt token
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-
+//Clodinary configration
 cloudinary.config({
   cloud_name: "dolq5ge5g",
   api_key: 577799122689975,
   api_secret: "u6uc3xFRS2BuvOaoI8twMLunOvM",
 });
-
+//Atlas configration
 // mongoose.connect(
 //   "mongodb+srv://abikiruba:abi090227@cluster0.orqo6fs.mongodb.net/?retryWrites=true&w=majority",
 //   {
@@ -36,11 +37,12 @@ cloudinary.config({
 //     useUnifiedTopology: true,
 //   }
 // );
+//Localhost configration
 mongoose.connect("mongodb://localhost/heyyy", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+//Define the user model
 const User = mongoose.model("User", {
   name: String,
   role: String,
@@ -53,13 +55,14 @@ const User = mongoose.model("User", {
   passportno: Number,
   country: String,
 });
+//Define the activity model
 const Activity = mongoose.model("Activity", {
   activityname: String,
   description: String,
   price: String,
   images: Object,
 });
-
+//Define the package model 
 const Package = mongoose.model("Package", {
   package: String,
   description: String,
@@ -68,37 +71,60 @@ const Package = mongoose.model("Package", {
   images: [{ url: String, caption: String }],
   calendar: Date,
 });
-
+//Define the order model
 const Order = mongoose.model("Order",{
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    // required: true
-  },
-  items: [
-    {
-      package: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Package',
-        // required: true
+  
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      // required: true
+    },
+    members:Number,
+    items: [
+      {
+        packagename:String,
+        package: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Package",
+          // required: true
+        },
+     
+        checkInDate: {
+          type: Date,
+          // required: true
+        },
+        checkOutDate: {
+          type: Date,
+          // required: true
+        },
       },
-      quantity: {
-        type: Number,
-        // required: true
-      }
-    }
-  ],
-  status: {
-    type: String,
-    enum: ['pending', 'completed', 'cancelled'],
-    default: 'pending'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+    ],
+    customer:{
+      name:String,
+      email:String,
+      phonenumber:Number,
+      country:String,
+      passportno:Number,
+    //   address_line1: String,
+    // address_zip:Number,
+    // address_city: String,
+    // billing_address_country:String ,
 
+    },
+    totalprice :String,
+    status: {
+      type: String,
+      enum: ["pending", "completed", "cancelled"],
+      default: "pending",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  }
+  );
+
+//post method for signup
 app.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
   const salt = await bcrypt.genSalt(10);
@@ -119,10 +145,7 @@ app.post("/signup", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-
-
-
+//post method for login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -150,10 +173,7 @@ app.post("/login", async (req, res) => {
     res.status(401).json({ error: "Password didn't match." });
   }
 });
-
-
-
-
+//post method for logout
 app.post("/logout", async (req, res) => {
   try {
     // Remove the token from local storage
@@ -465,23 +485,31 @@ app.get("/dash/orders/:id", async (req, res) => {
 
 app.post("/dash/orders", async (req, res) => {
   try {
+    const  {items,customerInfo,total}  = req.body;
     // if (!req.user) {
     //   return res.status(401).json({ error: "Unauthorized" });
     // }
-
     const order = new Order({
       // user: req.user._id,
-      items: req.body.items,
+      items: [{
+        packagename:items.name,
+        package:items._id,
+        checkInDate:items.checkindate,
+        checkOutDate:items.checkoutdate
+      }],
+      totalprice:total,
+      members:items.count,
+      customer:customerInfo,
     });
-
     await order.save();
-
-    res.status(201).json({ success: true });
+   
+    res.json({ success: true});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
-  } 
+  }
 });
+
 const removeTmp = (path) => {
   fs.unlink(path, (err) => {
     if (err) throw err;
@@ -523,16 +551,8 @@ app.post("/destroy", (req, res) => {
   }
 });
 
-// Assuming you have set up your Express.js server and MongoDB connection
 
-// Example route for saving check-in and check-out dates
-app.post('/dash/package', (req, res) => {
-  const { checkInDate, checkOutDate } = req.body;
 
-  // Perform database operations to save check-in and check-out dates
-  // ...
-  res.status(200).json({ message: 'Dates saved successfully' });
-});
 
 
 

@@ -90,105 +90,302 @@ try {
       }
     }
   }
+  // return (
+  //   <div className="App">
+  //     <ResponsiveDashBar/>
+  //     <div>
+        
+  //       <h1 className="activity">Add new activity</h1>
+  //       <form>
+  //         <label>Package:</label>
+  //         <input type="text" name="package" />
+  //         <br />
+  //         <label>Description:</label>
+  //         <input type="text" name="description" />
+  //         <br />
+  //         <label>Total Price:</label>
+  //         <input type="Number" name="total" />
+  //         <br />
+  //         <fieldset>
+  //           <legend>Details:</legend>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]" />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]"  />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]" />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]"  />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]" />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]"  />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]" />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]"  />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]" />
+  //           </div>
+  //           <div class="activity">
+  //             <label>Activity:</label>
+  //             <input type="text" name="activity[]" />
+  //           </div>
+  //           <div class="cost">
+  //             <label>Cost:</label>
+  //             <input type="number" name="cost[]"  />
+  //           </div>
+  //         </fieldset>
+  //         <label for="images">Select Images:</label>
+  //         <input
+  //           type="file"
+  //           id="images"
+  //           name="images"
+  //           accept="image/*"
+  //           multiple
+  //           onChange={handleImageChange}
+  //         />
+  //         <div id="image-preview"></div>
+  //         <button type="submit" onClick={postPackage}>
+  //           Save
+  //         </button>
+  //       </form>
+
+
   return (
     <div className="App">
       <ResponsiveDashBar/>
-      <div>
+      <div className="container">
+        <h2 className="activity">Add new Package</h2><br></br>
         
-        <h1 className="activity">Add new activity</h1>
         <form>
-          <label>Package:</label>
-          <input type="text" name="package" />
+       <div class="for">
+          <label>Package :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="package" id="border" /></label><br/>
+          {/* <input type="text" name="package" /> */}
           <br />
-          <label>Description:</label>
-          <input type="text" name="description" />
+          <label>Description :&nbsp;&nbsp;<input type="text" name="description"id="border" /></label><br/>
+          {/* <input type="text" name="description" /> */}
           <br />
-          <label>Total Price:</label>
-          <input type="Number" name="total" />
-          <br />
-          <fieldset>
-            <legend>Details:</legend>
+          <label>Total Price :&nbsp;&nbsp;&nbsp;<input type="Number" name="total" id="border" /></label>
+          {/* <input type="Number" name="total" /> */}
+          <br /><br/><br/>
+          </div>
+          </form>
+          </div>
+      
+          <div class="tab">
+          <table className="tableAlignment">
+            <tr>
+            <th>
+              <div class="detail">
+        <h4>Details</h4>
+        </div>
+            </th>
+             </tr>
+            <tr>
+              <td>  
             <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
+              <label>Activity:</label><input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]" />
             </div>
+            </td>
+            </tr>
+            
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]"  />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]" />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]"  />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]" />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]"  />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]" />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]"  />
             </div>
+            </td>
+            </tr>
+            <tr>
+              <td>
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]" />
             </div>
+            </td>
+            </tr>
+          
+            <tr>
+            
+              <td>
+              
             <div class="activity">
               <label>Activity:</label>
               <input type="text" name="activity[]" />
             </div>
+            </td>
+            <td>
             <div class="cost">
               <label>Cost:</label>
               <input type="number" name="cost[]"  />
             </div>
-          </fieldset>
+            
+            </td>
+            </tr>
+  
+  
+            
+            {/* <tr>
+              <td> */}
+          {/* </fieldset> */}
+         
           <label for="images">Select Images:</label>
           <input
             type="file"
@@ -198,11 +395,24 @@ try {
             multiple
             onChange={handleImageChange}
           />
+          
           <div id="image-preview"></div>
+          {/* </td>
+          <td> */}
+          <div class="save">
           <button type="submit" onClick={postPackage}>
             Save
-          </button>
-        </form>
+            </button>
+            </div>
+  
+          {/* </td>
+          </tr>
+         */}
+        </table>
+        
+
+
+
       </div>
      
       <Footer/>

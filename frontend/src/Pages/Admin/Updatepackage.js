@@ -128,98 +128,379 @@ function UpdatePackage() {
     }
   }
 
-  return (
-    <div>
-      <ResponsiveDashBar/>
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <h1>Update Package</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="package">Package Name</label>
-              <input
-                type="text"
-                className="form-control"
+//   return (
+//     <div>
+//       <ResponsiveDashBar/>
+//     <div className="container">
+//       <div className="row justify-content-center">
+//         <div className="col-lg-8">
+//           <h1>Update Package</h1>
+//           <form onSubmit={handleSubmit}>
+//             <div className="form-group">
+//               <label htmlFor="package">Package Name</label>
+//               <input
+//                 type="text"
+//                 className="form-control"
                
-                name="package"
-                defaultValue={packageData.package}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="package">Total price</label>
-              <input
-                type="Number"
-                className="form-control"
+//                 name="package"
+//                 defaultValue={packageData.package}
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label htmlFor="package">Total price</label>
+//               <input
+//                 type="Number"
+//                 className="form-control"
                
-                name="totalprice"
-                defaultValue={packageData.totalprice}
+//                 name="totalprice"
+//                 defaultValue={packageData.totalprice}
                 
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea
-                className="form-control"
-                name="description"
-                defaultValue={packageData.description}
-              ></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Consider</label>
-              <textarea
-                className="form-control"
-                name="note"
-                defaultValue={packageData.note}
-              ></textarea>
-            </div>
-            <div className="form-group">
-  <label htmlFor="details">Details</label>
-  {[...Array(10)].map((_, index) => {
-    const existingDetail = packageData.details[index] || { activity: "", cost: "" };
-    return (
-      <div key={index}>
-        <label> Activity</label>
-        <input
-          type="text"
-          className="form-control"
-          name={`activity-${index}`}
-          defaultValue={existingDetail.activity}
-        /><br></br>
-        <label>Cost</label>
-        <input
-          type="number"
-          className="form-control"
-          name={`cost-${index}`}
-          defaultValue={existingDetail.cost}
-        />
-        <br></br><br></br>
-      </div>
-    );
-  })}
-</div>
+//               />
+//             </div>
+//             <div className="form-group">
+//               <label htmlFor="description">Description</label>
+//               <textarea
+//                 className="form-control"
+//                 name="description"
+//                 defaultValue={packageData.description}
+//               ></textarea>
+//             </div>
+//             <div className="form-group">
+//               <label htmlFor="description">Consider</label>
+//               <textarea
+//                 className="form-control"
+//                 name="note"
+//                 defaultValue={packageData.note}
+//               ></textarea>
+//             </div>
+//             <div className="form-group">
+//   <label htmlFor="details">Details</label>
+//   {[...Array(10)].map((_, index) => {
+//     const existingDetail = packageData.details[index] || { activity: "", cost: "" };
+//     return (
+//       <div key={index}>
+//         <label> Activity</label>
+//         <input
+//           type="text"
+//           className="form-control"
+//           name={`activity-${index}`}
+//           defaultValue={existingDetail.activity}
+//         /><br></br>
+//         <label>Cost</label>
+//         <input
+//           type="number"
+//           className="form-control"
+//           name={`cost-${index}`}
+//           defaultValue={existingDetail.cost}
+//         />
+//         <br></br><br></br>
+//       </div>
+//     );
+//   })}
+// </div>
 
-            <div className="form-group">
-              <label htmlFor="images">Images</label>
-              <label for="images">Select Images:</label>
-          <input
-            type="file"
-            id="images"
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-          />
-          <div id="image-preview"></div>
+//             <div className="form-group">
+//               <label htmlFor="images">Images</label>
+//               <label for="images">Select Images:</label>
+//           <input
+//             type="file"
+//             id="images"
+//             name="images"
+//             accept="image/*"
+//             multiple
+//             onChange={handleImageChange}
+//           />
+//           <div id="image-preview"></div>
 
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Update
-            </button>
-          </form>
+//             </div>
+//             <button type="submit" className="btn btn-primary">
+//               Update
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+
+
+// myupdatepackage
+
+return (
+  <div>
+    <ResponsiveDashBar/>
+  <div className="container">
+    <div className="row justify-content-center">
+      <div className="col-lg-16">
+        <h3 text align="center">Update Package</h3><br/>
+
+
+
+        
+         <form>
+        <div class="for">
+          <div class="col-25">
+        <label>Package Name &nbsp;&nbsp;&nbsp;&nbsp;</label>
         </div>
+          <div class="col-50">
+            <input type="text" name="package" id="border" />
+          </div>
+          <br/>
+        <div class="col-25">
+          <label>Description &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-50">
+          <input type="text" name="description"id="border" /><br/>
+        </div>
+        <br />
+        <div class="col-25">
+        <label>Total Price &nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-50">
+          <input type="Number" name="total" id="border" />
+          </div>
+        <br/>
+        <div class="col-25">
+        <label>Consider &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div class="col-50">
+          <input type="Number" name="total" id="border" />
+          </div>
+        <br /><br/>
+        </div>
+
+      </form>  
       </div>
+       
+ <br/>
+
+
+
+
+    
+{/* myyy */}
+
+{/* <div class="update"> */}
+
+ <h3 className="heading">Details</h3>
+<table>
+{/* <div className="row justify-content-center"> */}
+        {/* <tr>
+        <th>
+          <div class="detail"> */}
+    {/* <h3 className="heading">Details</h3> */}
+    {/* </div>
+        </th>
+        </tr> */}
+        <tr>
+          <td>
+            
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]" />
+        </div>
+        </td>
+        </tr>
+        
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]"  />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]" />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]"  />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]" />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]"  />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]" />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]"  />
+        </div>
+        </td>
+        </tr>
+        <tr>
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]" />
+        </div>
+        </td>
+        </tr>
+        <tr>
+
+          <td>
+        <div class="activity">
+          <label>Activity:</label>
+          <input type="text" name="activity[]" />
+        </div>
+        </td>
+        <td>
+        <div class="cost">
+          <label>Cost:</label>
+          <input type="number" name="cost[]"  />
+        </div>
+        </td>
+        </tr>
+        {/* </div> */}
+  </table>     
+  
+  
+
+
+
+
+
+
+
+
+          {/* <div className="form-group">
+<label htmlFor="details">Details</label>
+{[...Array(10)].map((_, index) => {
+  const existingDetail = packageData.details[index] || { activity: "", cost: "" };
+  return (
+    <div key={index}>
+      <label> Activity</label>
+      <input
+        type="text"
+        className="form-control"
+        name={`activity-${index}`}
+        defaultValue={existingDetail.activity}
+      /><br></br>
+      <label>Cost</label>
+      <input
+        type="number"
+        className="form-control"
+        name={`cost-${index}`}
+        defaultValue={existingDetail.cost}
+      />
+      <br></br><br></br>
     </div>
+  );
+})}
+</div>  */}
+
+          <div className="form-group">
+            <label htmlFor="images">Images</label>
+            <label for="images">Select Images:  </label>
+        <input
+          type="file"
+          id="images"
+          name="images"
+          accept="image/*"
+          multiple
+          onChange={handleImageChange}
+        />
+        <div id="image-preview"></div>
+        {/* </div> */}
+
+          </div>
+          </div>
+          <div className="updatebutton">
+          <button type="submit" className="btnbtn-primary">
+            Update
+          </button>
+          </div>
+        {/* </form> */}
+      {/* </div> */}
+    </div>
+
+
+
+
+
+
     <Footer/>
     </div>
 );

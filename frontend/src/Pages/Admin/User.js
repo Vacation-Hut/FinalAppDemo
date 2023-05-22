@@ -27,8 +27,8 @@ function User() {
   }, []);
   return (
     <div>
-      <ResponsiveDashBar/>
-      <h1 className="activity users">Users</h1>
+      <ResponsiveDashBar/><br/>
+      <h2 className="activity users"><b>Users</b></h2>
       <table class="table1 table3 table table-bordered th-lg border-dark">
         <thead class="tablehead1">
           <tr>

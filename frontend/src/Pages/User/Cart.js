@@ -44,7 +44,9 @@ const CartPage = () => {
 
   return (
     <div>
+      <div class="cart">
       <h1>Cart</h1>
+      </div>
       <Table>
         <TableHead>
           <TableRow>
@@ -83,7 +85,7 @@ const CartPage = () => {
           ))}
         </TableBody>
       </Table>
-      <h2>Total Cost: ${totalCost}</h2>
+      <h4>Total Cost: ${totalCost}</h4>
       <Checkout cartItems={cartItems} totalCost={totalCost} />
     </div>
   );

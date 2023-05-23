@@ -2,6 +2,8 @@ import React from 'react';
 import "../../Edit.css";
 import Carousel from './inspirationcarosel';
 import Packagedetails from "./Packagedetails";
+import Footer from "./Footer";
+
 
 
 
@@ -68,6 +70,9 @@ const LandingPage = () => {
     <div className="background">
       <h1 className="whychoose packagealign">Where will you get Authentic Experience</h1>
       <Packagedetails/>
+      </div>
+      <div>
+        <Footer/>
       </div>
 
     

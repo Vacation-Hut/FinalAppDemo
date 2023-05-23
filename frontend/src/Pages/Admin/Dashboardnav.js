@@ -41,7 +41,7 @@ function ResponsiveDashBar() {
   };
 
   return (
-<AppBar position="static" sx={{ background: 'linear-gradient(to left, #2c3e50, #bdc3c7)' }}>
+<AppBar position="static" sx={{ background: 'linear-gradient(to right,#ffffff, #6dd5fa,  #2980b9)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -57,7 +57,7 @@ function ResponsiveDashBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'white',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
@@ -113,7 +113,7 @@ function ResponsiveDashBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'white',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
@@ -126,7 +126,7 @@ function ResponsiveDashBar() {
     component={Link}
     to={page[1]}
     onClick={handleCloseNavMenu}
-    sx={{ my: 2, color: 'white', display: 'block' }}
+    sx={{ my: 2, color: 'black', display: 'block' }}
   >
     {page[0]}
   </Button>

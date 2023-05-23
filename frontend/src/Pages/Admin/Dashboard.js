@@ -9,7 +9,7 @@ import ResponsiveDashBar from "./Dashboardnav";
 function Dashboard() {
   return (
     <div className="App">
-      <ResponsiveDashBar/>
+      {/* <ResponsiveDashBar/> */}
       {/* <div class="dashdiv">
         <button class="dashbtn dashbtn2">Total booking</button>
         <button class="dashbtn dashbtn1">Total income</button>
@@ -44,11 +44,11 @@ function Dashboard() {
 <div id="mySidenav" class="sidenav">
 <p class="logo">VacationHut<span class="menu">&#9776;</span></p>
 <p class="logo1"><span class="menu1">&#9776;</span></p> 
-<a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i>&nbsp;&nbsp;&nbsp;DASHBOARD</a><br/>
-<a href="#" class="icon-a"><i class="fa fa-pie-chart icons"></i>&nbsp;&nbsp;&nbsp;PACKAGE</a><br/>
-<a href="#" class="icon-a"><i class="fa fa-list icons"></i>&nbsp;&nbsp;&nbsp;PAYMENT</a><br/>
-<a href="#" class="icon-a"><i class="fa fa-user icons"></i>&nbsp;&nbsp;&nbsp;BOOKING</a><br/>
-<a href="#" class="icon-a"><i class="fa fa-shopping-bag icons"></i>&nbsp;&nbsp;&nbsp;USER</a><br/>
+<a href="/dash" class="icon-a"><i class="fa fa-dashboard icons"></i>&nbsp;&nbsp;&nbsp;DASHBOARD</a><br/>
+<a href="/dash/package" class="icon-a"><i class="fa fa-pie-chart icons"></i>&nbsp;&nbsp;&nbsp;PACKAGE</a><br/>
+{/* <a href="#" class="icon-a"><i class="fa fa-list icons"></i>&nbsp;&nbsp;&nbsp;PAYMENT</a><br/> */}
+<a href="/dash/orders" class="icon-a"><i class="fa fa-user icons"></i>&nbsp;&nbsp;&nbsp;BOOKING</a><br/>
+<a href="/dash/users" class="icon-a"><i class="fa fa-shopping-bag icons"></i>&nbsp;&nbsp;&nbsp;USER</a><br/>
 {/* <a href="#" class="icon-a"><i class="fa fa-shopping-bag icons"></i>&nbsp;&nbsp;oder</a><br/> */}
 
 </div>
@@ -89,7 +89,7 @@ function Dashboard() {
      <div class="box">
 <p class="head-1">PACKAGE</p>
 <p class="number">6</p>
-<p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p>
+{/* <p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p> */}
 <i class="fa fa-line-chart box-icon"></i>
      </div>
   </div>
@@ -98,7 +98,7 @@ function Dashboard() {
      <div class="box">
 <p class="head-1">USER</p>
 <p class="number">263</p>
-<p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p>
+{/* <p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p> */}
 <i class="fa fa-line-chart box-icon"></i>
      </div>
   </div>
@@ -107,7 +107,7 @@ function Dashboard() {
      <div class="box">
 <p class="head-1">BOOKING</p>
 <p class="number">250</p>
-<p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p>
+{/* <p class="percent"><i class="fa fa-long-arrow-up"></i>5.67%<span>Since last months</span></p> */}
 <i class="fa fa-line-chart box-icon"></i>
      </div>
   </div>
@@ -117,8 +117,9 @@ function Dashboard() {
 
 </div>
 </div>
-
+<div className="dashfooter">
  <Footer/>
+ </div>
     </div>
   );
 }

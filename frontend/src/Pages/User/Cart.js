@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Checkout from "./Checkout";
+import ResponsiveAppBar from "./Navbar";
+import Footer from "./Footer";
+import '../../App.css'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -44,6 +47,7 @@ const CartPage = () => {
 
   return (
     <div>
+      <ResponsiveAppBar/>
       <div class="cart">
       <h1>Cart</h1>
       </div>
@@ -87,6 +91,9 @@ const CartPage = () => {
       </Table>
       <h4>Total Cost: ${totalCost}</h4>
       <Checkout cartItems={cartItems} totalCost={totalCost} />
+      <div className="cartfooter">
+      <Footer/>
+      </div>
     </div>
   );
 };

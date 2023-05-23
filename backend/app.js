@@ -89,14 +89,11 @@ const Order = mongoose.model("Order",{
           // required: true
         },
      
-        checkInDate: {
+        date: {
           type: Date,
           // required: true
         },
-        checkOutDate: {
-          type: Date,
-          // required: true
-        },
+        
       },
     ],
     customer:{
@@ -482,28 +479,28 @@ app.get("/dash/orders/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
+const ObjectId = require('mongoose').Types.ObjectId;
 app.post("/dash/orders", async (req, res) => {
   try {
     const  {items,customerInfo,total}  = req.body;
     // if (!req.user) {
     //   return res.status(401).json({ error: "Unauthorized" });
     // }
+  const orderItems = items.map((item) => ({
+      packagename: item.name,
+      package: item._id,
+      date: item.date
+    }));
     const order = new Order({
       // user: req.user._id,
-      items: [{
-        packagename:items.name,
-        package:items._id,
-        checkInDate:items.checkindate,
-        checkOutDate:items.checkoutdate
-      }],
+      items:orderItems,
       totalprice:total,
-      members:items.count,
+      members:items.length,
       customer:customerInfo,
     });
     await order.save();
    
-    res.json({ success: true});
+    res.json({ success: true ,orderID: `${order._id}` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
@@ -515,6 +512,46 @@ const removeTmp = (path) => {
     if (err) throw err;
   });
 };
+app.post("/sentmail", async (req, res) => {
+  const { items, customerInfo, orderID, total } = req.body;
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'ravipirathap0715@gmail.com',
+        pass: 'pirathap33',
+      },
+    });
+
+    let packageDetails = '';
+    items.forEach((item) => {
+      packageDetails += `<li>Package: ${item.package.package}</li>
+                        <li>Price: ${item.package.totalprice}</li>`;
+    });
+
+    const message = {
+      from: 'ravipirathap0715@gmail.com',
+      to: customerInfo.email,
+      subject: 'Payment Receipt',
+      html: `<p>Thank you for your payment!</p>
+            <p>Payment details:</p>
+            <ul>
+              <li>Payment ID: ${orderID}</li>
+              <li>Amount: ${total}</li>
+              <li>Package details:</li>
+              ${packageDetails}
+            </ul>`,
+    };
+
+    await transporter.sendMail(message);
+
+    res.status(201).json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.post("/upload", async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {

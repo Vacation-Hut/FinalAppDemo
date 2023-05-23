@@ -7,6 +7,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import ResponsiveAppBar from "./Navbar";
 import Footer from "./Footer";
+import '../../App.css'
 
 
 
@@ -93,13 +94,15 @@ function Login() {
       </div>
       <div>
         <img 
-        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1682833360/vector1_dq481m.avif"
+        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1684820921/signupimage_aoplfv.png"
         className="loginimg">
         </img>
       </div>
       
     </div>
+    <div className="loginfooter">
     <Footer/>
+    </div>
     </div>
   );
 }

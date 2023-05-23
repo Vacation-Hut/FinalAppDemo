@@ -2,7 +2,7 @@ import React, { useState ,useEffect } from "react";
 import { useStripe, useElements, CardElement, Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   cardElement: {
@@ -25,7 +25,7 @@ const [cartItems ,setCartItems] = useState([])
   const elements = useElements();
   const classes = useStyles();
   const [totalCost, setTotalCost] = useState(0);
-
+const Navigate = useNavigate()
   useEffect(() => {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
@@ -40,15 +40,16 @@ const [cartItems ,setCartItems] = useState([])
   }, []);
 
   const handleToken = async (event) => {
+    
     event.preventDefault();
-  
+
     if (!stripe || !elements) {
       return;
     }
-  
+
     const cardElement = elements.getElement(CardElement);
     const { token, error } = await stripe.createToken(cardElement);
-  
+    
     if (error) {
       console.error("Error creating token:", error);
     } else {
@@ -58,8 +59,8 @@ const [cartItems ,setCartItems] = useState([])
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          items: cartItems[0],
-          total: totalCost,
+          items: cartItems,
+          total:totalCost,
           token: token,
           customerInfo: {
             name: name,
@@ -71,37 +72,20 @@ const [cartItems ,setCartItems] = useState([])
           },
         }),
       });
-  
+
       const data = await response.json();
-      console.log(data)
+ 
       if (data.success) {
-        // Save the receipt data in the backend
-        const receiptResponse = await fetch("http://localhost:5000/receipt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            paymentIntent: data.paymentIntent,
-          }),
-        });
-  
-        const receiptData = await receiptResponse.json();
-  
-        if (receiptData.success) {
-          localStorage.removeItem("cart");
-          setCartItems([]);
-          setIsOpen(true);
-        } else {
-          console.error("Error saving receipt:", receiptData.error);
-        }
+        const orderID = data.orderID
+        localStorage.removeItem("cart");
+        setCartItems([]);
+        setIsOpen(true);
+      Navigate(`/receipt/${orderID}`)
       } else {
         alert("Payment failed");
       }
     }
   };
-  
 
   return (
     <div>

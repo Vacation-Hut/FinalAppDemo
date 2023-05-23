@@ -109,7 +109,7 @@
 .btn2{
   margin-top: 40px;
   margin-right: 30px;
-  background:rgb(219, 187, 184) !important;
+  background:rgb(135, 172, 201) !important;
   border-radius: 20px;
 }
 
@@ -196,8 +196,9 @@ th, td {
 }
 
 table, th, td {
-  /* border: 1px solid black; */
+  border: 2px solid black !important;
   border-collapse: collapse;
+  /* border-width: 1px !important; */
 }
 
 .adds{
@@ -575,7 +576,8 @@ table, th, td {
 }
 
 .loginbtn{
-  background: #ceac9f !important;
+  background: #9bc2d6 !important;
+  color: black !important;
 }
 
 .loginimg{
@@ -626,9 +628,9 @@ table, th, td {
 /* background: linear-gradient(to left, #FFFFFF, #ECE9E6) !important; W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 /* } */   
 
-body{
+/* body{
   background: #d8dbdb !important;
-}
+}  */
 
 .activity-image {
   height: 300px;
@@ -1014,6 +1016,7 @@ padding-left: 10px;
     overflow: hidden;
     padding-top: 30px;
     transition: 0.3s ease-in-out;
+    background: linear-gradient(to bottom, #6dd5fa, #ffffff) !important;
   
 }
 
@@ -1129,3 +1132,63 @@ padding-left: 10px;
 /* .for{
   background-color: #dce1e8;
 } */
+
+.cartfooter{
+  margin-top: 380px;
+}
+
+.loginfooter{
+  margin-top: -240px;
+}
+
+.dashfooter{
+  margin-top: 409px;
+}
+
+.sidenav{
+  color: #000000 !important;
+}
+
+.logo{
+  color: #000000 !important;
+}
+
+.sidenav a{
+  color: #000000 !important;
+}
+
+.imagegallery {
+  width: 100%;
+  height: auto;
+}
+
+.App {
+  text-align: center;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.bodydescription {
+  width: 2000px;
+  max-width: 1500px; /* Adjust the value as needed */
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: left !important;
+  margin-left: -450px !important;
+}
+
+.activity-cost {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+

@@ -16,7 +16,7 @@ import Cart from "./Pages/User/Cart"
 import Updatepackage from "./Pages/Admin/Updatepackage";
 import UserPackage from "./Pages/User/Package";
 import AdminPackage from "./Pages/Admin/Package";
-
+import Receipt from "./Pages/User/Recipt";
 
 function App() {
   return (
@@ -38,7 +38,7 @@ function App() {
         <Route path="/dash/package/update/:id" element = {<Updatepackage/>}></Route>
         <Route path="/package/:id" element = {<UserPackage/>}></Route>
         <Route path="/dash/package" element = {<AdminPackage/>}></Route>
-        
+        <Route path="/receipt/:id" element = {<Receipt/>}></Route>
       </Routes>
     </BrowserRouter>
   );

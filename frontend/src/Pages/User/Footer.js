@@ -7,7 +7,7 @@ import { Facebook } from '@mui/icons-material';
 
 function Footer() {
   return (
-    <Box sx={{ background: 'linear-gradient(to left, #2c3e50, #bdc3c7)', color: 'white', py: 3, mt: '50px' }}>
+    <Box sx={{ background: 'linear-gradient(to right,#ffffff, #6dd5fa,  #2980b9)', color: 'black', py: 3, mt: '50px' }}>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={3}>

@@ -15,6 +15,8 @@ function Package() {
   const [images, setImages] = useState([{}]);
   const { id } = useParams();
   const [date, setDate] = useState(null);
+  const [count ,setCount] = useState();
+
   const [packageData, setPackageData] = useState({
     package: "",
     details: [
@@ -30,17 +32,29 @@ function Package() {
       { activity: "", cost: "" },
     ],
   });
-
   const handleDateChange = (date) => {
     setDate(date);
   };
+  const handleMembersChange = (e) => {
+    const selectedCount = parseInt(e.target.value);
+    setCount(selectedCount);
+  };
+  
 
+  
   const handleAddToCart = (image) => {
-    if (!date) {
-      alert("Please select a date.");
+    if (!date || !count) {
+      // Dates not selected, handle the error accordingly
+      alert("Please select a date and members.");
       return;
     }
-
+    let additionalCost = 0;
+    if (count > 8) {
+      const extraMembers = count - 8;
+      additionalCost = Math.ceil(extraMembers / 5) * 10;
+    }
+  
+    const totalPrice = packageData.totalprice + additionalCost;
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
@@ -49,33 +63,38 @@ function Package() {
 
     if (duplicates.length === 0) {
       const activityToAdd = {
-        image: image,
+        image:image,
         _id: id,
         name: packageData.package,
-        price: packageData.totalprice,
-        count: 1,
+        price: totalPrice,
+        count: count,
         date: date.toLocaleDateString(),
+       
       };
 
       cart.push(activityToAdd);
 
       localStorage.setItem("cart", JSON.stringify(cart));
       setCartCount((prevCount) => prevCount + 1);
-      Navigate("/");
+      Navigate("/")
+    }
+    
+  };
+  
+  const handleBookNow = (image, id, activityname, description, price) => {
+    if (!date || !count) {
+      alert("Please select a date and enter the number of members.");
+      return;
+    }
+  
+    try {
+      handleAddToCart(image, id, activityname, description, price, date);
+      Navigate("/cart");
+    } catch (err) {
+      throw err;
     }
   };
 
-  const handleBookNow = (
-    image,
-    id,
-    activityname,
-    description,
-    price,
-    date
-  ) => {
-    handleAddToCart(image, id, activityname, description, price, date);
-    Navigate("/cart");
-  };
 
   useEffect(() => {
     async function fetchPackageData() {
@@ -140,6 +159,16 @@ function Package() {
             </div>
           </form>
         </Box>
+        <div>
+                 <label>Members</label> 
+                <input
+                  type="number"
+                  value={count}
+                  onChange={(e) => handleMembersChange(e,count)}
+                  min="1"
+                /><br></br>
+                 {count > 8 && <span className="alert">More than 8 People for every additional 5 people we pay 5$.  .</span>}
+                    </div>
 
         <div className="actbtn">
           <Link to="/">

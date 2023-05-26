@@ -102,6 +102,7 @@ const Order = mongoose.model("Order",{
       phonenumber:Number,
       country:String,
       passportno:Number,
+      nic:String,
     //   address_line1: String,
     // address_zip:Number,
     // address_city: String,
@@ -486,6 +487,7 @@ app.post("/dash/orders", async (req, res) => {
     // if (!req.user) {
     //   return res.status(401).json({ error: "Unauthorized" });
     // }
+    console.log(customerInfo)
   const orderItems = items.map((item) => ({
       packagename: item.name,
       package: item._id,

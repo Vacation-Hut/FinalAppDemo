@@ -17,19 +17,17 @@ const Receipt = () => {
         setReceiptData(data);
         setCustomer(data.customer);
         setItems(data.items);
-        
       } catch (error) {
         console.error('Error retrieving receipt data:', error);
       }
     };
 
-    fetchReceiptData(); 
+    fetchReceiptData();
   }, [id]);
 
   if (!receiptData) {
     return <div>Loading receipt...</div>;
   }
-
 const sendmail = async () => {
   try {
     const response = await fetch('http://localhost:5000/sentmail', {

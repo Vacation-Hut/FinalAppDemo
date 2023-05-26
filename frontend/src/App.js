@@ -17,6 +17,7 @@ import Updatepackage from "./Pages/Admin/Updatepackage";
 import UserPackage from "./Pages/User/Package";
 import AdminPackage from "./Pages/Admin/Package";
 import Receipt from "./Pages/User/Recipt";
+import MyForm from "./Pages/valtry";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path="/dash/activity/:id" element={<Pottery/>}></Route>
         <Route path="/dash/orders" element={<Order />}></Route>
         <Route path="/dash" element={<Dashboard />}></Route>
-      
+        <Route path="/val" element={<MyForm />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/dash/package/add" element = {<Addpackage/>}></Route>
         <Route path="/dash/package/update/:id" element = {<Updatepackage/>}></Route>

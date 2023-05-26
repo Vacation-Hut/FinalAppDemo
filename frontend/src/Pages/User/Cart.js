@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Checkout from "./Checkout";
-import ResponsiveAppBar from "./Navbar";
-import Footer from "./Footer";
-import '../../App.css'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -15,7 +12,7 @@ const CartPage = () => {
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     setCartItems(cart);
-    const cost = cart.reduce((total, item) => total + item.price * item.count, 0);
+    const cost = cart.reduce((total, item) => total + item.price, 0);
     setTotalCost(cost);
   }, []);  
 
@@ -24,15 +21,7 @@ const CartPage = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
   };
-  const handleMembersChange = (e, item) => {
-    const updatedCartItems = cartItems.map((cartItem) => {
-      if (cartItem._id === item._id) {
-        return { ...cartItem, count: e.target.value };
-      }
-      return cartItem;
-    });
-    setCartItems(updatedCartItems);
-  };
+  
   const searchParams = new URLSearchParams(useLocation().search);
   const itemsParam = searchParams.get("items");
 
@@ -47,10 +36,7 @@ const CartPage = () => {
 
   return (
     <div>
-      <ResponsiveAppBar/>
-      <div class="cart">
       <h1>Cart</h1>
-      </div>
       <Table>
         <TableHead>
           <TableRow>
@@ -71,16 +57,10 @@ const CartPage = () => {
               </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>${item.price}</TableCell>
+              <TableCell>{item.count}</TableCell>
               <TableCell>{item.date}</TableCell>
 
-              <TableCell>
-                <input
-                  type="number"
-                  value={item.count}
-                  onChange={(e) => handleMembersChange(e, item)}
-                  min="1"
-                />
-              </TableCell>
+              
               
               <TableCell>
                 <button onClick={() => handleRemoveItem(item)}>Remove</button>
@@ -89,11 +69,8 @@ const CartPage = () => {
           ))}
         </TableBody>
       </Table>
-      <h4>Total Cost: ${totalCost}</h4>
+      <h2>Total Cost: ${totalCost}</h2>
       <Checkout cartItems={cartItems} totalCost={totalCost} />
-      <div className="cartfooter">
-      <Footer/>
-      </div>
     </div>
   );
 };

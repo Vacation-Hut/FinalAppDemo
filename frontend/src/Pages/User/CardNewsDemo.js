@@ -1,16 +1,45 @@
-import { Grid } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import cx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import ChevronRightRounded from "@material-ui/icons/ChevronRightRounded";
+import Star from "./assets/star";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
-const Packagedetails = () => {
+
+
+const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 304,
+    width: 400,
+    margin: "auto",
+    boxShadow: '5px 10px #888888',
+    borderRadius: 30
+  },
+  content: {
+    padding: 24
+  },
+  cta: {
+    marginTop: 24,
+    textTransform: "initial"
+  }
+}));
+
+ const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0,image }) {
+  const styles = useStyles();
+  const n = 6;
   const [data, setData] = useState([]);
   const [images, setImages] = useState([]);
   const [cartcount, setCartCount] = useState(0); // Initialize cart count to zero
   const [date, setDate] = useState(null);
   const Navigate = useNavigate();
+  
 
   useEffect(() => {
     fetch("http://localhost:5000/allpackage", {
@@ -59,29 +88,34 @@ const Packagedetails = () => {
     handleAddToCart(image, id, activityname, description, price, date);
     Navigate("/cart");
   };
+  
+
+
   return (
-    <div>
-      {images.map((image, index) => {
-        const activity = data[index];
-        return (
-          <div key={index} className="activity-card">
-            <Grid container spacing={5}>
-              <Grid item xs={12} md={5}>
-                <Link to={`/package/${activity._id}`}>
-                  <img
-                    src={image}
-                    alt={`Image ${index}`}
-                    className="activity-image"
-                  />
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <div className="activity-details">
-                  <h4>{activity.package}</h4>
-                  <span>{activity.totalprice}</span>
-                  <div>
-                    <div>
-                      <h2>Calendar</h2>
+    <Card>
+      
+      <CardMedia
+        style={{
+          height: "300px",
+          width: "500px",
+          filter: activeIndex !== 0 ? "blur(2px)" : "none"
+        }}
+        image={image}
+         
+      />
+      
+
+      <CardContent className={styles.content}>
+        {/* {[...Array(n)].map((e, i) => (
+          <span key={i}>
+            <Star height="20px" />
+          </span>
+        ))} */}
+        <div className="packagecarousel">
+        <h3>Packages</h3>
+
+                 <div>
+                      <h4>Calendar</h4>
                       <form>
                         <div>
                           <label>Date:</label>
@@ -93,15 +127,15 @@ const Packagedetails = () => {
                         </div>
                       </form>
                     </div>
-
+                    <div>
                     <button
                       className="booksbtn booksbtn1"
                       onClick={() =>
                         handleBookNow(
-                          image,
-                          activity._id,
-                          activity.package,
-                          activity.totalprice,
+                          // image,
+                          // activity._id,
+                          // activity.package,
+                          // activity.totalprice,
                           date
                         )
                       }
@@ -113,25 +147,25 @@ const Packagedetails = () => {
                       className="booksbtn booksbtn1"
                       onClick={() =>
                         handleAddToCart(
-                          image,
-                          activity._id,
-                          activity.package,
-                          activity.totalprice,
+                          // image,
+                          // activity._id,
+                          // activity.package,
+                          // activity.totalprice,
                           date
                         )
                       }
                     >
                       Add to cart
                     </button>
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        );
-      })}
-    </div>
+                    </div>
+        <Button color={"primary"} fullWidth className={styles.cta}>
+          View More <ChevronRightRounded />
+        </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
-};
+});
 
-export default Packagedetails;
+export default CardNewsDemo;
+

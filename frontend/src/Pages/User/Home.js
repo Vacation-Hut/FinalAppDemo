@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "../../App.css";
 import { useParams, useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "./Navbar";
-import AppCarousel from "./Carousel";
 import Whychoose from "./Whychoose";
 import Packagedetails from "./Packagedetails";
 import "bootstrap/dist/css/bootstrap.min.css";

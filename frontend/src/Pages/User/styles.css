@@ -1,0 +1,92 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .cardContainer {
+    background-color: blue;
+    /*margin: 20px;*/
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    align-items: center;
+    box-shadow: 5px 4px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 10px !important;
+  }
+  .titleContainer {
+    background-color: white;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 5px;
+  }
+  #title {
+    flex-grow: 3;
+    position: relative;
+  }
+  
+  #rating {
+    width: 40%;
+    background-color: orange;
+    flex-direction: row;
+  }
+  .cardImgContainer {
+    background-color: green;
+    border-radius: 10px !important;
+  }
+  
+  .cardImgContainer img {
+    object-fit: fill;
+  }
+  
+  .cardTextContainer {
+    background-color: red !important;
+  }
+
+  .packagecarousel{
+    background-color: white !important;
+    box-shadow: 20px 20px 50px 10px lightgray inset;  }
+
+
+  
+
+  /* ############################################################################################## */
+  /* overlay container */
+  .overlaycontainer {
+    position: relative;
+    width: 50%;
+  }
+  
+  .overlaycontent {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(112, 186, 210);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+  }
+  
+  .overlaycontainer:hover .overlay {
+    height: 100%;
+  }
+  
+  .overlaytext {
+    color: black;
+    font-size: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }

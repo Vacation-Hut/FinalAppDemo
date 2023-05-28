@@ -305,7 +305,7 @@ main {
 
 /* BEGINING OF BENEFITS SECTION */
 #benefits {
-    width: 90%;
+    width: 100%;
     background-color: white;
     color: var(--dark);
     align-self: center !important;

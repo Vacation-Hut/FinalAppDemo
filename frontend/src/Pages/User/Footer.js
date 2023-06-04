@@ -4,15 +4,19 @@ import { WhatsApp } from '@mui/icons-material';
 import { Instagram } from '@mui/icons-material';
 import { Email } from '@mui/icons-material';
 import { Facebook } from '@mui/icons-material';
+import "./styles.css";
+
 
 function Footer() {
   return (
-    <Box sx={{ background: 'linear-gradient(to right,#ffffff, #6dd5fa,  #2980b9)', color: 'black', py: 3, mt: '50px' }}>
+    <Box sx={{ 
+      background: 'linear-gradient(to right,#ffffff, #ECDACD,  #E6C4AC)', 
+      color: 'black', py: 3, mt: '50px' }}>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={3}>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 2 }}>
-              <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1683827717/Dark_logo-removebg-preview_ube8bh.png" alt="Company Logo" style={{ width: 'auto', height: '100px' }} />
+              <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Company Logo" style={{ width: 'auto', height: '100px' }} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={3}>

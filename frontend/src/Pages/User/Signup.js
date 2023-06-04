@@ -93,7 +93,7 @@ function Signup() {
         </form>
       </div>
       <img 
-        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1684820921/signupimage_aoplfv.png"
+        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685805381/hd_signup-removebg-preview-removebg-preview_d4inad.png"
         className="signupimg">
         </img>
     </div>

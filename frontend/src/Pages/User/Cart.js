@@ -5,6 +5,7 @@ import Checkout from "./Checkout";
 import ResponsiveAppBar from "./Navbar";
 import Footer from "./Footer";
 import '../../App.css'
+import Review from "./Review";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -38,12 +39,12 @@ const CartPage = () => {
   }
 
   return (
-    <div>
+    <div className="cartfullbackground">
       <ResponsiveAppBar/>
       <div className="cart">
-      <h1>Cart</h1>
+      <h1 className="cartheadalign">Cart</h1>
       </div>
-      <Table>
+      <Table className="carttablealign">
         <TableHead>
           <TableRow>
             <TableCell>Image</TableCell>
@@ -75,7 +76,8 @@ const CartPage = () => {
           ))}
         </TableBody>
       </Table>
-      <h2>Total Cost: ${totalCost}</h2>
+      <h2 className="carttotalalign">Total Cost: ${totalCost}</h2>
+      <Review/>
       <Checkout cartItems={cartItems} totalCost={totalCost} />
       <div className="cartfooter">
         <Footer/>

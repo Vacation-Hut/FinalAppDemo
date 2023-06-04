@@ -84,8 +84,8 @@
 
 body {
     width: 100%;
-    font-family: "Lato", sans-serif;
-    background-color: var(--light);
+    /* font-family: 'Exo Medium', sans-serif !important; */
+    background-color: white;
     height: 100%;
 }
 
@@ -141,7 +141,8 @@ section:not(#hero):not(#showcase) {
 #header {
     width: 100%;
     height: 100vh;
-    background: url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1684402787/landing_page_imagejpg_xxcwzq.jpg") no-repeat fixed center;
+    background: url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png") no-repeat fixed center;
+    background-color: rgb(240, 224, 218);
     background-size: cover;
     color: var(--light);
     display: flex;
@@ -175,13 +176,14 @@ section:not(#hero):not(#showcase) {
 }
 /* HEADER AFTER OVERLAY */
 
-nav {
+/* nav {
     z-index: 3;
+    background-color: brown;
 }
 
-/* #navbar {
+#navbar {
     position: fixed;
-} */
+}
 
 #navbar,
 .nav--links,
@@ -194,61 +196,63 @@ nav {
     width: 100%;
     height: 10vh;
     /* padding-block: 2%; */
-    padding-inline: 10%;
-}
+    /* padding-inline: 10%;
+} */
 
-.nav--brand,
+/* .nav--brand,
 .nav--links {
     width: 50%;
-}
+} */
 
-.nav--brand {
+/* .nav--brand {
     margin-inline-start: auto;
-}
+} */
 
-.nav--brand a img:hover {
+/* .nav--brand a img:hover {
     transform: scale(1.02);
     transition: all 300ms ease-in;
-}
-
+} */
+/* 
 .nav--links {
     justify-content: space-around;
-}
+} */
 
-.link-item a {
-    color: black !important;
-    font-weight: 500;
+/* .link-item a {
+    color: rgb(53, 14, 14) !important;
+    font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 1px;
-}
+} */
 
-.link-item a:hover {
+/* /* .link-item a:hover {
     font-weight: 600;
     text-shadow: 0px 30px 4px rgba(0, 0, 0, 0.7);
     transition: all 300ms ease-in;
-}
+} */  */
 
 /* BEGINING OF HERO */
+
 #hero {
     width: 100%;
     height: 100%;
-    padding-inline: 10%;
-    padding-block: 15%;
+    padding: 10% 10% 15%; /* Simplify padding property */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Change to align-items: center to center content horizontally */
     justify-content: center;
     margin-top: -180px;
-}
+  }
 
 .hero--header {
-    width: 25ch;
+    width: 100%;
+    max-width: 25ch;
     font-weight: 500;
     font-size: 50px;
     line-height: 60px;
     color: black !important;
-}
+    text-align: center; /* Add text-align property to center the content */
+  }
 
 .hero--header {
     /* Animation */
@@ -301,24 +305,26 @@ main {
     left: 0;
     display: flex;
     flex-direction: column;
+    margin-top: 200px !important;
 }
 
 /* BEGINING OF BENEFITS SECTION */
 #benefits {
-    width: 100%;
+    width: 80%;
     background-color: white;
     color: var(--dark);
     align-self: center !important;
     z-index: 2;
     border-radius: 100px !important;
+    /* margin-top: 280px !important; */
 }
 
 .benefits--header {
     padding-block-end: 50px;
     font-weight: 500;
-    font-size: 35px;
+    font-size: 40px;
     line-height: 42px;
-    margin-top: -80px !important;
+    /* font-family: 'Exo Medium', sans-serif !important; */
 }
 
 .benefit--cards {
@@ -332,6 +338,7 @@ main {
     width: 100%;
     display: flex;
     align-items: flex-start;
+    margin-top: -30px;
 }
 
 .benefit--card_item {

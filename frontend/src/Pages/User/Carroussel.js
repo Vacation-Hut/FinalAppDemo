@@ -4,19 +4,24 @@ import { config } from "react-spring";
 import CardNewsDemo from "./CardNewsDemo"
 
 export default function Carroussel(props) {
-  const table = props.cards.map((element, index) => {
-    return { ...element, onClick: () => setGoToSlide(index) };
-  });
-
   const [offsetRadius, setOffsetRadius] = useState(2);
   const [showArrows, setShowArrows] = useState(false);
   const [goToSlide, setGoToSlide] = useState(null);
-  const [cards] = useState(table);
-
+  const [cards , setCards] = useState([]);
   useEffect(() => {
     setOffsetRadius(props.offset);
     setShowArrows(props.showArrows);
   }, [props.offset, props.showArrows]);
+useEffect(() =>{
+  if(props.cards && Array.isArray(props.cards)){
+    const updatedCards = props.cards.map((element,index)=>{
+      return {...element,onClick:()=>setGoToSlide(index)}
+    })
+    setCards(updatedCards)
+  }
+},[props.cards])
+  
+
 
   return (
     <div

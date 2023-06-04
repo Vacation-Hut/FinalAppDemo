@@ -134,7 +134,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #75091b;
 }
 
 @keyframes App-logo-spin {
@@ -327,11 +327,36 @@ table, th, td {
 }
 
 .whychoose{
-  margin-top: 50px;
-  color: #2c3e50;
-  font-family: 'League Spartan', sans-serif !important;
+  margin-top: 30px;
+  color: rgb(78, 13, 13) !important;
+  /* font-family: 'Exo Medium', sans-serif !important; */
   font-size: 40px !important;
 }
+
+.carouselalign {
+  margin-top: 35px;
+  position: relative; /* Add position relative to the parent div */
+  /* background-color: rgba(240, 224, 218, 0.7) !important; */
+}
+
+.carouselalign::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-image: url('https://res.cloudinary.com/dolq5ge5g/image/upload/v1685337465/gallery_3_aytj8g.jpg'); Replace 'path/to/your/image.jpg' with the actual path to your image file */
+  background-size: cover; /* Adjust the background size as needed */
+  background-position: center; /* Adjust the background position as needed */
+  opacity: 0.2; /* Adjust the opacity value (0.5) to control the transparency */
+}
+
+.carouselalign > div {
+  position: relative; /* Add position relative to the child div containing the content */
+  z-index: 1; /* Ensure the content appears above the background image */
+}
+
 
 .flex-item-leftside {
  margin-left: 350px;
@@ -358,9 +383,11 @@ table, th, td {
 }
 
 .imagegallery{
-  width: 400px !important;
-  height: 300px !important;
+  width: 1150px !important;
+  height: 600px !important;
   border-radius: 30px !important;
+  align-self: center !important;
+  margin-top: 25px;
 }
 
 .searchbar{
@@ -572,17 +599,20 @@ table, th, td {
 }
 
 .loginmodel{
-  margin-top: -100px !important;
+  margin-top: -105px !important;
 }
 
 .loginbtn{
-  background: #9bc2d6 !important;
+  background: rgba(240, 224, 218) !important;
   color: black !important;
 }
 
 .loginimg{
-  height: 345px !important;
-  width: 350px !important;
+  /* height: 345px !important;
+  width: 350px !important; */
+  margin-top: -80px;
+  height: 400px !important;
+  width: 450px;
 }
 
 .signupmodel{
@@ -716,7 +746,7 @@ body{
   margin: 0px;
   padding:0px;
   background-color: #efeff5;
-  font-family: system-ui;
+  /* font-family: 'Exo Medium', sans-serif !important; */
 }
 .clearfix{
 clear:both;
@@ -1134,7 +1164,7 @@ padding-left: 10px;
 } */
 
 .cartfooter{
-  margin-top: 380px;
+  margin-top: 100px;
 }
 
 .loginfooter{
@@ -1177,12 +1207,11 @@ footer {
 }
 
 .bodydescription {
-  width: 2000px;
-  max-width: 1500px; /* Adjust the value as needed */
+  width: 1050px;
+  /* max-width: 800px; Adjust the value as needed */
   margin: 0 auto;
   padding: 1rem;
-  text-align: left !important;
-  margin-left: -450px !important;
+  text-align: justify !important;
 }
 
 .activity-cost {
@@ -1191,4 +1220,102 @@ footer {
   margin-bottom: 1rem;
 }
 
+.glassmorphismss {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
 
+.cartheadalign{
+  margin-top: 30px;
+  color: rgb(72, 17, 17);
+}
+
+.carttablealign{
+  margin-top: 20px;
+}
+
+.carttotalalign{
+  margin-top: 20px;
+}
+
+.checkoutheadalign{
+  margin-top: 30px;
+  text-align: center;
+  color:rgb(53, 11, 11);
+}
+
+.checkoutformalign{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.emailinputfield{
+  margin-top: 2px;
+  width: 500px;
+
+}
+
+.phonenumberinputfield{
+  margin-top: 2px;
+  width: 500px;
+
+}
+
+.passportinputfield{
+  margin-top: 25px;
+  width: 500px;
+}
+
+.buttoninputfield{
+  margin-top: 25px;
+  width: 200px;
+}
+
+.nameinputfield{
+  width: 500px;
+}
+
+.countryinputfield{
+  width: 500px;
+}
+
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0);
+  width: 600px;
+}
+
+.checkout-container {
+  color: #fff;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  /* background-color: #f5f5f5; */
+}
+
+.cartfullbackground{
+  background-color: rgba(240, 224, 218, 0.7);;
+}
+
+.reviewheadingalign{
+  margin-top: 20px;
+}

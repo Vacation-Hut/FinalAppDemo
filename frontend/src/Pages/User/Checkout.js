@@ -12,10 +12,14 @@ import { CountryDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import Validation from "../../Validation/checkoutvalidate";
+import '../../App.css'
+
 
 const useStyles = makeStyles({
   cardElement: {
     width: "500px",
+    marginTop:"25px",
+    // fontSize:"25px",
   },
 });
 
@@ -111,7 +115,7 @@ const CheckoutForm = () => {
         <div>
           <input
             type="text"
-            placeholder="NIC"
+            placeholder="NIC Number"
             value={nic}
             onChange={(e) => setNic(e.target.value)}
           
@@ -124,8 +128,9 @@ const CheckoutForm = () => {
         <div>
           <input
             type="text"
-            placeholder="Passport No"
+            placeholder="Passport Number"
             value={passportno}
+            className="passportinputfield"
             onChange={(e) => setPassport(e.target.value)}
             
           />
@@ -138,45 +143,52 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div>
-      <h1>Checkout</h1>
-      <form onSubmit={handleToken}>
+    <div className="page-container">
+    <div className="checkout-container">
+      <h1 className="checkoutheadalign">Checkout</h1>
+      <form onSubmit={handleToken} className="checkoutformalign">
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Full Name"
           value={name}
+          className="nameinputfield"
           onChange={(e) => setName(e.target.value)}
           
-        />
+        /><br/>
         {error.name && <span className="text-danger"> {error.name}</span>}
         <input
           type="text"
           placeholder="Email"
           value={email}
+          className="emailinputfield"
           onChange={(e) => setEmail(e.target.value)}
           
-        />
+        /><br/> 
         {error.email && <span className="text-danger"> {error.email}</span>}
         <PhoneInput
           defaultCountry="SL" // Set the default country
           value={phonenumber}
+          placeholder='Phone Number'
+          className="phonenumberinputfield"
           onChange={handleNumberchange}
           flags={false} // Disable country flags
         />
         {error.phonenumber && (
           <span className="text-danger"> {error.phonenumber}</span>
-        )}
+        )}<br/>
         <CountryDropdown
           value={country}
           onChange={(val) => handleCountrychange(val)}
+          className="countryinputfield"
           valueType="short"
           priorityOptions={["US", "GB", "CA", "LK"]}
           key={country} // Optional: Set priority options
         />
         {renderFields()}
         <CardElement className={classes.cardElement} />
-        <button type="submit">Pay</button>
+        <button type="submit" className="buttoninputfield landbtn">Pay</button>
       </form>
+    </div>
     </div>
   );
 };

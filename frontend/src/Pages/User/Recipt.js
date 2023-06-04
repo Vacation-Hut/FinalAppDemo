@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
+import { Navigate } from 'react-router-dom';
 
 const Receipt = () => {
   const { id } = useParams();
   const [receiptData, setReceiptData] = useState(null);
   const [customer, setCustomer] = useState(null);
   const [items, setItems] = useState([]);
+  const Navigate = useNavigate()
 
   useEffect(() => {
     const fetchReceiptData = async () => {
@@ -17,6 +19,7 @@ const Receipt = () => {
         setReceiptData(data);
         setCustomer(data.customer);
         setItems(data.items);
+        
       } catch (error) {
         console.error('Error retrieving receipt data:', error);
       }
@@ -43,7 +46,9 @@ const sendmail = async () => {
       }),
     });
     const data = await response.json();
-    console.log(data); // Handle the response from the backend, e.g., display a success message
+    if(data.success) {
+      Navigate("/")
+    }// Handle the response from the backend, e.g., display a success message
   } catch (error) {
     console.error('Error sending receipt email:', error);
   }

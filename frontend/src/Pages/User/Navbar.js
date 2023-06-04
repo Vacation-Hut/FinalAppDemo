@@ -108,7 +108,7 @@ function ResponsiveAppBar() {
     navigate("/login");
   }
   return (
-<AppBar position="static" sx={{ background: 'linear-gradient(to right,#ffffff, #6dd5fa,  #2980b9)' }}>
+<AppBar position="static" sx={{background: 'linear-gradient(to right,#ffffff, #ECDACD,  #E6C4AC)'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -128,7 +128,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-         <img src='https://res.cloudinary.com/dolq5ge5g/image/upload/v1683827717/Dark_logo-removebg-preview_ube8bh.png' alt='Vacation Hut Logo' style={{ height: '50px', width: 'auto' }}></img>
+         <img src='https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png' alt='Vacation Hut Logo' style={{ height: '50px', width: 'auto' }}></img>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

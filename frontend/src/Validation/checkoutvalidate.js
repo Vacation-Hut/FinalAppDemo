@@ -5,6 +5,7 @@ function Validation(name, email, passportno,nic,phonenumber) {
     ;
     const checknic =
     /^[0-9]{9}[VX]$/i;
+    const checknewnic = /^\d{12}$/i;
       const checkpass =
       /^[A-Z]{1,2}[0-9]{7,8}$/i;
       const checknumber =

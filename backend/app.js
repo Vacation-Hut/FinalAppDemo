@@ -83,8 +83,14 @@ const Package = mongoose.model("Package", {
  calendar: Date,
 });
 //Define the order model
+const shortid = require('shortid');
+
 const Order = mongoose.model("Order",{
- 
+  orderId: {
+    type: String,
+    default: shortid.generate, // Generate a short ID for each new document
+  },
+  // ...other fields in your schema
  user: {
  type: mongoose.Schema.Types.ObjectId,
  ref: "User",

@@ -35,9 +35,10 @@ function Signup() {
   return (
     <div>
       <ResponsiveAppBar/>
+      <div className="loginalignment">
           <div className="d-flex justify-content-center align-items-center vh-100 signupmodel">
       <div className="bg-white p-3 w-25">
-        <h1>Sign Up</h1>
+        <h1 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Sign Up</h1>
         <form action="" onSubmit={submit}>
           <div className="mb-3">
           <FontAwesomeIcon icon={faUser} />
@@ -86,16 +87,16 @@ function Signup() {
           <button type="submit" className="btn w-100 loginbtn">
             Sign Up
           </button>
-          <p>You are agree our terms and conditions</p>
-          <Link to="/login" className="btn border w-100 loginbtn">
+          {/* <Link to="/login" className="btn border w-100 loginbtn">
             Log In
-          </Link>
+          </Link> */}
         </form>
       </div>
       <img 
-        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685805381/hd_signup-removebg-preview-removebg-preview_d4inad.png"
+        src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685975299/hd_tourism-removebg-preview_1_dzauhs.png"
         className="signupimg">
         </img>
+    </div>
     </div>
     <div className="loginfooter">
     <Footer/>

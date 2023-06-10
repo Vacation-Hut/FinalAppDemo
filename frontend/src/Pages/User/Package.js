@@ -137,7 +137,7 @@ function Package() {
           min="1"
         />
         {count > 8 && (
-          <span className="alert">
+          <span className="alert buttonfontfamily">
             More than 8 people? For every additional 5 people, we charge $5.
           </span>
         )}
@@ -196,9 +196,13 @@ function Package() {
         </div>
 
           {/* <Typography variant="h4" component="h1" gutterBottom> */}
-           <h1> {packageData.package} </h1>
-          {/* </Typography> */}
-          <h1>${packageData.totalprice}</h1>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background:'#F0E0DA', borderRadius:'25px' }}>
+              <h1 style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold', color:'#4E0D0D' }}>{packageData.package}</h1>
+              <h1 style={{ marginLeft: '50px', fontFamily: 'Pacifico, cursive', fontWeight:'bold', color:'#4E0D0D' }}>${packageData.totalprice}</h1>
+          </div>
+
+
+
        
       
      
@@ -220,48 +224,67 @@ function Package() {
       //  background: 'rgba(240, 224, 218)',
        backdropFilter: 'blur(10px)',
       //  boxShadow: '0 8px 32px 0 rgba(240, 224, 218, 0.7)',
-       borderRadius: '10px',
+       borderRadius: '25px',
        padding: '20px',
   }}>
     <Container maxWidth="lg">
-        <p className="bodydescription">
-          {packageData.description}
-        </p>
-        <p style={{ textAlign: 'center'}}>We can provide a tour guide to make your trip more memorable and enjoyable.</p>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+  <fieldset style={{ marginRight: "20px" }}>
+    {packageData.details.map((activity, index) => (
+      <div key={index} className="activity-cost">
+        <Typography variant="body1" className="activity" style={{fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:"20px"}}>
+          {activity.activity}
+        </Typography>
+      </div>
+    ))}
+  </fieldset>
+
+  <form style={{ width: "300px" }}>
+  <div style={{ display: "flex", flexDirection: "column" }}>
+    <div>
+      <h3 htmlFor="tripDate" style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold' }}>Your trip date</h3>
+      <DatePicker
+        id="tripDate"
+        selected={date}
+        onChange={handleDateChange}
+        dateFormat="dd/MM/yyyy"
+        className="datefield no-border dateinput"
+      />
+    </div>
+    <div>
+      <h3 htmlFor="memberCount" style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold' }}>Members</h3>
+      <input
+        id="memberCount"
+        type="number"
+        value={count}
+        onChange={handleMembersChange}
+        min="1"
+        className="datefield"
+        style={{ border: "none", borderRadius:'5px' }}
+      /><br/>
+      {count > 8 && (
+        <span className="alert buttonfontfamily">
+          More than 8 people? For every additional 5 people, we charge $5.
+        </span>
+      )}
+    </div>
+  </div>
+</form>
+
+</div>
+
+
+        <p style={{ textAlign: 'center', fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:"25px", color:'#4E0D0D' }}>We can provide a tour guide to make your trip more memorable and enjoyable.</p>
       <Box mt={4} sx={{ 
         display: 'flex', 
         justifyContent: 'center',
       }}>
-        <form>
-          <div>
-            <label htmlFor="tripDate">Your trip date:</label>
-            <br />
-            <DatePicker
-              id="tripDate"
-              selected={date}
-              onChange={handleDateChange}
-              dateFormat="dd/MM/yyyy"
-              className="datefield"
-            />
-          </div>
-          <div>
-            <label htmlFor="memberCount">Members:</label>
-            <br />
-            <input
-              id="memberCount"
-              type="number"
-              value={count}
-              onChange={handleMembersChange}
-              min="1"
-              className="datefield"
-            /><br/>
-            {count > 8 && (
-              <span className="alert">
-                More than 8 people? For every additional 5 people, we charge $5.
-              </span>
-            )}
-          </div>
-        </form>
+
+        
+
+
+
+
       </Box>
     </Container>
   </Box>
@@ -271,38 +294,40 @@ function Package() {
 
 <div className="benefit--cards">
   <Paper className={classes.paperContainers}>
-    <div className=" overlaycontainer">
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685700513/hd_camera_3_ajh0hv.jpg" alt="Camera" className="iconss" />
+    <div className=" overlaycontainerss">
+          <h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Take a pictures</h2>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1686167306/hd_camera_555-removebg-preview_rirnys.png" alt="Camera" className="iconss" />
           <p className='hdtext'>You are allowed to take photos for your memories, except inside the temples and museums. However, you can take photos in other areas.<br/>You are permitted to bring your own cameras and take photos.</p>
     </div>
   </Paper>
   
   <Paper className={classes.paperContainers}>
-    <div className=" overlaycontainer">
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685700797/hd_memorable_things_5_meozoy.jpg" alt="Memorable gifts" className="iconss" />
-          <p className='hdtext'>You have the opportunity to purchase memorable souvenirs at each location, allowing you to create cherished memories.<br/>You can purchase high-quality items during this trip.<br/> You can buy pottery items, handicrafts, and pure oils, among others.</p>
+    <div className=" overlaycontainerss">
+          <h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Buy a memorable things</h2>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1686167622/hd_quality-removebg-preview_t9ynvz.png" alt="Memorable gifts" className="iconsss" />
+          <p className='hdtext'>You have the opportunity to purchase memorable souvenirs at each location, allowing you to create cherished memories.<br/>You can purchase high-quality buy pottery items, handicrafts, and pure oils, among others.</p>
     </div>
   </Paper>
   </div>
 
   <div className="searchbargoogle">
-    <h5>You can search the details on Google here.</h5>
     <SearchComponent/>
   </div>
 
 
 
   <div className="actbtn" style={{ display: 'flex', justifyContent: 'space-between' }}>
-  <Link to="/">
-    <Button variant="outlined" className="landbtn">
-      Back to home
-    </Button>
-  </Link>
+  <Link to="/" style={{ textDecoration: 'none' }}>
+      <Button variant="outlined" className="landbtn buttonfontfamily">
+        Back to home
+      </Button>
+    </Link>
 
+    
   <div>
   <Button
     variant="contained"
-    className="landbtn"
+    className="landbtn buttonfontfamily"
     onClick={() =>
       handleAddToCart(
         images[0].url,
@@ -319,7 +344,7 @@ function Package() {
 
   <Button
      variant="contained"
-     className="landbtn"
+     className="landbtn buttonfontfamily"
      onClick={() =>
      handleBookNow(
      images[0].url,

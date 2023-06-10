@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
 import "../../App.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Validation from "../../Validation/loginvalidate";
 import axios from "axios";
-import { faInstagram, faFacebookF, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
+import { faInstagram, faFacebookF, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faCopyright } from '@fortawesome/free-solid-svg-icons'
 import ResponsiveDashBar from "./Dashboardnav";
 import Footer from "../User/Footer";
-
-
 
 function User() {
   const [data, setData] = useState([]);
@@ -25,45 +24,56 @@ function User() {
         setData(data.data);
       });
   }, []);
+
   return (
     <div>
-      <ResponsiveDashBar/><br/>
-      <h2 className="activity users"><b>Users</b></h2>
-      <table class="table1 table3 table table-bordered th-lg border-dark">
-        <thead class="tablehead1">
-          <tr>
-            {/* <th>Image</th> */}
-            <th>Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>N.I.C Number</th>
-            <th>Passport Number</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((i) => {
-            return (
-              <tr key={i.id}>
-                <td>{i.name}</td>
-                <td>{i.fname}</td>
-                <td>{i.lname}</td>
-                <td>{i.role}</td>
-                <td>{i.email}</td>
-                <td>{i.phonenumber}</td>
-                <td>{i.nic}</td>
-                <td>{i.passportno}</td>
-                <td>{i.country}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <Footer/>
+      <div className="sidebarDash">
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
+        <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
+          <a href="/dash">Dashboard</a>
+          <a href="/dash/package">Packages</a>
+          <a href="/dash/orders">Booking</a>
+          <a href="/dash/users">Users</a>
+        </div>
+      </div>
+
+      <div className="contentDash">
+        <h2 className="activity users" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px', paddingTop:'20px'}}><b>Users</b></h2>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize:'25px', background:'#F0E0DA' }}>
+                <TableCell>Name</TableCell>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Phone Number</TableCell>
+                <TableCell>N.I.C Number</TableCell>
+                <TableCell>Passport Number</TableCell>
+                <TableCell>Country</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((i) => (
+                <TableRow key={i.id}>
+                  <TableCell>{i.name}</TableCell>
+                  <TableCell>{i.fname}</TableCell>
+                  <TableCell>{i.lname}</TableCell>
+                  <TableCell>{i.role}</TableCell>
+                  <TableCell>{i.email}</TableCell>
+                  <TableCell>{i.phonenumber}</TableCell>
+                  <TableCell>{i.nic}</TableCell>
+                  <TableCell>{i.passportno}</TableCell>
+                  <TableCell>{i.country}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 }
+
 export default User;

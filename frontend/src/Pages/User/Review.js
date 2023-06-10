@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
 import StarIcon from '@material-ui/icons/Star';
-import '../../App.css'
-
+import '../../App.css';
 
 function Review() {
   const [reviews, setReviews] = useState([]);
@@ -37,11 +36,12 @@ function Review() {
   };
 
   return (
-    <div>
-      <h4 className='reviewheadingalign'>Customer Reviews</h4>
-      <form onSubmit={submitReview}>
-        <div>
-          {/* <label htmlFor="rating">Rating:</label> */}
+    <div className="center-alignrating">
+    <div className="glass-containerreview">
+    <h2 className="review-heading-align" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Customer Reviews</h2>
+    <form onSubmit={submitReview}>
+      <div className="glass-input-containerreview">
+        <div className="center-alignrating">
           <Rating
             id="rating"
             name="rating"
@@ -49,27 +49,39 @@ function Review() {
             onChange={(event, newValue) => setRating(newValue)}
             required
             icon={<StarIcon />}
+            className="glass-ratingreview"
           />
         </div>
-        <div>
-          {/* <label htmlFor="comment">Comment:</label> */}
-          <textarea
-            id="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className='landbtn'>Submit Review</button>
-      </form>
-      {/* <h2>Reviews:</h2>
-      {reviews.map((review) => (
-        <div key={review._id}>
-          <p>Rating: <Rating value={review.rating} icon={<StarIcon />} readOnly /></p>
-          <p>Comment: {review.comment}</p>
-        </div>
-      ))} */}
-    </div>
+      </div>
+  
+      <div className="glass-input-container">
+        <textarea
+          id="comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          required
+          className="glass-textareareview"
+        />
+      </div>
+  
+      <div className="center-alignrating">
+        <button type="submit" className="landbtn buttonfontfamily landbtnalign">
+          Submit Review
+        </button>
+      </div>
+    </form>
+    {/* <h2>Reviews:</h2>
+    {reviews.map((review) => (
+      <div key={review._id}>
+        <p>
+          Rating: <Rating value={review.rating} icon={<StarIcon />} readOnly />
+        </p>
+        <p>Comment: {review.comment}</p>
+      </div>
+    ))} */}
+  </div>
+  </div>
+  
   );
 }
 

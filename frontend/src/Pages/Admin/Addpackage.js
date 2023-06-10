@@ -4,7 +4,25 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ResponsiveDashBar from "./Dashboardnav";
 import Footer from "../User/Footer";
+import { Grid, TextField, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import {  Paper, Typography} from '@material-ui/core';
+
+
+const FormContainer = styled(Grid)({
+  padding: '20px',
+  margin: '0 auto',
+  maxWidth: '600px',
+});
+
+const ActivityInput = styled(TextField)({
+  marginBottom: '10px',
+});
+
+
 function Addpackage() {
+  const rows = [...Array(10)]; // Array of 10 rows
+
   async function postPackage(event) {
     event.preventDefault();
    const Navigate = useNavigate
@@ -58,6 +76,7 @@ function Addpackage() {
       public_id: publicIds[i],
     }));
     const token = localStorage.getItem("token"); // Get the token from local storage
+    console.log(packageData)
 try {
   const response = await fetch("http://localhost:5000/packages", {
     method: "POST",
@@ -90,332 +109,214 @@ try {
       }
     }
   }
-  // return (
-  //   <div className="App">
-  //     <ResponsiveDashBar/>
-  //     <div>
-        
-  //       <h1 className="activity">Add new activity</h1>
-  //       <form>
-  //         <label>Package:</label>
-  //         <input type="text" name="package" />
-  //         <br />
-  //         <label>Description:</label>
-  //         <input type="text" name="description" />
-  //         <br />
-  //         <label>Total Price:</label>
-  //         <input type="Number" name="total" />
-  //         <br />
-  //         <fieldset>
-  //           <legend>Details:</legend>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]" />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]"  />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]" />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]"  />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]" />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]"  />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]" />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]"  />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]" />
-  //           </div>
-  //           <div class="activity">
-  //             <label>Activity:</label>
-  //             <input type="text" name="activity[]" />
-  //           </div>
-  //           <div class="cost">
-  //             <label>Cost:</label>
-  //             <input type="number" name="cost[]"  />
-  //           </div>
-  //         </fieldset>
-  //         <label for="images">Select Images:</label>
-  //         <input
-  //           type="file"
-  //           id="images"
-  //           name="images"
-  //           accept="image/*"
-  //           multiple
-  //           onChange={handleImageChange}
-  //         />
-  //         <div id="image-preview"></div>
-  //         <button type="submit" onClick={postPackage}>
-  //           Save
-  //         </button>
-  //       </form>
-
-
+ 
   return (
-    <div className="App">
-      <ResponsiveDashBar/>
-      <div className="container">
-        <h2 className="activity">Add new Package</h2><br></br>
+    // <div className="App">
+    //   <ResponsiveDashBar/>
+    //   <div>
         
-        <form>
-       <div class="for">
-          <label>Package :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="package" id="border" /></label><br/>
-          {/* <input type="text" name="package" /> */}
-          <br />
-          <label>Description :&nbsp;&nbsp;<input type="text" name="description"id="border" /></label><br/>
-          {/* <input type="text" name="description" /> */}
-          <br />
-          <label>Total Price :&nbsp;&nbsp;&nbsp;<input type="Number" name="total" id="border" /></label>
-          {/* <input type="Number" name="total" /> */}
-          <br /><br/><br/>
-          </div>
-          </form>
-          </div>
-      
-          <div class="tab">
-          <table className="tableAlignment">
-            <tr>
-            <th>
-              <div class="detail">
-        <h4>Details</h4>
-        </div>
-            </th>
-             </tr>
-            <tr>
-              <td>  
-            <div class="activity">
-              <label>Activity:</label><input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]" />
-            </div>
-            </td>
-            </tr>
-            
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]"  />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]" />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]"  />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]" />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]"  />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]" />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]"  />
-            </div>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]" />
-            </div>
-            </td>
-            </tr>
-          
-            <tr>
-            
-              <td>
-              
-            <div class="activity">
-              <label>Activity:</label>
-              <input type="text" name="activity[]" />
-            </div>
-            </td>
-            <td>
-            <div class="cost">
-              <label>Cost:</label>
-              <input type="number" name="cost[]"  />
-            </div>
-            
-            </td>
-            </tr>
-  
-  
-            
-            {/* <tr>
-              <td> */}
-          {/* </fieldset> */}
-         
-          <label for="images">Select Images:</label>
-          <input
-            type="file"
-            id="images"
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-          />
-          
-          <div id="image-preview"></div>
-          {/* </td>
-          <td> */}
-          <div class="save">
-          <button type="submit" onClick={postPackage}>
-            Save
-            </button>
-            </div>
-  
-          {/* </td>
-          </tr>
-         */}
-        </table>
+    //     <h1 className="activity">Add new activity</h1>
+    //     <form>
+    //       <label>Package:</label>
+    //       <input type="text" name="package" />
+    //       <br />
+    //       <label>Description:</label>
+    //       <input type="text" name="description" />
+    //       <br />
+    //       <label>Total Price:</label>
+    //       <input type="Number" name="total" />
+    //       <br />
+    //       <fieldset>
+    //         <legend>Details:</legend>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]" />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]"  />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]" />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]"  />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]" />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]"  />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]" />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]"  />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]" />
+    //         </div>
+    //         <div class="activity">
+    //           <label>Activity:</label>
+    //           <input type="text" name="activity[]" />
+    //         </div>
+    //         <div class="cost">
+    //           <label>Cost:</label>
+    //           <input type="number" name="cost[]"  />
+    //         </div>
+    //       </fieldset>
+    //       <label for="images">Select Images:</label>
+    //       <input
+    //         type="file"
+    //         id="images"
+    //         name="images"
+    //         accept="image/*"
+    //         multiple
+    //         onChange={handleImageChange}
+    //       />
+    //       <div id="image-preview"></div>
+    //       <button type="submit" onClick={postPackage}>
+    //         Save
+    //       </button>
+    //     </form>
+
+
+ 
         
 
 
 
-      </div>
+    //   </div>
      
-      <Footer/>
+    //   <Footer/>
+    // </div>
+    <div>
+      <div className="sidebarDash">
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
+          <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
+            <a className="active" href="/dash">Dashboard</a>
+            <a href="/dash/package">Packages</a>
+            <a href="/dash/orders">Booking</a>
+            <a href="/dash/users">Users</a>
+          </div>
+      </div>
+      
+      <div className="contentDash">
+      <h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px', textAlign:'center'}}>Add new package</h2>
+       <div>
+       <form>
+       <section style={{ display: 'flex', padding: '20px', borderRadius: '25px', backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)',  margin: '20px' }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography variant="h6" style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize: '25px' }}>Package Name</Typography>
+            <TextField variant="outlined" name="package" style={{ background: '#F0E0DA', marginBottom: '20px' }} />
+            <Typography variant="h6" style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize: '25px' }}>Description</Typography>
+            <TextField variant="outlined" name="description" style={{ background: '#F0E0DA', marginBottom: '20px' }} />
+            <Typography variant="h6" style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize: '25px' }}>Total Price</Typography>
+            <TextField variant="outlined" type="number" name="total" style={{ background: '#F0E0DA' }} />
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <section>
+            <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1686399343/hd_dash_package-removebg-preview_zlnizb.png" style={{width:'300px', height:'300px'}}></img>
+          </section>
+        </Grid>
+      </Grid>
+    </section>
+           <section style={{padding: '20px',
+    borderRadius: '10px',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(10px)',
+    
+    margin: '20px',
+    }}>
+           <fieldset>
+             <legend style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'35px', textAlign:'center'}}>Details</legend>
+            
+              <Grid container spacing={2}>
+      {rows.map((_, index) => (
+        <Grid item xs={12} sm={6} key={index}>
+          <Paper elevation={3} style={{ padding: '20px', borderRadius:'25px', textAlign:'center' }}>
+            <Grid container spacing={2} style={{borderRadius:'25px'}}>
+              
+                <Typography variant="h6" gutterBottom style={{fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:'25px', textAlign:'center',}}>
+                  Activity 
+                </Typography>
+                <TextField variant="outlined" fullWidth style={{borderRadius:'25px'}} />
+             
+             
+                <Typography variant="h6" gutterBottom style={{fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:'25px'}}>
+                  Cost
+                </Typography>
+                <TextField variant="outlined" fullWidth />
+            
+            </Grid>
+          </Paper>
+        </Grid>
+      ))}
+    </Grid>
+           </fieldset>
+           </section>
+           
+            <label htmlFor="images">Select Images</label>
+            <input type="file" id="images" name="images" accept="image/*" multiple onChange={handleImageChange}/>
+            <div id="image-preview" style={{width:'300px', height:'200px'}}></div>
+          
+           <button type="submit" onClick={postPackage}>
+             Save
+           </button>
+         </form>
+
+       </div>
+      </div>
+
+
+
     </div>
   );
 }

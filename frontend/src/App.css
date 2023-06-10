@@ -376,16 +376,16 @@ table, th, td {
   margin-left: 15px;
 }
 
-.row{
+/* .row{
   margin-top: 50px !important;
   margin-left: 250px !important;
   margin-right: 250px !important;
-}
+} */
 
 .imagegallery{
   width: 1150px !important;
   height: 600px !important;
-  border-radius: 30px !important;
+  border-radius: 25px !important;
   align-self: center !important;
   margin-top: 25px;
 }
@@ -605,6 +605,8 @@ table, th, td {
 .loginbtn{
   background: rgba(240, 224, 218) !important;
   color: black !important;
+  text-align: center;
+  text-align: justify;
 }
 
 .loginimg{
@@ -747,6 +749,7 @@ body{
   padding:0px;
   background-color: #efeff5;
   /* font-family: 'Exo Medium', sans-serif !important; */
+  font-family: "Fira Sans", sans-serif !important;
 }
 .clearfix{
 clear:both;
@@ -1040,14 +1043,19 @@ padding-left: 10px;
 .sidenav{
   
     height: 100%;
-    width: 300px;
+    width: 250px;
     position:fixed;
     z-index:1;
     overflow: hidden;
     padding-top: 30px;
     transition: 0.3s ease-in-out;
-    background: linear-gradient(to bottom, #6dd5fa, #ffffff) !important;
-  
+    background: #F0E0DA;
+}
+
+.dashboardimagebackground{
+  background-image: url('https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* myaddpackage */
@@ -1168,7 +1176,7 @@ padding-left: 10px;
 }
 
 .loginfooter{
-  margin-top: -240px;
+  margin-top: -175px;
 }
 
 .dashfooter{
@@ -1264,12 +1272,12 @@ footer {
 
 .phonenumberinputfield{
   margin-top: 2px;
-  width: 500px;
-
+  width: 610px;
+  height: 50px ;
 }
 
 .passportinputfield{
-  margin-top: 25px;
+  margin-top: 20px;
   width: 500px;
 }
 
@@ -1282,8 +1290,18 @@ footer {
   width: 500px;
 }
 
-.countryinputfield{
-  width: 500px;
+.countryinputfield {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 25px;
+  background-color: #F0E0DA;
+  border: none;
+  box-sizing: border-box;
+}
+
+.nicinputfield{
+  margin-top: 20px;
 }
 
 .checkout-container {
@@ -1319,3 +1337,71 @@ footer {
 .reviewheadingalign{
   margin-top: 20px;
 }
+
+.loginalignment{
+  margin-top: -150px !important;
+}
+
+.glass-containerreview {
+  background: white;
+  border-radius: 25px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 500px;
+  margin-top: 40px;
+}
+
+.glass-input-containerreview {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.glass-ratingreview {
+  color: #fff;
+}
+
+.glass-textareareview {
+  background: rgba(240, 224, 218);
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  color: black;
+  width: 100%;
+}
+
+/* .land-btnreview {
+  background-color: #fff;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} */
+
+
+
+.review-heading-align {
+  text-align: center;
+}
+
+.center-alignrating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.customerheading{
+  margin-top: 30px;
+}
+
+
+
+
+
+

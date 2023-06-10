@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import SlickCarousel from './ReviewCarroussel';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -114,7 +115,8 @@ price = {item.totalprice} id = {item._id}/>}
     <Grid item xs={6} md={9} className={classes.navLinks}>
       <Grid container justifyContent="flex-end" spacing={2}>
         <Grid item>
-          <Link href="/" style={{ color: 'brown' }}>Home</Link>
+          <Link href="/" style={{ color: 'brown',  fontFamily:"Fira Sans, sans-serif" // Add this line
+ }}>Home</Link>
         </Grid>
         <Grid item>
           <Link href="/login" className={classes.linkItem} style={{ color: 'brown' }}>
@@ -144,18 +146,19 @@ price = {item.totalprice} id = {item._id}/>}
 <main>
   {/* BEGINING OF BENEFITS SECTION */}
   <section id="benefits" style={{ backgroundColor: 'rgba(239, 231, 228, 0.7)', backdropFilter: 'blur(10px)', borderRadius: '5px', padding: '25px' }}>
-  <h2 className="benefits--header">Why choose Vacation Hut</h2>
+  <h2 className="benefits--header" style={{ fontFamily: 'Pacifico, cursive' }}>Your <span style={{ fontWeight: 'bold' }}>Dream Vacation</span> Awaits at <span style={{ fontWeight: 'bold', color:'#ff3e00' }}>Vacation</span> <span style={{ fontWeight: 'bold', color:'#5e4f47' }}>Hut</span></h2>
   <div className="benefit--cards">
   <Paper className={classes.paperContainer}>
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685610763/hd_location_kcjpu9.jpg" alt="Location icon" className="icons" />
-          <p className='hdtext'>At Vacation Hut, our dedication lies in providing our customers with truly authentic experiences in various destinations.</p>
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Authentic destinations</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685992965/hd_destinations2222-removebg-preview_wrxipz.png" alt="Location icon" className="icons" />
+          <p className='hdtext'>Our dedication lies in providing our customers with truly authentic experiences in various destinations.</p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>We carefully select activities and attractions that capture the true spirit of the destination, guaranteeing our customers unforgettable moments and lasting memories.</div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -164,12 +167,13 @@ price = {item.totalprice} id = {item._id}/>}
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685611348/hd_package_y84tlx.jpg" alt="Package icon" className="icons" />
-          <p className='hdtext'>At Vacation Hut, we offer unique and attractive packages, allowing our customers to fully immerse themselves in the culture and essence of each place they visit.</p>
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Pre designed packages</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685998553/hd_package_22-removebg-preview_bbdncj.png" alt="Package icon" className="icons" />
+          <p className='hdtext'>We offer unique and attractive packages, allowing our customers to fully immerse themselves in the culture and essence of each place they visit.</p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>Our primary goal is to ensure that every aspect of our packages contributes to an authentic experience. With meticulous design and curation.</div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -178,12 +182,13 @@ price = {item.totalprice} id = {item._id}/>}
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685611753/hd_transport1_kyuug2.jpg" alt="Transport icon" className="icons" />
-          <p className='hdtext'>At Vacation Hut, we offer a variety of transportation options to cater to different needs and preferences, including bicycles, autos, cars, and vans.</p>
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Better transportation</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685998951/hd_transportations-removebg-preview_alqd2h.png" alt="Transport icon" className="icons transporticon" />
+          <p className='hdtext transporthdtext'>We offer a variety of transportation options to cater to different needs and preferences, including bicycles, autos, cars, and vans.</p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>Whether you prefer the eco-friendly and leisurely pace of a bicycle ride, the convenience of an auto, the comfort and flexibility of a car, or the spaciousness of a van, we have got you covered.</div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -192,12 +197,13 @@ price = {item.totalprice} id = {item._id}/>}
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685611872/hd_food_ekujbu.jpg" alt="Food icon" className="icons" />
-          <p className='hdtext'>At Vacation Hut, we offer exceptional food facilities, providing you with delicious meals for breakfast, lunch, and dinner.</p>
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Traditional foods</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685999299/hd_food222-removebg-preview_uwub0y.png" alt="Food icon" className="foodicons" />
+          <p className='hdtext foodhdtext'>We offer exceptional food facilities, providing you with delicious meals for breakfast, lunch, and dinner.</p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>Join us in experiencing the culinary delights on offer and embark on a gastronomic adventure that will tantalize your taste buds and leave you craving for more.</div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -206,12 +212,13 @@ price = {item.totalprice} id = {item._id}/>}
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685612423/hd_cost_id2hkn.png" alt="Cost icon" className="icons" />
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Affordable price</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1686130990/hd_affordable_price_55-removebg-preview_m8bheg.png" alt="Cost icon" className="icons" />
           <p className='hdtext'>Experience the convenience of booking our packages at affordable prices through our user-friendly website.</p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>Start exploring and book your dream vacation today with confidence, knowing that our affordable prices won't compromise the quality and satisfaction you deserve.</div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -220,12 +227,13 @@ price = {item.totalprice} id = {item._id}/>}
     <div className=" overlaycontainer">
       <div>
         <div>
-          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685613309/hd_experience_gvvrgz.jpg" alt="Experience icon" className="icons" />
+          <h3 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Better experience</h3>
+          <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1686000136/hd_experience-removebg-preview_rj2tip.png" alt="Experience icon" className="icons" />
           <p className='hdtext'>We strive to provide you with genuine and immersive travel experiences that go beyond the ordinary. </p>
         </div>
-        <div className="overlay">
+        {/* <div className="overlay">
           <div>Explore fascinating destinations, engage with local cultures, and discover hidden gems that showcase the essence of each place you visit. </div>
-        </div>
+        </div> */}
       </div>
     </div>
   </Paper>
@@ -239,7 +247,7 @@ price = {item.totalprice} id = {item._id}/>}
 
     <div className="background">
     <div className="glassmorphism-content">
-      <h1 className="whychoose packagealign">Where will you get Authentic Experience</h1>
+      <h1 className="whychoose packagealign" style={{ fontFamily: 'Pacifico, cursive' }}>Where will you get<span style={{ fontWeight: 'bold' }}> Authentic Experience</span></h1>
       {/* <Packagedetails/> */}
       </div>
       </div>
@@ -256,6 +264,7 @@ price = {item.totalprice} id = {item._id}/>}
 
       />
     </div>
+    <div className='slickcarousel'><SlickCarousel/></div>
     </div>
       <div>
         <Footer/>

@@ -1,140 +1,111 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css";
-import { Link, Navigate } from "react-router-dom";
-import ReactDOM from "react-dom/client";
+import "../../Dash.css";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { faInstagram, faFacebookF, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faCopyright } from '@fortawesome/free-solid-svg-icons'
+import {
+  faInstagram,
+  faFacebookF,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 import ResponsiveDashBar from "./Dashboardnav";
 import Footer from "../User/Footer";
-
+import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
 
 
 function Package() {
-  const [images, setImages] = useState([]);
-  const [activityname, setActivityName] = useState();
-  const [description, setDiscription] = useState();
-  const [price, setPrice] = useState();
-
-  const [data, setData] = useState([]);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allpackage", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.data);
-        const allImages = data.data.map((packages) => packages.images[0].url);
-        setImages(allImages);
-      });
-  }, [])
+    fetchPackages();
+  }, []);
 
-  async function Delete(id) {
+  async function fetchPackages() {
     try {
-      const res = await fetch(`http://localhost:5000/dash/package/${id}`, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(err);
+      const response = await axios.get("http://localhost:5000/allpackage");
+      const data = response.data.data;
+      setPackages(data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  async function submit(e) {
-    e.preventDefault();
-    const updatedProduct = {
-      images,
-      activityname,
-      description,
-      price
-    };
-
+  async function handleDelete(id) {
     try {
-      const res = await fetch(`http://localhost:5000/dash/package/:id`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedProduct),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to update product");
-      }
-      Navigate("/dash/packages");
-    } catch (err) {
-      console.error(err);
+      await axios.delete(`http://localhost:5000/dash/package/${id}`);
+      setPackages((prevPackages) => prevPackages.filter((pkg) => pkg._id !== id));
+    } catch (error) {
+      console.error(error);
     }
   }
-
-  // async function Update(id) {
-  //   try{
-  //   Navigate(`dash/activity/${id}/update`)
-  // } catch (err) {
-  //   console.error(err);
-  // }
-  // }
 
   return (
-    <div className="App">
-      <ResponsiveDashBar/>
-      <div>
-        <h1 className="activity">Packages</h1>
-        <Link className="btn border btn4" to="/dash/package/add">
-          Add Package
-        </Link>
-        <div className="grid-container">
-          <table class="table1 table4 table table-bordered th-lg border-dark">
-            <thead class="tablehead1">
-              <tr>
-                <th>Image</th>
-                <th>Package Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Update/Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-            {images.map((image, index) => {
-        const activity = data[index];
-        return (
-                  <tr key={index}>
-                    <td>
-                 
-            <img
-              src={image}
-              alt={activity.package}
-              class="shadow-1-strong mb-4 imagegallery"
-            />
-              
-       
-                    </td>
-                    <td>{activity.package}</td>
-                    <td>{activity.description}</td>
-                    <td>{activity.totalprice}</td>
-                    <td>
-                      <button
-                        class="btn btn6"
-                        onClick={() =>
-                          (window.location.href = `/dash/package/update/${activity._id}`)
-                        }
-                      >
-                        Update
-                      </button>
-                      <button class="btn6 btn" onClick={() => Delete(activity._id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+    <div>
+      <div className="sidebarDash">
+        <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
+          <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
+            <a href="/dash">Dashboard</a>
+            <a href="/dash/package">Packages</a>
+            <a href="/dash/orders">Booking</a>
+            <a href="/dash/users">Users</a>
+          </div>
+      </div>
+
+      <div className="contentDash">
+        <div style={{textAlign:'center'}}>
+          <h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px'}}>Packages</h2>
+          <div style={{paddingTop:'20px'}}>
+          <Link className="landbtn" style={{padding:'10px'}} to="/dash/package/add">Add new package</Link>
+          </div>
+
+          <div style={{paddingTop:'50px', paddingBottom:'20px'}}>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead style={{background:'#F0E0DA'}}>
+                  <TableRow>
+                    <TableCell style={{textAlign:'center'}}>
+                      <Typography variant="h5" style={{fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold'}}>Package Image</Typography>
+                    </TableCell>
+                    <TableCell style={{textAlign:'center'}}>
+                      <Typography variant="h6" style={{fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold'}}>Package Name </Typography>
+                    </TableCell>
+                    <TableCell style={{textAlign:'center'}}>
+                      <Typography variant="h6" style={{fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold'}}>Package Price</Typography>
+                    </TableCell>
+                    <TableCell style={{textAlign:'center'}}>
+                      <Typography variant="h6" style={{fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold'}}>Action</Typography>
+                    </TableCell>
+                    
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                   {packages.map((pkg) => (
+                      <TableRow key={pkg._id}>
+                        <TableCell><img src={pkg.images[0].url} alt={pkg.package} className="packagepageimages"/>
+                        </TableCell>
+                        <TableCell ><h4 style={{fontFamily: 'Pacifico, cursive', fontWeight: 'bold', textAlign:'center', fontSize:'25px'}}>{pkg.package}</h4></TableCell>
+                        {/* <TableCell>{pkg.description}</TableCell> */}
+                        <TableCell><h4 style={{fontFamily: 'Pacifico, cursive', fontWeight: 'bold', textAlign:'center', fontSize:'25px'}}>${pkg.totalprice}</h4></TableCell>
+                        <TableCell><button
+                       className="btn btn6 landbtn"
+                       onClick={() => (window.location.href = `/dash/package/update/${pkg._id}`)}
+                     >
+                       Update
+                     </button>
+                     <button className="btn6 btn landbtn" onClick={() => handleDelete(pkg._id)}>
+                       Delete
+                     </button></TableCell>
+                      </TableRow>
+          ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
       </div>
-      <Footer/>
+
     </div>
   );
 }

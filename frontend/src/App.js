@@ -20,6 +20,7 @@ import Receipt from "./Pages/User/Recipt";
 import MyForm from "./Pages/valtry";
 import Review from "./Pages/User/Review";
 import SearchComponent from "./Pages/User/Search";
+
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +44,8 @@ function App() {
         <Route path="/receipt/:id" element = {<Receipt/>}></Route>
         <Route path="/search" element={<SearchComponent/>}></Route>
         <Route path="/Review" element={<Review/>}></Route>
+        {/* <Route path="/ReviewCarosel" element={<ReviewCarousel/>}></Route> */}
+
       </Routes>
     </BrowserRouter>
   );

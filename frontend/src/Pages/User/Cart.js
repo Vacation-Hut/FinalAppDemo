@@ -6,6 +6,8 @@ import ResponsiveAppBar from "./Navbar";
 import Footer from "./Footer";
 import '../../App.css'
 import Review from "./Review";
+import "./Checkout.css";
+
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -42,19 +44,31 @@ const CartPage = () => {
     <div className="cartfullbackground">
       <ResponsiveAppBar/>
       <div className="cart">
-      <h1 className="cartheadalign">Cart</h1>
+        <h1 className="cartheadalign" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Cart</h1>
       </div>
-      <Table className="carttablealign">
+      <Table className="carttablealign" style={{ width: '80%', margin: '20px auto' }}>
         <TableHead>
           <TableRow>
-            <TableCell>Image</TableCell>
-            <TableCell>Package Name</TableCell>
-            <TableCell>Price</TableCell>
-            <TableCell>Members</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Actions</TableCell>
-
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Image</h4>
+            </TableCell>
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Package Name</h4>
+            </TableCell>
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Price</h4>
+            </TableCell>
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Members</h4>
+            </TableCell>
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Date</h4>
+            </TableCell>
+            <TableCell>
+              <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Actions</h4>
+            </TableCell>
           </TableRow>
+          
         </TableHead>
         <TableBody>
           {cartItems.map((item) => (
@@ -66,19 +80,30 @@ const CartPage = () => {
               <TableCell>${item.price}</TableCell>
               <TableCell>{item.count}</TableCell>
               <TableCell>{item.date}</TableCell>
-
-              
-              
               <TableCell>
                 <button onClick={() => handleRemoveItem(item)}>Remove</button>
               </TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            <h3
+              className="carttotalalign"
+              style={{
+                fontFamily: 'Pacifico, cursive',
+                color: '#4E0D0D',
+                fontWeight: 'bold',
+                marginLeft: '10px'
+              }}
+            >
+              Total Cost: ${totalCost}
+            </h3>
+          </TableRow>
         </TableBody>
       </Table>
-      <h2 className="carttotalalign">Total Cost: ${totalCost}</h2>
-      <Review/>
-      <Checkout cartItems={cartItems} totalCost={totalCost} />
+
+      <div style={{ width: '100%' }}>
+        <Checkout cartItems={cartItems} totalCost={totalCost} />
+      </div>
       <div className="cartfooter">
         <Footer/>
       </div>

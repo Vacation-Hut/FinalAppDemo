@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.2",
+    "shortid": "^2.2.16",
     "stripe": "^12.4.0"
   }
 }

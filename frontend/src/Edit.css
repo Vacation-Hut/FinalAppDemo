@@ -87,6 +87,7 @@ body {
     /* font-family: 'Exo Medium', sans-serif !important; */
     background-color: white;
     height: 100%;
+    font-family: "Fira Sans", sans-serif !important;
 }
 
 html {
@@ -315,7 +316,7 @@ main {
     color: var(--dark);
     align-self: center !important;
     z-index: 2;
-    border-radius: 100px !important;
+    border-radius: 25px !important;
     /* margin-top: 280px !important; */
 }
 
@@ -338,7 +339,7 @@ main {
     width: 100%;
     display: flex;
     align-items: flex-start;
-    margin-top: -30px;
+    margin-top: -5px;
 }
 
 .benefit--card_item {

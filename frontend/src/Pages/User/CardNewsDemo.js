@@ -12,36 +12,36 @@ import "./styles.css";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
-
-
-
-
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 700,
     width: 700,
-    // margin: "auto",
     boxShadow: '5px 10px rgba(240, 224, 218)',
-    borderRadius: 30
+    borderRadius: 25
   },
   content: {
     padding: 24
   },
-  cta: {
-    marginTop: 24,
-    textTransform: "initial"
-  }
+  // cta: {
+  //   marginTop: 24,
+  //   textTransform: "initial"
+  // },
+  buttonGroup: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: '40px'
+  },
 }));
 
- const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0,image, packagename, price, id }) {
+const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0, image, packagename, price, id }) {
   const styles = useStyles();
-  const [data ,setData] = useState([]);
+  const [data, setData] = useState([]);
   const [images, setImages] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [date, setDate] = useState(null);
   const Navigate = useNavigate();
-  const [count ,setCount] = useState();
-  const n = 6;
+  const [count, setCount] = useState();
 
   useEffect(() => {
     fetch("http://localhost:5000/allpackage", {
@@ -54,9 +54,11 @@ const useStyles = makeStyles(() => ({
         setImages(allImages);
       });
   }, []);
+
   const handleDateChange = (date) => {
     setDate(date);
   };
+
   const handleMembersChange = (e) => {
     const selectedCount = parseInt(e.target.value);
     setCount(selectedCount);
@@ -65,7 +67,6 @@ const useStyles = makeStyles(() => ({
 
   const handleAddToCart = (image, id, activityname, totalprice) => {
     if (!date || !count) {
-      // Dates not selected, handle the error accordingly
       alert("Please select a date and members.");
       return;
     }
@@ -119,105 +120,103 @@ const useStyles = makeStyles(() => ({
 
 
   return (
-    <Card className={styles.root} style={{ borderRadius: "30px" }}>
-      
+    <Card className={styles.root} style={{ borderRadius: "25px" }}>
       <CardMedia
         style={{
           height: "400px",
           width: "700px",
           filter: activeIndex !== 0 ? "blur(2px)" : "none",
-          borderRadius: "30px", // Add the border radius here
-
+          borderRadius: "25px",
         }}
         image={image}
-         
       />
-      
-        {activeIndex === 0 && (
-      <CardContent className={styles.content}>
-          <div className="packagecarousel">
-        <h3>{packagename}</h3>
-        <h3>${price}</h3>
-        <Grid container spacing={1}>
-        <Grid item xs={6}>
-                 <div>
-                      <form>
-                        <div>
-                          <label>Date:</label>
-                          <DatePicker
-                            selected={date}
-                            onChange={handleDateChange}
-                            dateFormat="dd/MM/yyyy"
-                            className="datefield"
-                          />
-                        </div>
-                      </form>
-                    </div>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <div>
-                 <label>Members:</label> <br/>
-                <input
-                  type="number"
-                  value={count}
-                  onChange={(e) => handleMembersChange(e,count)}
-                  min="1"
-                  className="datefield"
-                /><br></br>
-                 {count > 8 && <span className="alert">More than 8 People for every additional 5 people we pay 5$.  .</span>}
-                    </div>
-                    </Grid>
-                    </Grid>
 
-                    
-                    <div className="carouselbutton">
-                    <Grid container spacing={1}>
-                    <Grid item xs={6}>
-                     <button
-                      className="landbtn"
-                      onClick={() =>
-                        handleBookNow(
-                          image,
-                          id,
-                          packagename,
-                          price,
-                          date
-                        )
-                      }
-                    >
-                      book now
-                    </button>
-                   </Grid>
-                   <Grid item xs={6}>
-                    <button
-                      className="landbtn"
-                      onClick={() =>
-                        handleAddToCart(
-                          image,
-                          id,
-                          packagename,
-                          price,
-                          date
-                        )
-                      }
-                    >
-                      Add to cart
-                    </button>
-                    </Grid>
-                    </Grid>
-                    </div>
-                    
-                    
-        <Button   color={"primary"} fullWidth className={styles.cta}>
-          <Link to={`/package/${id}`}>View More</Link> <ChevronRightRounded />
-        </Button>
+      {activeIndex === 0 && (
+        <CardContent className={styles.content}>
+          <div className="packagecarousel">
+            <h1 style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold', color:'#4E0D0D' }}>{packagename}</h1>
+            <h3 style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold', color:'#4E0D0D' }}>${price}</h3>
+            <Grid container spacing={1}>
+  <Grid item xs={6}>
+    <div>
+      <form>
+        <div className="input-container">
+          <label className="datelabelfield" style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold' }}>Date</label>
+          <DatePicker
+            selected={date}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+            className="datefield no-border dateinput"
+            // style={{ borderRadius:'25px' }}
+          />
         </div>
-        
-      </CardContent>
+      </form>
+    </div>
+  </Grid>
+  <Grid item xs={6}>
+    <div className="input-container">
+      <label className="datelabelfield" style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold' }}>Members</label> 
+      <input
+        type="number"
+        value={count}
+        onChange={(e) => handleMembersChange(e, count)}
+        min="1"
+        className="datefield dateinput"
+        style={{ border: "none", borderRadius:'15px' }}
+      />
+      <br />
+      {count > 8 && (
+        <span className="alert buttonfontfamily">
+          More than 8 People for every additional 5 people we pay 5$.
+        </span>
+      )}
+    </div>
+  </Grid>
+</Grid>
+
+            
+
+            
+            <div className={styles.buttonGroup}>
+  <Button className="landbtn buttonfontfamily">
+    <Link to={`/package/${id}`} style={{ color: "white", textDecoration: "none" }}>
+      More details
+    </Link>{" "}
+    <ChevronRightRounded />
+  </Button>
+
+  <div>
+    <Button
+      variant="contained"
+      color="primary"
+      className="landbtn buttonfontfamily"
+      style={{ marginRight: "10px" }} // Adjust the right margin for positioning
+      onClick={() =>
+        handleBookNow(image, id, packagename, price, date)
+      }
+    >
+      Book Now
+    </Button>
+
+
+    <Button
+      variant="contained"
+      color="primary"
+      className="landbtn buttonfontfamily"
+      onClick={() =>
+        handleAddToCart(image, id, packagename, price, date)
+      }
+    >
+      Add to Cart
+    </Button>
+  </div>
+</div>
+
+          </div>
+        </CardContent>
       )}
     </Card>
   );
 });
 
 export default CardNewsDemo;
-

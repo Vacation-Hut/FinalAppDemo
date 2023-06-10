@@ -14,7 +14,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-const pages = [  ['Home', '/'],
+const pages = [
+  ['Home', '/'],
   ['Login', '/login'],
   ['Booking', '/cart'],
 ];
@@ -108,7 +109,7 @@ function ResponsiveAppBar() {
     navigate("/login");
   }
   return (
-<AppBar position="static" sx={{background: 'linear-gradient(to right,#ffffff, #ECDACD,  #E6C4AC)'}}>
+    <AppBar position="static" sx={{ background: 'linear-gradient(to right,#ffffff, #ECDACD,  #E6C4AC)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -121,14 +122,14 @@ function ResponsiveAppBar() {
               mr: 5,
               display: { xs: 'none', md: 'flex' },
               flexGrow: 120,
-              fontFamily: 'monospace',
+              fontFamily: "Fira Sans, sans-serif", // Add this line
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'black',
+              color: '#4E0D0D',
               textDecoration: 'none',
             }}
           >
-         <img src='https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png' alt='Vacation Hut Logo' style={{ height: '50px', width: 'auto' }}></img>
+            <img src='https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png' alt='Vacation Hut Logo' style={{ height: '50px', width: 'auto' }}></img>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -137,7 +138,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="black"
+              color="#4E0D0D"
             >
               <MenuIcon />
             </IconButton>
@@ -161,7 +162,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color="black">{page}</Typography>
+                  <Typography textAlign="center" color="#4E0D0D" fontFamily="Fira Sans, sans-serif">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -176,27 +177,27 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "Fira Sans, sans-serif", // Add this line
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'black',
+              color: '#4E0D0D',
               textDecoration: 'none',
             }}
           >
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
-  <Button
-    key={page[0]}
-    component={Link}
-    to={page[1]}
-    onClick={handleCloseNavMenu}
-    sx={{ my: 2, color: 'black', display: 'block' }}
-  >
-    {page[0]}
-  </Button>
-))}
+            {pages.map((page) => (
+              <Button
+                key={page[0]}
+                component={Link}
+                to={page[1]}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: '#4E0D0D', display: 'block', fontFamily: "Fira Sans, sans-serif" }} // Add this line
+              >
+                {page[0]}
+              </Button>
+            ))}
           </Box>
         </Toolbar>
       </Container>

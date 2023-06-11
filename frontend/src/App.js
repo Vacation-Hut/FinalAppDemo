@@ -20,6 +20,7 @@ import Receipt from "./Pages/User/Recipt";
 import MyForm from "./Pages/valtry";
 import Review from "./Pages/User/Review";
 import SearchComponent from "./Pages/User/Search";
+import MapComponent from "./Pages/User/Map";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/receipt/:id" element = {<Receipt/>}></Route>
         <Route path="/search" element={<SearchComponent/>}></Route>
         <Route path="/Review" element={<Review/>}></Route>
+        <Route path="/map" element={<MapComponent/>}></Route>
         {/* <Route path="/ReviewCarosel" element={<ReviewCarousel/>}></Route> */}
 
       </Routes>

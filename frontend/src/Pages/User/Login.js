@@ -31,7 +31,7 @@ function Login() {
         localStorage.setItem("token", data);
         localStorage.setItem("userId", userId);
         if (redirectTo === "http://localhost:3000/dash") {
-          Navigate("/dash");
+          Navigate("/dash/package");
         } else {
           Navigate("/");
         }

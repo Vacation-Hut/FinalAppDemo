@@ -1,4 +1,4 @@
-function Validation(name, email, passportno,nic,phonenumber) {
+function Validation(name, email, passportno,nic,phonenumber,country) {
     let error = {};
     const checkmail =
     /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+(?!.*\.))*$/i
@@ -23,22 +23,27 @@ function Validation(name, email, passportno,nic,phonenumber) {
     } else {
       error.email = "";
     }
-    if (passportno === "") {
-      error.passportno = "Enter Passport No";
-    } else if (!checkpass.test(passportno)) {
-      error.passportno = "Enter Valid Passport No";
-      // alert("Password must have lover case , upper case ,one number ,one special character and minimum 8 characters")
-    } else {
-      error.passportno = "";
-    }
-    if (nic === "") {
-        error.nic = "Enter Nic";
+    if (country === "LK") {
+      if (nic === "") {
+        error.nic = "Enter NIC";
       } else if (!checknic.test(nic)) {
-        error.nic = "Enter Valid Nic";
-        // alert("Password must have lover case , upper case ,one number ,one special character and minimum 8 characters")
+        error.nic = "Enter Valid NIC";
       } else {
         error.nic = "";
       }
+  
+      error.passportno = "";
+    } else {
+      if (passportno === "") {
+        error.passportno = "Enter Passport No";
+      } else if (!checkpass.test(passportno)) {
+        error.passportno = "Enter Valid Passport No";
+      } else {
+        error.passportno = "";
+      }
+  
+      error.nic = "";
+    }
       if (phonenumber === "") {
         error.phonenumber = "Enter Phone Number";
       } else if (!checknumber.test(phonenumber)) {

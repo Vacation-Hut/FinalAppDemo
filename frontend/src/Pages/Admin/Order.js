@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -10,12 +11,11 @@ import {
   Paper,
   Modal,
   TextField,
-  Button
+  Button,
+  IconButton
 } from "@material-ui/core";
 import "../../App.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import ResponsiveDashBar from "./Dashboardnav";
-import { useParams } from "react-router-dom";
+import { Close } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -45,7 +45,15 @@ function Order() {
   const [time, setTime] = useState("");
   const [email, setEmail] = useState("");
   const [orderId, setorderid] = useState("");
-
+ 
+  async function handleDelete(id) {
+    try {
+      await axios.delete(`http://localhost:5000/dash/order/${id}`);
+      setorderData((prevOrderData) => prevOrderData.filter((order) => order._id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     const fetchReceiptData = async () => {
       try {
@@ -220,9 +228,12 @@ function Order() {
                       </TableCell>
                       <TableCell>{totalprice}</TableCell>
                       <TableCell>
-                        <button onClick={() => handleOpen(email, _id)}>
+                        <button className="btn6 btn landbtn" onClick={() => handleOpen(email, _id)}>
                           Accept
                         </button>
+                        <button className="btn6 btn landbtn" onClick={() => handleDelete(_id)}>
+                       Delete
+                     </button>
                       </TableCell>
                     </TableRow>
                   );
@@ -235,9 +246,12 @@ function Order() {
           className={classes.modal}
           open={open}
           onClose={handleClose}
-          disableBackdropClick
+         
         >
           <div className={classes.modalContent}>
+            <IconButton className={classes.closeButton} onClick={handleClose}>
+            <Close />
+          </IconButton>
             <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 label="Date"

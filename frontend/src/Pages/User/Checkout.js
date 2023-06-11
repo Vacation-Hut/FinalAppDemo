@@ -12,34 +12,29 @@ import { CountryDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import Validation from "../../Validation/checkoutvalidate";
-import '../../App.css'
+import "../../App.css";
 import "./Checkout.css";
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import FlagIcon from '@material-ui/icons/Flag';
-import CardMembershipIcon from '@material-ui/icons/CardMembership';
-import { Grid } from '@material-ui/core';
-import {FormControl, InputLabel, TextField} from '@material-ui/core';
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import FlagIcon from "@material-ui/icons/Flag";
+import CardMembershipIcon from "@material-ui/icons/CardMembership";
+import { Grid } from "@material-ui/core";
+import { FormControl, InputLabel, TextField } from "@material-ui/core";
 import Review from "./Review";
-
-
-
-
-
-
+import submitReview from "./Review";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     marginBottom: theme.spacing(2),
-    width: '100%',
+    width: "100%",
   },
   input: {
-    maxWidth: '200px', // Adjust the maximum width as needed
-    width: '200px',
+    maxWidth: "200px", // Adjust the maximum width as needed
+    width: "200px",
   },
   centeredText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 }));
 
@@ -64,80 +59,90 @@ const CheckoutForm = () => {
   const { id } = useParams();
   const [error, setError] = useState({});
 
-
   useEffect(() => {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     setCartItems(cart);
-    const cost = cart.reduce(
-      (total, item) => total + item.price,0
-    );
+    const cost = cart.reduce((total, item) => total + item.price, 0);
     setTotalCost(cost);
   }, []);
   const handleNumberchange = (value) => {
     setPhonenumber(value);
-    
   };
   const handleCountrychange = (value) => {
     setCountry(value);
   };
   const handleToken = async (event) => {
     event.preventDefault();
-    const validationErrors = Validation(name, email, passportno, nic, phonenumber);
+    const validationErrors = Validation(
+      name,
+      email,
+      passportno,
+      nic,
+      phonenumber,
+      country
+    );
     setError(validationErrors);
-  
-    const cardElement = elements.getElement(CardElement);
-    const { token, error: tokenError } = await stripe.createToken(cardElement);
-  
-    if (tokenError) {
-      console.error("Error creating token:", tokenError);
-      // Handle the error if needed
-    }
-  
-    const response = await fetch("http://localhost:5000/dash/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        items: cartItems,
-        total: totalCost,
-        token: token.id, // Use token.id instead of token
-        customerInfo: {
-          name: name,
-          email: email,
-          phonenumber: phonenumber,
-          country: country,
-          passportno: passportno,
-          nic: nic,
+
+    if (Object.values(validationErrors).every(value => value === '')){
+      const cardElement = elements.getElement(CardElement);
+      const { token, error: tokenError } = await stripe.createToken(
+        cardElement
+      );
+
+      if (tokenError) {
+        console.error("Error creating token:", tokenError);
+        // Handle the error if needed
+      }
+
+      const response = await fetch("http://localhost:5000/dash/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    });
-  
-    const data = await response.json();
-    if (data.success) {
-      const orderID = data.orderID;
-      localStorage.removeItem("cart");
-      setCartItems([]);
-      setIsOpen(true);
-      Navigate(`/receipt/${orderID}`);
-    } else {
-      alert("Payment failed");
+        body: JSON.stringify({
+          items: cartItems,
+          total: totalCost,
+          token: token.id,
+          customerInfo: {
+            name: name,
+            email: email,
+            phonenumber: phonenumber,
+            country: country,
+            passportno: passportno,
+            nic: nic,
+          },
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        const orderID = data.orderID;
+        localStorage.removeItem("cart");
+        setCartItems([]);
+        setIsOpen(true);
+        Navigate(`/receipt/${orderID}`);
+      } else {
+        alert("Payment failed");
+      }
     }
   };
-  
-  
 
   const renderFields = () => {
     if (country === "LK") {
       return (
         <div>
-          <label for="city" className="nicinputfield"><CardMembershipIcon /> NIC Number</label>
+          <label for="city" className="nicinputfield">
+            <CardMembershipIcon /> NIC Number
+          </label>
           <input
             type="text"
             value={nic}
-            onChange={(e) => setNic(e.target.value)}
+            onChange={(e) => {
+              setNic(e.target.value);
+              setError((prevError) => ({ ...prevError, nic: '' }));
+            }}
             className="inputfieldstyling"
           />
           {error.nic && <span className="text-danger"> {error.nic}</span>}
@@ -146,13 +151,18 @@ const CheckoutForm = () => {
     } else {
       return (
         <div>
-          <label for="city" className="passportinputfield"> <CardMembershipIcon /> Passport Number</label>
+          <label for="city" className="passportinputfield">
+            {" "}
+            <CardMembershipIcon /> Passport Number
+          </label>
           <input
             type="text"
             value={passportno}
             className="inputfieldstyling"
-            onChange={(e) => setPassport(e.target.value)}
-            
+            onChange={(e) => {
+              setPassport(e.target.value);
+              setError((prevError) => ({ ...prevError, passportno: '' }));
+            }}
           />
           {error.passportno && (
             <span className="text-danger"> {error.passportno}</span>
@@ -163,91 +173,130 @@ const CheckoutForm = () => {
   };
 
   return (
-   
     <div className="glass-input-containerreview alignformcenter">
       <form onSubmit={handleToken}>
-      <div className="container row">
-    <div className="col-md-6">
-    
-    <section>
-      <div className="customer-detailscheckoutedit">
-        <h2 className="customerheading" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Customer details</h2>
-        <label htmlFor="fname" className="firstfieldcheckoutform">
-          <PersonIcon />Full Name
-        </label>
-        <input
-          type="text"
-          id="fname"
-          name="firstname"
-          onChange={(e) => setName(e.target.value)}
-          className="inputfieldstyling"
-        />
-        {error.name && <span className="text-danger">{error.name}</span>}
+        <div className="container row">
+          <div className="col-md-6">
+            <section>
+              <div className="customer-detailscheckoutedit">
+                <h2
+                  className="customerheading"
+                  style={{
+                    fontFamily: "Pacifico, cursive",
+                    color: "#4E0D0D",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Customer details
+                </h2>
+                <label htmlFor="fname" className="firstfieldcheckoutform">
+                  <PersonIcon />
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="fname"
+                  name="firstname"
+                  onChange={(e) => setName(e.target.value)}
+                  className="inputfieldstyling"
+                />
+                {error.name && (
+                  <span className="text-danger">{error.name}</span>
+                )}
 
-        <label htmlFor="email">
-          <EmailIcon />Email
-        </label>
-        <input
-          type="text"
-          id="email"
-          name="email" 
-          onChange={(e) => setEmail(e.target.value)}
-          className="inputfieldstyling"
-        />
-        {error.email && <span className="text-danger">{error.email}</span>}
+                <label htmlFor="email">
+                  <EmailIcon />
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="inputfieldstyling"
+                />
+                {error.email && (
+                  <span className="text-danger">{error.email}</span>
+                )}
 
-        <label htmlFor="city">
-          <FlagIcon /> Country
-        </label>
-        <CountryDropdown
-          value={country}
-          onChange={(val) => handleCountrychange(val)}
-          className="countryinputfield inputfieldstyling"
-          valueType="short"
-          priorityOptions={["US", "GB", "CA", "LK"]}
-          key={country} // Optional: Set priority options
-        /><br/>
+                <label htmlFor="city">
+                  <FlagIcon /> Country
+                </label>
+                <CountryDropdown
+                  value={country}
+                  onChange={(val) => handleCountrychange(val)}
+                  className="countryinputfield inputfieldstyling"
+                  valueType="short"
+                  priorityOptions={["US", "GB", "CA", "LK"]}
+                  key={country} // Optional: Set priority options
+                />
+                <br />
 
-        {renderFields()}
+                {renderFields()}
 
-        <label htmlFor="adr">
-          <PhoneIcon /> Phone Number
-        </label>
-        <PhoneInput
-          defaultCountry="SL" // Set the default country
-          value={phonenumber}
-          className="phonenumberinputfield"
-          style={{ maxWidth: '400px', width: '100%' }} // Set the desired width
-          onChange={handleNumberchange}
-          flags={false} // Disable country flags
-        /><br/>
-        {error.phonenumber && (
-          <span className="text-danger">{error.phonenumber}</span>
-        )}
-      </div>
-      </section>
-      </div>
-      <div className="col-md-6">
-      <section>
-      <div className="payment-detailscheckoutedit">
-        <h2 className="customerheading" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Payment details</h2>
-        <label htmlFor="cname" className="firstfieldcheckoutform">Name on Card</label>
-        <input type="text" id="cname" name="cardname" className="inputfieldstyling" />
+                <label htmlFor="adr">
+                  <PhoneIcon /> Phone Number
+                </label>
+                <PhoneInput
+                  defaultCountry="SL" // Set the default country
+                  value={phonenumber}
+                  className="phonenumberinputfield"
+                  style={{ maxWidth: "400px", width: "100%" }} // Set the desired width
+                  onChange={handleNumberchange}
+                  flags={false} // Disable country flags
+                />
+                <br />
+                {error.phonenumber && (
+                  <span className="text-danger">{error.phonenumber}</span>
+                )}
+              </div>
+            </section>
+          </div>
+          <div className="col-md-6">
+            <section>
+              <div className="payment-detailscheckoutedit">
+                <h2
+                  className="customerheading"
+                  style={{
+                    fontFamily: "Pacifico, cursive",
+                    color: "#4E0D0D",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Payment details
+                </h2>
+                <label htmlFor="cname" className="firstfieldcheckoutform">
+                  Name on Card
+                </label>
+                <input
+                  type="text"
+                  id="cname"
+                  name="cardname"
+                  className="inputfieldstyling"
+                />
 
-        <CardElement className={classes.cardElement} />
-        <Review/>
-      </div>
-      </section>
-      </div>
-      <div style={{ textAlign: 'center', gridColumn: '1 / span 2', fontSize: '17px' }}>
-        <button type="submit" className="buttoninputfieldcheckoutedit landbtn checkoutformbutton inputfieldstyling">Pay</button>
-      </div>
-      </div>
+                <CardElement className={classes.cardElement} />
+                <Review />
+              </div>
+            </section>
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              gridColumn: "1 / span 2",
+              fontSize: "17px",
+            }}
+          >
+            <button
+              type="submit"
+              className="buttoninputfieldcheckoutedit landbtn checkoutformbutton inputfieldstyling"
+            >
+              Pay
+            </button>
+          </div>
+        </div>
       </form>
     </div>
-  
-
-
   );
 };
 

@@ -478,7 +478,7 @@ app.delete("/dash/user/:id", (req, res) => {
  User.deleteOne({ _id: req.params.id })
  .then((result) => {
  if (result.deletedCount === 0) {
- return res.json("No quote to delete");
+ return res.json("No User to delete");
  }
  res.json("Deleted id");
  })
@@ -593,7 +593,16 @@ app.put("/dash/orders/:orderId", async (req, res) => {
  res.status(500).json({ error: "Server error" });
  }
 });
-
+app.delete("/dash/order/:id", (req, res) => {
+  Order.deleteOne({ _id: req.params.id })
+  .then((result) => {
+  if (result.deletedCount === 0) {
+  return res.json("No order to delete");
+  }
+  res.json("Deleted id");
+  })
+  .catch((error) => console.error(error));
+ });
 const removeTmp = (path) => {
  fs.unlink(path, (err) => {
  if (err) throw err;

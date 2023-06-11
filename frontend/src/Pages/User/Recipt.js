@@ -148,7 +148,9 @@ const Receipt = () => {
         <Typography variant="h6">Email: {customer.email}</Typography>
         <Typography variant="h6">Phone Number: {customer.phonenumber}</Typography>
         <Typography variant="h6">Country: {customer.country}</Typography>
-        <Typography variant="h6">Passport Number: {customer.passportno}</Typography>
+        <Typography variant="h6">
+        {customer.passportno ? `Passport Number: ${customer.passportno}` : `NIC: ${customer.nic}`}
+      </Typography>
       </Paper>
       
 

@@ -66,7 +66,7 @@ function Order() {
     };
 
     fetchReceiptData();
-  }, []);
+  }, [orderdata]);
 
   const handleOpen = (email, _id) => {
     setorderid(_id);
@@ -151,7 +151,7 @@ function Order() {
             fontWeight: "bold",
           }}
         >
-          <a href="/dash">Dashboard</a>
+          {/* <a href="/dash">Dashboard</a> */}
           <a href="/dash/package">Packages</a>
           <a href="/dash/orders">Booking</a>
           <a href="/dash/users">Users</a>
@@ -223,17 +223,20 @@ function Order() {
                       </TableCell>
                       <TableCell>
                         {items.map((packageItem, index) => (
-                          <div key={index}>{packageItem.date}</div>
+                          <div key={index}>{new Date(packageItem.date).toLocaleDateString()}</div>
                         ))}
                       </TableCell>
                       <TableCell>{totalprice}</TableCell>
-                      <TableCell>
-                        <button className="btn6 btn landbtn" onClick={() => handleOpen(email, _id)}>
+                      <TableCell style={{textAlign:'center'}}>
+                        <button className=" landbtn" onClick={() => handleOpen(email, _id)} style={{paddingRight:'10px',paddingLeft:'10px'}}>
                           Accept
                         </button>
-                        <button className="btn6 btn landbtn" onClick={() => handleDelete(_id)}>
+                        <div style={{paddingTop:'10px'}}>
+                        <button className="landbtn" onClick={() => handleDelete(_id)} style={{paddingRight:'10px',paddingLeft:'10px'}}>
+                          
                        Delete
                      </button>
+                     </div>
                       </TableCell>
                     </TableRow>
                   );

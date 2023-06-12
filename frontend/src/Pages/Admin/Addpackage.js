@@ -2,8 +2,6 @@ import React, { useState } from "react";
 // import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import ResponsiveDashBar from "./Dashboardnav";
-import Footer from "../User/Footer";
 import { Grid, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {  Paper, Typography} from '@material-ui/core';
@@ -238,7 +236,7 @@ try {
       <div className="sidebarDash">
         <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
           <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
-            <a className="active" href="/dash">Dashboard</a>
+            {/* <a className="active" href="/dash">Dashboard</a> */}
             <a href="/dash/package">Packages</a>
             <a href="/dash/orders">Booking</a>
             <a href="/dash/users">Users</a>
@@ -305,11 +303,12 @@ try {
            
             <label htmlFor="images">Select Images</label>
             <input type="file" id="images" name="images" accept="image/*" multiple onChange={handleImageChange}/>
-            <div id="image-preview" style={{width:'300px', height:'200px'}}></div>
-          
-           <button type="submit" onClick={postPackage}>
+            <div id="image-preview"></div>
+          <div style={{paddingTop:'40px', textAlign:'center', paddingBottom:'20px'}}>
+           <button type="submit" onClick={postPackage} className="landbtn" style={{paddingTop:'2px', paddingRight:'30px', paddingLeft:'30px',paddingBottom:'2px'}}>
              Save
            </button>
+           </div>
          </form>
 
        </div>

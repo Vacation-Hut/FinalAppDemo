@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
 import "../../App.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Validation from "../../Validation/loginvalidate";
-import axios from "axios";
-import { faInstagram, faFacebookF, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faCopyright } from '@fortawesome/free-solid-svg-icons'
-import ResponsiveDashBar from "./Dashboardnav";
-import Footer from "../User/Footer";
+import SlickCarousel from '../User/ReviewCarroussel';
 
 function User() {
   const [data, setData] = useState([]);
@@ -30,7 +22,7 @@ function User() {
       <div className="sidebarDash">
         <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
         <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
-          <a href="/dash">Dashboard</a>
+          {/* <a href="/dash">Dashboard</a> */}
           <a href="/dash/package">Packages</a>
           <a href="/dash/orders">Booking</a>
           <a href="/dash/users">Users</a>
@@ -71,7 +63,9 @@ function User() {
             </TableBody>
           </Table>
         </TableContainer>
+        <div className='slickcarousel'><SlickCarousel/></div>
       </div>
+      
     </div>
   );
 }

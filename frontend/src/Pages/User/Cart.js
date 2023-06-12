@@ -12,29 +12,48 @@ import "./Checkout.css";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
-
+  const [AditionalCost , setAditionalCost] = useState(0)
   useEffect(() => {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     setCartItems(cart);
-    const cost = cart.reduce((total, item) => total + item.price, 0);
+    calculateTotalCost(cart);
+  }, []);
+  const calculateTotalCost = (cart) => {
+    const cost = cart.reduce((total, item) => total + (item.price)+ AditionalCost, 0);
     setTotalCost(cost);
-  }, []);  
-
+  };
   const handleRemoveItem = (item) => {
     const updatedCart = cartItems.filter((cartItem) => cartItem._id !== item._id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
+    calculateTotalCost(updatedCart);
   };
-  
+  const handleUpdateCount = (item, count) => {
+    let additionalCost = 0;
+    if (count > 8) {
+      const extraMembers = count - 8;
+      additionalCost = Math.ceil(extraMembers / 5) * 10;
+      setAditionalCost(additionalCost)
+    }
+    const updatedCart = cartItems.map((cartItem) => {
+      if (cartItem._id === item._id) {
+        return { ...cartItem, count };
+      }
+      return cartItem;
+    });
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
+    calculateTotalCost(updatedCart);
+  };
   const searchParams = new URLSearchParams(useLocation().search);
   const itemsParam = searchParams.get("items");
-
   if (itemsParam) {
     try {
       const parsedItems = JSON.parse(itemsParam);
       setCartItems(parsedItems);
+      calculateTotalCost(parsedItems);
     } catch (error) {
       console.error("Error parsing cart items JSON:", error);
     }
@@ -44,27 +63,27 @@ const CartPage = () => {
     <div className="cartfullbackground">
       <ResponsiveAppBar/>
       <div className="cart">
-        <h1 className="cartheadalign" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Cart</h1>
+        <h1 className="cartheadalign" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold' }}>Booking</h1>
       </div>
-      <Table className="carttablealign" style={{ width: '80%', margin: '20px auto' }}>
+      <Table className="carttablealign" style={{ width: '70%', margin: '20px auto' }}>
         <TableHead>
           <TableRow>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Image</h4>
             </TableCell>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Package Name</h4>
             </TableCell>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Price</h4>
             </TableCell>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Members</h4>
             </TableCell>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Date</h4>
             </TableCell>
-            <TableCell>
+            <TableCell style={{textAlign:'center'}}>
               <h4 style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Actions</h4>
             </TableCell>
           </TableRow>
@@ -73,15 +92,20 @@ const CartPage = () => {
         <TableBody>
           {cartItems.map((item) => (
             <TableRow key={item._id}>
-              <TableCell>
+              <TableCell style={{textAlign:'center'}}>
                 <img src={item.image} alt={item.name} width={150} height={100} />
               </TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>${item.price}</TableCell>
-              <TableCell>{item.count}</TableCell>
-              <TableCell>{item.date}</TableCell>
-              <TableCell>
-                <button onClick={() => handleRemoveItem(item)}>Remove</button>
+              <TableCell style={{textAlign:'center'}}>{item.name}</TableCell>
+              <TableCell style={{textAlign:'center'}}>${item.price}</TableCell>
+              <TableCell style={{textAlign:'center'}}> <input
+                  type="number"
+                  value={item.count}
+                  onChange={(e) => handleUpdateCount(item, parseInt(e.target.value))}
+                  min="8"
+                /></TableCell>
+              <TableCell style={{textAlign:'center'}}>{new Date(item.date).toLocaleDateString()}</TableCell>
+              <TableCell style={{textAlign:'center'}}>
+                <button onClick={() => handleRemoveItem(item)} className="landbtn" style={{paddingLeft:'10px', paddingRight:'10px', paddingBottom:'3px', paddingTop:'3px'}}>Remove</button>
               </TableCell>
             </TableRow>
           ))}

@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Rating from '@material-ui/lab/Rating';
+import StarIcon from '@material-ui/icons/Star';
 import "../../Dash.css";
 import { Link } from "react-router-dom";
 import Footer from "../User/Footer";
 import ResponsiveDashBar from "./Dashboardnav";
+import SlickCarousel from '../User/ReviewCarroussel';
 
 
 
 function Dashboard() {
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
+
+  
+
   return (
 //     <div className="App">
 //       {/* <ResponsiveDashBar/> */}
@@ -78,6 +88,8 @@ function Dashboard() {
 
   <div className="contentDash">
     <h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px'}}>Dashboard</h2>
+  
+   <div className='slickcarousel'><SlickCarousel/></div>
   </div>
 </div>
   );

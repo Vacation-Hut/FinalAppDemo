@@ -238,7 +238,7 @@ const CheckoutForm = () => {
                   <PhoneIcon /> Phone Number
                 </label>
                 <PhoneInput
-                  defaultCountry="SL" // Set the default country
+                  defaultCountry="LK" // Set the default country
                   value={phonenumber}
                   className="phonenumberinputfield"
                   style={{ maxWidth: "400px", width: "100%" }} // Set the desired width

@@ -685,13 +685,78 @@ body {
 
 .glass-containerrecieptpageedittings{
   
-    display: flex;
+    /* display: flex; */
     /* justify-content: center; */
     /* align-items: center; */
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* background-color: #f3f3f3; */
-    background-image: 'url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png")';
+    /* background-image: 'url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png")';
     background-repeat: "no-repeat";
     background-size: "cover";
-  
+   */
+
+    display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 20px;
+
+  /* Responsive styles */
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 40px;
+  }
 }
+
+/* ########################################################################################### */
+ .title-word {
+  animation: color-animation 4s linear infinite;
+}
+
+.title-word-1 {
+  --color-1: #d15c1e;
+  --color-2: #111112;
+  --color-3: #cf2c29;
+}
+
+.title-word-2 {
+  --color-1: #4E0D0D;
+  --color-2: #e56c30;
+  --color-3: #162e30;
+}
+
+.title-word-3 {
+  --color-1: #a83345;
+  --color-2: #d66765;
+  --color-3: #ff3e00;
+}
+
+.title-word-4 {
+  --color-1: #121516;
+  --color-2: #ce5919;
+  --color-3: #850c0a;
+}
+
+@keyframes color-animation {
+  0%    {color: var(--color-1)}
+  32%   {color: var(--color-1)}
+  33%   {color: var(--color-2)}
+  65%   {color: var(--color-2)}
+  66%   {color: var(--color-3)}
+  99%   {color: var(--color-3)}
+  100%  {color: var(--color-1)}
+}
+
+/* Here are just some visual styles. 🖌 */
+
+ .containerreceiptedittinganimation {
+  display: grid;
+  place-items: center;  
+  text-align: center;
+  /* height: 100vh */
+}
+
+ 

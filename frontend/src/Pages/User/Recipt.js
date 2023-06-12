@@ -5,6 +5,8 @@ import { Navigate } from 'react-router-dom';
 import "./styles.css";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, withStyles } from '@material-ui/core';
 
+  
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     // backgroundColor: theme.palette.common.brown,
@@ -136,12 +138,14 @@ const Receipt = () => {
     // </div>
     
     <div className="glass-containerrecieptpageedittings">
-      <div id="mySidenav" class="sidenav">
+      <div id="mySidenav" class="sidenav sidebarDash">
         <h1 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', textAlign:'center', background:'#4e0d0d', color:'white', padding:'20px' }}>Receipt</h1>
 <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" style={{width:'230px', paddingTop:'100px'}}></img>
-<h2 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', paddingTop:'100px', paddingLeft:'20px'}}>Adventure awaits you... <br/>let us take you there.</h2>
+<div className='containerreceiptedittinganimation'>
+<h2 style={{ fontFamily: 'Pacifico, cursive',  fontWeight: 'bold', paddingTop:'100px', paddingLeft:'20px'}} className="titleanimation"><span class="title-word title-word-1">Adventure</span><span class="title-word title-word-2"> awaits</span><span class="title-word title-word-3"> you... </span><br/><span class="title-word title-word-4">let</span><span class="title-word title-word-1"> us</span><span class="title-word title-word-2"> take</span><span class="title-word title-word-3"> you</span><span class="title-word title-word-4"> there.</span></h2>
 </div>
-<div style={{paddingLeft:'600px', paddingTop:'30px'}}>
+</div>
+<div style={{ paddingTop:'30px'}} className="contentDash">
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px', width:'400px', background:'none'}}>
         <Typography variant="h3" style={{paddingTop:'10px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold',  color:'#4E0D0D'}}>Customer Details</Typography>
         <Typography variant="h6" style={{paddingTop:'20px'}}>Name: {customer.name}</Typography>
@@ -154,38 +158,79 @@ const Receipt = () => {
       </Paper>
       
 
-      <Typography variant="h3" style={{paddingTop:'20px',paddingLeft:'20px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold',  color:'#4E0D0D'}}>Package Details</Typography>
-      <TableContainer component={Paper} style={{ boxShadow:'none', background:'none', paddingTop:'30px'}}>
-      <Table style={{width:'800px'}}>
-        <TableHead>
-          <TableRow>
-            <TableCell><span style={{fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold'}}>Pakage Name</span></TableCell>
-            <TableCell><span style={{fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold'}}>Total price</span></TableCell>
-            <TableCell><span style={{fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold'}}>Date</span></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {items.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell>{item.package.package}</TableCell>
-              <TableCell>{item.package.totalprice}</TableCell>
-              <TableCell>{item.date}</TableCell>
-            </TableRow>
-          ))}
-          <TableRow style={{fontFamily: 'Pacifico, cursive', fontWeight: 'bold',  color:'#4E0D0D', fontSize:'25px'}}>
-             <span style={{paddingLeft:'20px'}}>Total: ${receiptData.totalprice}</span>
-            </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <Typography variant="h3" style={{ paddingTop: '20px', paddingLeft: '20px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold', color: '#4E0D0D' }}>Booking Details</Typography>
+        <TableContainer component={Paper} style={{ boxShadow: 'none', background: 'none', paddingTop: '30px' }}>
+          <Table style={{ width: '100%' }}>
+            <TableHead>
+              <TableRow>
+                <TableCell><span style={{ fontSize: '25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Package Name</span></TableCell>
+                <TableCell><span style={{ fontSize: '25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Total Price</span></TableCell>
+                <TableCell><span style={{ fontSize: '25px', fontFamily: 'Pacifico, cursive', fontWeight: 'bold' }}>Date</span></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {items.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell>{item.package.package}</TableCell>
+                  <TableCell>{item.package.totalprice}</TableCell>
+                  <TableCell>{new Date(item.date).toLocaleDateString()}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', color: '#4E0D0D', fontSize: '25px' }}>
+                <TableCell colSpan={3} style={{ paddingLeft: '20px' }}>Total: ${receiptData.totalprice}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+
     <button onClick={sendMail} style={{marginTop:'40px', padding:'5px'}} className="landbtn">Send me receipt</button>
-    <footer style={{background:'#f0e0da'}}>
-      <div style={{textAlign:'center', paddingTop:'30px', paddingBottom:'10px'}}>
-      <h3> <span style={{ fontWeight: 'bold', color:'#ff3e00', fontFamily: 'Pacifico, cursive' }}>Vacation</span><span style={{ fontWeight: 'bold', color:'#5e4f47' }}> Hut</span></h3>
-      <h3 style={{fontFamily: 'Pacifico, cursive', fontWeight: 'bold',  color:'#4E0D0D'}}>0761238954</h3>
-      <h3 style={{fontFamily: 'Pacifico, cursive', fontWeight: 'bold',  color:'#4E0D0D'}}>vacationapk@gmail.com</h3>
-      </div>
-    </footer>
+    <div style={{ paddingTop: '20px' }}>
+  <footer
+    style={{
+      background: 'rgba(240, 224, 218, 0.5)', // Transparent background
+      backdropFilter: 'blur(10px)', // Adds blur effect
+      borderRadius: '10px', // Rounded corners
+      padding: '20px', // Adjust padding as needed
+    }}
+  >
+    <div style={{ textAlign: 'center' }}>
+      <h3>
+        {' '}
+        <span
+          style={{
+            fontWeight: 'bold',
+            color: '#ff3e00',
+            fontFamily: 'Pacifico, cursive',
+            fontSize:'40px',
+          }}
+        >
+          Vacation
+        </span>
+        <span style={{ fontWeight: 'bold', color: '#5e4f47', fontSize:'40px', fontFamily: 'Pacifico, cursive'}}> Hut</span>
+      </h3>
+      <h3
+        style={{
+          fontFamily: 'Pacifico, cursive',
+          fontWeight: 'bold',
+          color: '#4E0D0D',
+        }}
+      >
+        0761238954
+      </h3>
+      <h3
+        style={{
+          fontFamily: 'Pacifico, cursive',
+          fontWeight: 'bold',
+          color: '#4E0D0D',
+        }}
+      >
+        vacationapk@gmail.com
+      </h3>
+    </div>
+  </footer>
+</div>
+
     </div>
 
     </div>

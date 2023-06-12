@@ -166,8 +166,8 @@ const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0, image, pack
       />
       <br />
       {count > 8 && (
-        <span className="alert buttonfontfamily">
-          More than 8 People for every additional 5 people we pay 5$.
+        <span className="alert buttonfontfamily" style={{color:'red'}}>
+         Every additional 5 people you pay $10.
         </span>
       )}
     </div>

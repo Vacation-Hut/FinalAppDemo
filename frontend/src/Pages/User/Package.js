@@ -230,6 +230,7 @@ function Package() {
     <Container maxWidth="lg">
     <div style={{ display: "flex", justifyContent: "space-between" }}>
   <fieldset style={{ marginRight: "20px" }}>
+    <h2 style={{fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:"30px", color:'#4E0D0D'}}>Included  Activities</h2>
     {packageData.details.map((activity, index) => (
       <div key={index} className="activity-cost">
         <Typography variant="body1" className="activity" style={{fontFamily: 'Pacifico, cursive', fontWeight:'bold', fontSize:"20px"}}>

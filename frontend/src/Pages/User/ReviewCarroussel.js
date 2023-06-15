@@ -1,4 +1,4 @@
-import React, { useEffect, useRef ,useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,15 +14,18 @@ const useStyles = makeStyles(() => ({
     height: 'auto',
   },
 }));
-const SlickCarousel = () => {
+
+const SlickCarousel = ({ isAdmin }) => { // Add isAdmin prop to determine if it's the admin dashboard
   const classes = useStyles();
   const sliderRef = useRef(null);
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+
   useEffect(() => {
     fetchReviews();
   }, []);
+
   const fetchReviews = async () => {
     try {
       const response = await axios.get('http://localhost:5000/reviews');
@@ -31,6 +34,7 @@ const SlickCarousel = () => {
       console.error('Error fetching reviews:', error);
     }
   };
+
   const submitReview = async (e) => {
     e.preventDefault();
     try {
@@ -42,11 +46,13 @@ const SlickCarousel = () => {
       console.error('Error submitting review:', error);
     }
   };
+
   useEffect(() => {
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(0);
     }
   }, []);
+
   const settings = {
     slidesToShow: 6,
     slidesToScroll: 1,
@@ -70,25 +76,32 @@ const SlickCarousel = () => {
       },
     ],
   };
+
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      await axios.delete(`http://localhost:5000/reviews/${reviewId}`);
+      fetchReviews();
+    } catch (error) {
+      console.error('Error deleting review:', error);
+    }
+  };
+
   return (
     <div className="container reviewstyle">
-      <h2 className='reviewheadingfeedback' style={{ fontFamily: 'Pacifico, cursive', fontWeight:'bold', color:'#4E0D0D'  }}>Our Customers Feedback</h2>
+      <h2 className='reviewheadingfeedback' style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', color: '#4E0D0D' }}>Our Customers Feedback</h2>
       <Slider {...settings} ref={sliderRef}>
-      {reviews.map((review) => (
-        <div key={review._id} className="slide">
-          <p className='reviewheadingfeedback'><Rating value={review.rating} icon={<StarIcon />} readOnly /></p>
-          <p>Comment: {review.comment}</p>
-        </div>
-      ))}
+        {reviews.map((review) => (
+          <div key={review._id} className="slide">
+            <p className='reviewheadingfeedback'><Rating value={review.rating} icon={<StarIcon />} readOnly /></p>
+            <p>Comment: {review.comment}</p>
+            {isAdmin && (
+              <button onClick={() => handleDeleteReview(review._id)} className="deleteButton">Delete</button>
+            )}
+          </div>
+        ))}
       </Slider>
     </div>
   );
 };
+
 export default SlickCarousel;
-
-
-
-
-
-
-

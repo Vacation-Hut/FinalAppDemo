@@ -725,19 +725,19 @@ body {
 .title-word-2 {
   --color-1: #4E0D0D;
   --color-2: #e56c30;
-  --color-3: #162e30;
+  --color-3: #9e190d;
 }
 
 .title-word-3 {
   --color-1: #a83345;
-  --color-2: #d66765;
-  --color-3: #ff3e00;
+  --color-2: #121516;
+  --color-3: #850c0a;
 }
 
 .title-word-4 {
-  --color-1: #121516;
+  --color-1: #864e4d;
   --color-2: #ce5919;
-  --color-3: #850c0a;
+  --color-3: #8d351a;
 }
 
 @keyframes color-animation {
@@ -759,4 +759,69 @@ body {
   /* height: 100vh */
 }
 
- 
+
+.title-word-package {
+  animation: color-animation 4s linear infinite;
+}
+
+.title-word-1-package {
+  --color-1: #d15c1e;
+  --color-2: #611e1e;
+  --color-3: #b13330;
+}
+
+.title-word-2-package {
+  --color-1: #c35034;
+  --color-2: #ff3e00;
+  --color-3: #57080a;
+}
+
+.title-word-3-package {
+  --color-1: #a83345;
+  --color-2: #d66765;
+  --color-3: #ff3e00;
+}
+
+.title-word-4-package {
+  --color-1: #121516;
+  --color-2: #ce5919;
+  --color-3: #850c0a;
+}
+
+@keyframes color-animation {
+  0%    {color: var(--color-1)}
+  32%   {color: var(--color-1)}
+  33%   {color: var(--color-2)}
+  65%   {color: var(--color-2)}
+  66%   {color: var(--color-3)}
+  99%   {color: var(--color-3)}
+  100%  {color: var(--color-1)}
+}
+
+.customer-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+  grid-gap: 20px; /* Spacing between the columns */
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    /* Modify the styles for smaller screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .card {
+    /* Modify the styles for medium-sized screens */
+  }
+}

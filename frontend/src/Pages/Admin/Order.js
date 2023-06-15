@@ -151,7 +151,6 @@ function Order() {
             fontWeight: "bold",
           }}
         >
-          {/* <a href="/dash">Dashboard</a> */}
           <a href="/dash/package">Packages</a>
           <a href="/dash/orders">Booking</a>
           <a href="/dash/users">Users</a>
@@ -171,22 +170,23 @@ function Order() {
           Bookings
         </h1>
         {orderdata && orderdata.length > 0 && (
-          <TableContainer component={Paper}>
+          <div style={{paddingTop:'40px'}}>
+          <TableContainer component={Paper} style={{borderRadius:'25px', border: '2px solid #000000'}}>
             <Table>
               <TableHead style={{ background: "#F0E0DA", fontFamily: "Pacifico, cursive" }}>
                 <TableRow style={{fontFamily: "Pacifico, cursive"}}>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone Number</TableCell>
-                  <TableCell>N.I.C Number</TableCell>
-                  <TableCell>Passport Number</TableCell>
-                  <TableCell>Country</TableCell>
-                  <TableCell>Ordered Package</TableCell>
-                  <TableCell>Members</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Total Price</TableCell>
-                  <TableCell>Options</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Name</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Status</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Email</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Phone Number</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>N.I.C Number</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Passport Number</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Country</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Ordered Package</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Members</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Date</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Total Price</TableCell>
+                  <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Options</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -244,6 +244,7 @@ function Order() {
               </TableBody>
             </Table>
           </TableContainer>
+          </div>
         )}
         <Modal
           className={classes.modal}

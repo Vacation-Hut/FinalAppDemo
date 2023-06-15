@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Grid, TextField, Button } from '@mui/material';
@@ -109,134 +108,10 @@ try {
   }
  
   return (
-    // <div className="App">
-    //   <ResponsiveDashBar/>
-    //   <div>
-        
-    //     <h1 className="activity">Add new activity</h1>
-    //     <form>
-    //       <label>Package:</label>
-    //       <input type="text" name="package" />
-    //       <br />
-    //       <label>Description:</label>
-    //       <input type="text" name="description" />
-    //       <br />
-    //       <label>Total Price:</label>
-    //       <input type="Number" name="total" />
-    //       <br />
-    //       <fieldset>
-    //         <legend>Details:</legend>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]" />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]"  />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]" />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]"  />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]" />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]"  />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]" />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]"  />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]" />
-    //         </div>
-    //         <div class="activity">
-    //           <label>Activity:</label>
-    //           <input type="text" name="activity[]" />
-    //         </div>
-    //         <div class="cost">
-    //           <label>Cost:</label>
-    //           <input type="number" name="cost[]"  />
-    //         </div>
-    //       </fieldset>
-    //       <label for="images">Select Images:</label>
-    //       <input
-    //         type="file"
-    //         id="images"
-    //         name="images"
-    //         accept="image/*"
-    //         multiple
-    //         onChange={handleImageChange}
-    //       />
-    //       <div id="image-preview"></div>
-    //       <button type="submit" onClick={postPackage}>
-    //         Save
-    //       </button>
-    //     </form>
-
-
- 
-        
-
-
-
-    //   </div>
-     
-    //   <Footer/>
-    // </div>
     <div>
       <div className="sidebarDash">
         <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" alt="Vacation Hut Logo" style={{width:'250px', height:'150px'}}></img>
           <div style={{paddingTop:'20px', fontSize:'25px', fontFamily: 'Pacifico, cursive', fontWeight:'bold'}}>
-            {/* <a className="active" href="/dash">Dashboard</a> */}
             <a href="/dash/package">Packages</a>
             <a href="/dash/orders">Booking</a>
             <a href="/dash/users">Users</a>
@@ -250,7 +125,7 @@ try {
        <section style={{ display: 'flex', padding: '20px', borderRadius: '25px', backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)',  margin: '20px' }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
             <Typography variant="h6" style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize: '25px' }}>Package Name</Typography>
             <TextField variant="outlined" name="package" style={{ background: '#F0E0DA', marginBottom: '20px' }} />
             <Typography variant="h6" style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize: '25px' }}>Description</Typography>

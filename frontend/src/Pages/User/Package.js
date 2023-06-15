@@ -261,7 +261,7 @@ function Package() {
         onChange={handleMembersChange}
         min="1"
         className="datefield"
-        style={{ border: "none", borderRadius:'5px' }}
+        style={{ border: "none", borderRadius:'5px', width:'200px' }}
       /><br/>
       {count > 8 && (
         <span className="alert buttonfontfamily">

@@ -48,7 +48,7 @@ function Footer() {
             </Typography>
             <Typography variant="body2" className="footerfontfamily">
               <span><Phone /></span> <span style={{ fontWeight: 'bold' }}>076 1238954</span><br /><br/>
-              Email: <span style={{ fontWeight: 'bold' }}>vacationapk@gmail.com</span>
+              <Email/> <span style={{ fontWeight: 'bold' }}>vacationapk@gmail.com</span>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3} sx={{ mb: { xs: 2, sm: 0 } }}>

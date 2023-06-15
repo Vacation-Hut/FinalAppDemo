@@ -12,40 +12,18 @@ import "./Checkout.css";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
-  const [AditionalCost , setAditionalCost] = useState(0)
   useEffect(() => {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     setCartItems(cart);
-    calculateTotalCost(cart);
-  }, []);
-  const calculateTotalCost = (cart) => {
-    const cost = cart.reduce((total, item) => total + (item.price)+ AditionalCost, 0);
+    const cost = cart.reduce((total, item) => total + item.price, 0);
     setTotalCost(cost);
-  };
+  }, []);
   const handleRemoveItem = (item) => {
     const updatedCart = cartItems.filter((cartItem) => cartItem._id !== item._id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
-    calculateTotalCost(updatedCart);
-  };
-  const handleUpdateCount = (item, count) => {
-    let additionalCost = 0;
-    if (count > 8) {
-      const extraMembers = count - 8;
-      additionalCost = Math.ceil(extraMembers / 5) * 10;
-      setAditionalCost(additionalCost)
-    }
-    const updatedCart = cartItems.map((cartItem) => {
-      if (cartItem._id === item._id) {
-        return { ...cartItem, count };
-      }
-      return cartItem;
-    });
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setCartItems(updatedCart);
-    calculateTotalCost(updatedCart);
   };
   const searchParams = new URLSearchParams(useLocation().search);
   const itemsParam = searchParams.get("items");
@@ -53,7 +31,6 @@ const CartPage = () => {
     try {
       const parsedItems = JSON.parse(itemsParam);
       setCartItems(parsedItems);
-      calculateTotalCost(parsedItems);
     } catch (error) {
       console.error("Error parsing cart items JSON:", error);
     }
@@ -97,12 +74,7 @@ const CartPage = () => {
               </TableCell>
               <TableCell style={{textAlign:'center'}}>{item.name}</TableCell>
               <TableCell style={{textAlign:'center'}}>${item.price}</TableCell>
-              <TableCell style={{textAlign:'center'}}> <input
-                  type="number"
-                  value={item.count}
-                  onChange={(e) => handleUpdateCount(item, parseInt(e.target.value))}
-                  min="8"
-                /></TableCell>
+              <TableCell style={{textAlign:'center'}}>{item.count}</TableCell>
               <TableCell style={{textAlign:'center'}}>{new Date(item.date).toLocaleDateString()}</TableCell>
               <TableCell style={{textAlign:'center'}}>
                 <button onClick={() => handleRemoveItem(item)} className="landbtn" style={{paddingLeft:'10px', paddingRight:'10px', paddingBottom:'3px', paddingTop:'3px'}}>Remove</button>

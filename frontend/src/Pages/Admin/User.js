@@ -29,40 +29,30 @@ function User() {
         </div>
       </div>
 
-      <div className="contentDash">
+      <div className="contentDash" style={{textAlign:'center'}}>
         <h2 className="activity users" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px', paddingTop:'20px'}}><b>Users</b></h2>
-        <TableContainer component={Paper}>
+        <div style={{textAlign:'center'}}>
+        <TableContainer component={Paper} style={{width:'80%'}}>
           <Table>
             <TableHead>
               <TableRow style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize:'25px', background:'#F0E0DA' }}>
-                <TableCell>Name</TableCell>
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell>Role</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Phone Number</TableCell>
-                <TableCell>N.I.C Number</TableCell>
-                <TableCell>Passport Number</TableCell>
-                <TableCell>Country</TableCell>
+                <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Name</TableCell>
+                <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Role</TableCell>
+                <TableCell style={{fontFamily: "Pacifico, cursive", fontWeight:'bold', fontSize:'20px', textAlign:'center'}}>Email</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((i) => (
                 <TableRow key={i.id}>
                   <TableCell>{i.name}</TableCell>
-                  <TableCell>{i.fname}</TableCell>
-                  <TableCell>{i.lname}</TableCell>
                   <TableCell>{i.role}</TableCell>
                   <TableCell>{i.email}</TableCell>
-                  <TableCell>{i.phonenumber}</TableCell>
-                  <TableCell>{i.nic}</TableCell>
-                  <TableCell>{i.passportno}</TableCell>
-                  <TableCell>{i.country}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        </div>
         <div className='slickcarousel'><SlickCarousel/></div>
       </div>
       

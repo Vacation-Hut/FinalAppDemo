@@ -512,6 +512,26 @@ app.post('/reviews', async (req, res) => {
       res.status(500).json({ message: 'An error occurred.' });
     }
   });
+  app.delete('/reviews/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Check if the review with the provided ID exists
+      const review = await Review.findById(id);
+      if (!review) {
+        return res.status(404).json({ message: 'Review not found.' });
+      }
+  
+      // Delete the review
+      await Review.findByIdAndDelete(id);
+  
+      res.json({ message: 'Review deleted successfully.' });
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      res.status(500).json({ message: 'An error occurred.' });
+    }
+  });
+  
 app.get("/allorders", async (req, res) => {
  try {
  const allorders = await Order.find({});

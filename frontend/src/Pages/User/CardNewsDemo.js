@@ -71,9 +71,9 @@ const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0, image, pack
       return;
     }
     let additionalCost = 0;
-    if (count > 8) {
-      const extraMembers = count - 8;
-      additionalCost = Math.ceil(extraMembers / 5) * 10;
+    if (count > 3) {
+      const extraMembers = count - 3;
+      additionalCost = extraMembers  * 10;
     }
   
     const totalPrice =totalprice + additionalCost;
@@ -160,14 +160,14 @@ const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0, image, pack
         type="number"
         value={count}
         onChange={(e) => handleMembersChange(e, count)}
-        min="1"
+        min="3"
         className="datefield dateinput"
         style={{ border: "none", borderRadius:'15px' }}
       />
       <br />
-      {count > 8 && (
+      {count > 3 && (
         <span className="alert buttonfontfamily" style={{color:'red'}}>
-         Every additional 5 people you pay $10.
+         Every additional 3 people you pay $10.
         </span>
       )}
     </div>

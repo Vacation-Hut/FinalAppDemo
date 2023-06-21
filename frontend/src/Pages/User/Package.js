@@ -80,9 +80,9 @@ function Package() {
       return;
     }
     let additionalCost = 0;
-    if (count > 8) {
-      const extraMembers = count - 8;
-      additionalCost = Math.ceil(extraMembers / 5) * 10;
+    if (count > 3) {
+      const extraMembers = count - 3;
+      additionalCost = extraMembers * 10;
     }
   
     const totalPrice = packageData.totalprice + additionalCost;
@@ -111,39 +111,39 @@ function Package() {
     }
     
   };
-  <Box mt={4} sx={{ 
-    display: 'flex', 
-    justifyContent: 'flex-end',
-  }}>
-    <form>
-      <div>
-        <label htmlFor="tripDate">Your trip date:</label>
-        <br />
-        <DatePicker
-          id="tripDate"
-          selected={date}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-        />
-      </div>
-      <div>
-        <label htmlFor="memberCount">Members:</label>
-        <br />
-        <input
-          id="memberCount"
-          type="number"
-          value={count}
-          onChange={handleMembersChange}
-          min="1"
-        />
-        {count > 8 && (
-          <span className="alert buttonfontfamily">
-            More than 8 people? For every additional 5 people, we charge $5.
-          </span>
-        )}
-      </div>
-    </form>
-  </Box>
+  // <Box mt={4} sx={{ 
+  //   display: 'flex', 
+  //   justifyContent: 'flex-end',
+  // }}>
+  //   <form>
+  //     <div>
+  //       <label htmlFor="tripDate">Your trip date:</label>
+  //       <br />
+  //       <DatePicker
+  //         id="tripDate"
+  //         selected={date}
+  //         onChange={handleDateChange}
+  //         dateFormat="dd/MM/yyyy"
+  //       />
+  //     </div>
+  //     <div>
+  //       <label htmlFor="memberCount">Members:</label>
+  //       <br />
+  //       <input
+  //         id="memberCount"
+  //         type="number"
+  //         value={count}
+  //         onChange={handleMembersChange}
+  //         min="1"
+  //       />
+  //       {count > 8 && (
+  //         <span className="alert buttonfontfamily">
+  //           More than 8 people? For every additional 5 people, we charge $5.
+  //         </span>
+  //       )}
+  //     </div>
+  //   </form>
+  // </Box>
   const handleBookNow = (image, id, activityname, description, price) => {
     if (!date || !count) {
       alert("Please select a date and enter the number of members.");
@@ -259,13 +259,13 @@ function Package() {
         type="number"
         value={count}
         onChange={handleMembersChange}
-        min="1"
+        min="3"
         className="datefield"
         style={{ border: "none", borderRadius:'5px', width:'200px' }}
       /><br/>
-      {count > 8 && (
-        <span className="alert buttonfontfamily">
-          More than 8 people? For every additional 5 people, we charge $5.
+      {count > 3 && (
+        <span className="alert buttonfontfamily" style={{color:'red'}}>
+          Every additional 3 people you pay $10.
         </span>
       )}
     </div>

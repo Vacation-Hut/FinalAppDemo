@@ -73,10 +73,10 @@ const Receipt = () => {
 <div>
        <div id="mySidenav" class="sidenav sidebarDash">
          <h1 style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', textAlign:'center', background:'#4e0d0d', color:'white', padding:'20px' }}>Receipt</h1>
-         <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" style={{width:'230px', paddingTop:'5px'}}></img>
          <div className='containerreceiptedittinganimation'>
-         <h2 style={{ fontFamily: 'Pacifico, cursive',  fontWeight: 'bold', paddingTop:'5px', paddingLeft:'20px', textAlign:'left', fontSize:'25px'}} className="titleanimation"><span class="title-word title-word-1" style={{fontSize:'50px'}}>V</span><span class="title-word title-word-2">isit</span><br/> <span class="title-word title-word-3" style={{fontSize:'50px'}}>A</span><span class="title-word title-word-4">dventure</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>C</span><span class="title-word title-word-2">amping</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>A</span><span class="title-word title-word-4">ttractions</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>T</span><span class="title-word title-word-2">ourism</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>I</span><span class="title-word title-word-4">tinerary</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>O</span><span class="title-word title-word-2">uting</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>N</span><span class="title-word title-word-4">omad</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>H</span><span class="title-word title-word-2">eritage</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>U</span><span class="title-word title-word-4">nforgettable</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>T</span><span class="title-word title-word-2">ourist</span></h2>
+         <h2 style={{ fontFamily: 'Pacifico, cursive',  fontWeight: 'bold', paddingTop:'35px', paddingLeft:'20px', textAlign:'left', fontSize:'25px'}} className="titleanimation"><span class="title-word title-word-1" style={{fontSize:'50px'}}>V</span><span class="title-word title-word-2">isit</span><br/> <span class="title-word title-word-3" style={{fontSize:'50px'}}>A</span><span class="title-word title-word-4">dventure</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>C</span><span class="title-word title-word-2">amping</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>A</span><span class="title-word title-word-4">ttractions</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>T</span><span class="title-word title-word-2">ourism</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>I</span><span class="title-word title-word-4">tinerary</span><br/><span class="title-word title-word-1" style={{fontSize:'50px'}}>O</span><span class="title-word title-word-2">uting</span><br/><span class="title-word title-word-3" style={{fontSize:'50px'}}>N</span><span class="title-word title-word-4">omad</span></h2>
          </div>
+         <img src="https://res.cloudinary.com/dolq5ge5g/image/upload/v1685439779/logo1111111111-removebg-preview_pnxqde.png" style={{width:'230px', paddingTop:'35px'}}></img>
        </div>
 
 <div style={{ paddingTop: '30px' }} className="contentDash">
@@ -85,7 +85,7 @@ const Receipt = () => {
     margin: 'auto',
     maxWidth: '600px',
     padding: '20px',
-    background: 'rgba(255, 255, 255, 0.8)',
+    background: '#F0E0DA',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
     borderRadius: '25px',
   }}>
@@ -103,7 +103,7 @@ const Receipt = () => {
          margin: 'auto',
          maxWidth: '600px',
          padding: '20px',
-         background: 'rgba(255, 255, 255, 0.8)',
+         background: '#F0E0DA',
          boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
          borderRadius: '25px',
         }}>           
@@ -132,7 +132,7 @@ const Receipt = () => {
 
 
 
-        <div className="card" style={{ marginTop: '80px', textAlign: 'center', background: '#F0E0DA', borderRadius:'25px' }}>
+        <div className="card" style={{ marginTop: '190px', textAlign: 'center', background: '#F0E0DA', borderRadius:'25px' }}>
       <h2
         className="titleanimation"
         style={{
@@ -179,9 +179,7 @@ const Receipt = () => {
     </div>
 
         
-        <footer>
-          {/* Footer content */}
-        </footer>
+      
       </div>
     </div>
   );

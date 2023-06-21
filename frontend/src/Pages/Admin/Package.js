@@ -73,7 +73,7 @@ function Package() {
                 <TableBody>
                    {packages.map((pkg) => (
                       <TableRow key={pkg._id}>
-                        <TableCell><img src={pkg.images[0].url} alt={pkg.package} className="packagepageimages"/>
+                        <TableCell><span style={{textAlign:'center'}}><img src={pkg.images[0].url} alt={pkg.package} className="packagepageimages"/></span>
                         </TableCell>
                         <TableCell ><h4 style={{ fontWeight: 'bold', textAlign:'center', fontSize:'25px' }}>{pkg.package}</h4></TableCell>
                         {/* <TableCell>{pkg.description}</TableCell> */}

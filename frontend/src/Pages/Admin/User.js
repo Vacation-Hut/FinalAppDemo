@@ -31,8 +31,8 @@ function User() {
 
       <div className="contentDash" style={{textAlign:'center'}}>
         <h2 className="activity users" style={{ fontFamily: 'Pacifico, cursive', color:'#4E0D0D', fontWeight: 'bold', fontSize:'45px', paddingTop:'20px'}}><b>Users</b></h2>
-        <div style={{textAlign:'center',marginLeft:'70px',marginRight:'70px'}}>
-        <TableContainer component={Paper} style={{width:'auto'}}>
+        <div style={{textAlign:'center',marginLeft:'70px',marginRight:'70px', paddingTop:'40px'}}>
+        <TableContainer component={Paper} style={{width:'auto', borderRadius:'25px', border: '2px solid #000000'}}>
           <Table>
             <TableHead>
               <TableRow style={{ fontFamily: 'Pacifico, cursive', fontWeight: 'bold', fontSize:'25px', background:'#F0E0DA' }}>
@@ -53,7 +53,7 @@ function User() {
           </Table>
         </TableContainer>
         </div>
-        <div className='slickcarousel'><SlickCarousel isAdmin={true} /></div>
+        <div className='slickcarousel' style={{paddingTop:'40px'}}><SlickCarousel isAdmin={true} /></div>
       </div>
       
     </div>

@@ -51,7 +51,7 @@ function Package() {
           </div>
 
           <div style={{ paddingTop:'50px', paddingBottom:'20px' }}>
-            <TableContainer component={Paper} style={{borderRadius:'25px', border: '2px solid #000000'}}>
+            <TableContainer component={Paper} style={{borderRadius:'25px', border: '2px solid #4E0D0D'}}>
               <Table>
                 <TableHead style={{ background:'#F0E0DA' }}>
                   <TableRow>

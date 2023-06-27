@@ -214,6 +214,7 @@ const CheckoutForm = () => {
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="inputfieldstyling"
+                  
                 />
                 {error.email && (
                   <span className="text-danger">{error.email}</span>

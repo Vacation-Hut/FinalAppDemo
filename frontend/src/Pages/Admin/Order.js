@@ -171,7 +171,7 @@ function Order() {
         </h1>
         {orderdata && orderdata.length > 0 && (
           <div style={{paddingTop:'40px'}}>
-          <TableContainer component={Paper} style={{borderRadius:'25px', border: '2px solid #000000'}}>
+          <TableContainer component={Paper} style={{borderRadius:'25px', border: '2px solid #4E0D0D'}}>
             <Table>
               <TableHead style={{ background: "#F0E0DA", fontFamily: "Pacifico, cursive" }}>
                 <TableRow style={{fontFamily: "Pacifico, cursive"}}>

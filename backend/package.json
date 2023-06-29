@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backend/app.js",
     "dev": "nodemon backend/app.js",
-    "build" : "npm i",
+    "build": "npm i",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.2",
+    "nodemon": "^2.0.22",
     "shortid": "^2.2.16",
     "stripe": "^12.4.0"
   }

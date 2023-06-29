@@ -44,7 +44,7 @@ const CardNewsDemo = React.memo(function CardNews({ activeIndex = 0, image, pack
   const [count, setCount] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:5000/allpackage", {
+    fetch("https://vacation-hut-0piq.onrender.com/allpackage", {
       method: "GET",
     })
       .then((res) => res.json())

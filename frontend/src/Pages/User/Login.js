@@ -23,7 +23,7 @@ function Login() {
     await setError(Validation(email, password));
     try {
       if (error && error.email === "" && error.password === "") {
-        const response = await axios.post("http://localhost:5000/login", {
+        const response = await axios.post("https://vacation-hut-0piq.onrender.com/login", {
           email,
           password,
         });

@@ -15,7 +15,7 @@ function Review() {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/reviews');
+      const response = await axios.get('https://vacation-hut-0piq.onrender.com/reviews');
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -26,7 +26,7 @@ function Review() {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:5000/reviews', { rating, comment });
+      await axios.post('https://vacation-hut-0piq.onrender.com/reviews', { rating, comment });
       fetchReviews();
       setRating(0);
       setComment('');

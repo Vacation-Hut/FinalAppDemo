@@ -13,7 +13,7 @@ const Packagedetails = () => {
   const Navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/allpackage", {
+    fetch("https://vacation-hut-0piq.onrender.com/allpackage", {
       method: "GET",
     })
       .then((res) => res.json())

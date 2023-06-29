@@ -12,7 +12,7 @@ function ProductPage(props) {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/dash/activity/${id}`);
+        const response = await axios.get(`https://vacation-hut-0piq.onrender.com/dash/activity/${id}`);
         setProduct(response.data.data);
         // console.log(response.data.data)
       } catch (error) {
@@ -29,7 +29,7 @@ function ProductPage(props) {
       const order = {
         items: cartItems.map((item) => ({ product: item._id })),
       };
-      const response = await axios.post("http://localhost:5000/dash/orders", order);
+      const response = await axios.post("https://vacation-hut-0piq.onrender.com/dash/orders", order);
       window.location.href = `/orders/${response.data._id}`;
     } catch (err) {
       console.error(err);

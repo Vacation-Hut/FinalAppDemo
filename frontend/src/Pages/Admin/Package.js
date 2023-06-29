@@ -14,7 +14,7 @@ function Package() {
 
   async function fetchPackages() {
     try {
-      const response = await axios.get("http://localhost:5000/allpackage");
+      const response = await axios.get("https://vacation-hut-0piq.onrender.com/allpackage");
       const data = response.data.data;
       setPackages(data);
     } catch (error) {
@@ -24,7 +24,7 @@ function Package() {
 
   async function handleDelete(id) {
     try {
-      await axios.delete(`http://localhost:5000/dash/package/${id}`);
+      await axios.delete(`https://vacation-hut-0piq.onrender.com/dash/package/${id}`);
       setPackages((prevPackages) => prevPackages.filter((pkg) => pkg._id !== id));
     } catch (error) {
       console.error(error);

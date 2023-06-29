@@ -48,7 +48,7 @@ function Order() {
  
   async function handleDelete(id) {
     try {
-      await axios.delete(`http://localhost:5000/dash/order/${id}`);
+      await axios.delete(`https://vacation-hut-0piq.onrender.com/dash/order/${id}`);
       setorderData((prevOrderData) => prevOrderData.filter((order) => order._id !== id));
     } catch (error) {
       console.error(error);
@@ -57,7 +57,7 @@ function Order() {
   useEffect(() => {
     const fetchReceiptData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/allorders`);
+        const response = await fetch(`https://vacation-hut-0piq.onrender.com/allorders`);
         const data = await response.json();
         setorderData(data.data);
       } catch (error) {
@@ -82,7 +82,7 @@ function Order() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/sentstatus", {
+      const response = await fetch("https://vacation-hut-0piq.onrender.com/sentstatus", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function Order() {
       if (data.success) {
         try {
           const response = await fetch(
-            `http://localhost:5000/dash/orders/${orderId}`,
+            `https://vacation-hut-0piq.onrender.com/dash/orders/${orderId}`,
             {
               method: "PUT",
               headers: {

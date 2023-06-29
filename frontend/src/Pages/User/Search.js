@@ -56,7 +56,7 @@ function SearchComponent() {
     e.preventDefault();
 
     try {
-      const response = await axios.get('http://localhost:5000/search', {
+      const response = await axios.get('https://vacation-hut-0piq.onrender.com/search', {
         params: { query: searchQuery },
       });
 

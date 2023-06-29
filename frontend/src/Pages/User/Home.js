@@ -20,7 +20,7 @@ const Home = () => {
     const token = localStorage.getItem("token");
     // const userId = localStorage.getItem("userId");
     if (token && userId) {
-      fetch(`http://localhost:5000/user/${userId}`, {
+      fetch(`https://vacation-hut-0piq.onrender.com/user/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ const Home = () => {
   }, [userId]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allpackage", {
+    fetch("https://vacation-hut-0piq.onrender.com/allpackage", {
       method: "GET",
     })
       .then((res) => res.json())

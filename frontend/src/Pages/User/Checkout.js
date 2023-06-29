@@ -96,7 +96,7 @@ const CheckoutForm = () => {
         // Handle the error if needed
       }
 
-      const response = await fetch("http://localhost:5000/dash/orders", {
+      const response = await fetch("https://vacation-hut-0piq.onrender.com/dash/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

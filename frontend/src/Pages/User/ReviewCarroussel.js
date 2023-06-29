@@ -28,7 +28,7 @@ const SlickCarousel = ({ isAdmin }) => { // Add isAdmin prop to determine if it'
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/reviews');
+      const response = await axios.get('https://vacation-hut-0piq.onrender.com/reviews');
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -38,7 +38,7 @@ const SlickCarousel = ({ isAdmin }) => { // Add isAdmin prop to determine if it'
   const submitReview = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/reviews', { rating, comment });
+      await axios.post('https://vacation-hut-0piq.onrender.com/reviews', { rating, comment });
       fetchReviews();
       setRating(0);
       setComment('');
@@ -79,7 +79,7 @@ const SlickCarousel = ({ isAdmin }) => { // Add isAdmin prop to determine if it'
 
   const handleDeleteReview = async (reviewId) => {
     try {
-      await axios.delete(`http://localhost:5000/reviews/${reviewId}`);
+      await axios.delete(`https://vacation-hut-0piq.onrender.com/reviews/${reviewId}`);
       fetchReviews();
     } catch (error) {
       console.error('Error deleting review:', error);

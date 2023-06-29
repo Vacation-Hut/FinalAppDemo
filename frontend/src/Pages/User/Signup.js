@@ -21,7 +21,7 @@ function Signup() {
     setError(Validation(name, email, password));
     try {
       if (error.name === "" && error.email === "" && error.password === "") {
-        await axios.post("http://localhost:5000/signup", {
+        await axios.post("https://vacation-hut-0piq.onrender.com/signup", {
           name,
           email,
           password,

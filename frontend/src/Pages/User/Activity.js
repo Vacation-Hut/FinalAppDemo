@@ -52,7 +52,7 @@ function Pottery() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/dash/activity/${id}`,
+        `https://vacation-hut-0piq.onrender.com/dash/activity/${id}`,
         {
           method: "GET",
         }

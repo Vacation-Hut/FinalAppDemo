@@ -58,7 +58,7 @@ function Addpackage() {
       const formData = new FormData();
       formData.append("file", file);
       const response = await axios.post(
-        "http://localhost:5000/upload",
+        "https://vacation-hut-0piq.onrender.com/upload",
         formData,
         {
           headers: {
@@ -75,7 +75,7 @@ function Addpackage() {
     const token = localStorage.getItem("token"); // Get the token from local storage
     console.log(packageData)
 try {
-  const response = await fetch("http://localhost:5000/packages", {
+  const response = await fetch("https://vacation-hut-0piq.onrender.com/packages", {
     method: "POST",
     body: JSON.stringify(packageData),
     headers: {

@@ -74,7 +74,7 @@ const LandingPage = () => {
     fetchImageUrls();
   },[])
   const fetchImageUrls = () => {
-    fetch("http://localhost:5000/allpackage")
+    fetch("https://vacation-hut-0piq.onrender.com/allpackage")
     .then(response => response.json())
     .then(data => {
       if (Array.isArray(data.data)){

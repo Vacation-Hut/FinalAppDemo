@@ -20,7 +20,7 @@ function Updateactivity() {
   const Navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/dash/activity/${id}`, {
+    fetch(`https://vacation-hut-0piq.onrender.com/dash/activity/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -46,7 +46,7 @@ function Updateactivity() {
       }
     
     
-      await axios.put(`http://localhost:5000/dash/activity/${id}`, formData, {
+      await axios.put(`https://vacation-hut-0piq.onrender.com/dash/activity/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -65,7 +65,7 @@ function Updateactivity() {
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(
-      "http://localhost:5000/upload",
+      "https://vacation-hut-0piq.onrender.com/upload",
       formData,
       {
         headers: {

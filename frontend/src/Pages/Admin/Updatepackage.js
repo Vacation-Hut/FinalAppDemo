@@ -25,7 +25,7 @@ function UpdatePackage() {
   useEffect(() => {
     async function fetchPackageData() {
       try {
-        const response = await axios.get(`http://localhost:5000/package/${id}`);
+        const response = await axios.get(`https://vacation-hut-0piq.onrender.com/package/${id}`);
         setPackageData(response.data);
       } catch (error) {
         console.error(error);
@@ -75,7 +75,7 @@ function UpdatePackage() {
     };
   
     try {
-      const response = await axios.put(`http://localhost:5000/package/${id}`, updatedPackageData);
+      const response = await axios.put(`https://vacation-hut-0piq.onrender.com/package/${id}`, updatedPackageData);
   
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -92,7 +92,7 @@ function UpdatePackage() {
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(
-      "http://localhost:5000/upload",
+      "https://vacation-hut-0piq.onrender.com/upload",
       formData,
       {
         headers: {

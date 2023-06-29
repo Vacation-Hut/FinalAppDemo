@@ -162,7 +162,7 @@ function Package() {
   useEffect(() => {
     async function fetchPackageData() {
       try {
-        const response = await axios.get(`http://localhost:5000/package/${id}`);
+        const response = await axios.get(`https://vacation-hut-0piq.onrender.com/package/${id}`);
         setPackageData(response.data);
         setImages(response.data.images);
       } catch (error) {

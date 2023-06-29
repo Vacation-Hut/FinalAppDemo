@@ -7,7 +7,7 @@ function User() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users", {
+    fetch("https://vacation-hut-0piq.onrender.com/users", {
       method: "GET",
     })
       .then((res) => res.json())

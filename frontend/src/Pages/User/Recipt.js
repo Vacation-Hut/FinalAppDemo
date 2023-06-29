@@ -27,7 +27,7 @@ const Receipt = () => {
   useEffect(() => {
     const fetchReceiptData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/dash/orders/${id}`);
+        const response = await fetch(`https://vacation-hut-0piq.onrender.com/dash/orders/${id}`);
         const data = await response.json();
 
         setReceiptData(data);
@@ -47,7 +47,7 @@ const Receipt = () => {
 
   const sendMail = async () => {
     try {
-      const response = await fetch('http://localhost:5000/sentreceipt', {
+      const response = await fetch('https://vacation-hut-0piq.onrender.com/sentreceipt', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

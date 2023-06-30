@@ -678,7 +678,7 @@ body {
 }
 
 .receiptbackgroundimage{
-    background-image: 'url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png")';
+    background-image: url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png");
     background-repeat: "no-repeat";
     background-size: "cover";
 }
@@ -690,7 +690,7 @@ body {
     /* align-items: center; */
     /* min-height: 100vh; */
     /* background-color: #f3f3f3; */
-    /* background-image: 'url("https://res.cloudinary.com/dolq5ge5g/image/upload/v1685440093/Landing_55555555555555555_oehyyv.png")';
+    /* 
     background-repeat: "no-repeat";
     background-size: "cover";
    */
